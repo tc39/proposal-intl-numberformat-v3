@@ -17,6 +17,10 @@ const nf = new Intl.NumberFormat("en-US", {
 nf.formatRange(3, 5);  // "€3–5"
 ```
 
+Peer methods will also be added:
+
+- `formatRangeToParts`
+
 ## Part 2: formatSelect ([ECMA-402 #397](https://github.com/tc39/ecma402/issues/397))
 
 It is common to want to perform both plural rules selection and number formatting together.  Currently, you need to create two separate objects with the same set of options, and we have had multiple bug reports come in about this process being unintuitive.  Further, the Intl.NumberFormat implementation requires plural rules under the hood anyway, so users are not getting optimal performance by having to create another object for the plural rules selection.
