@@ -21,11 +21,11 @@ Peer methods will also be added:
 
 - `formatRangeToParts`
 
-## Part 2: formatSelect ([ECMA-402 #397](https://github.com/tc39/ecma402/issues/397))
+## Part 2: Better interop between PluralRules and NumberFormat ([ECMA-402 #397](https://github.com/tc39/ecma402/issues/397))
 
 It is common to want to perform both plural rules selection and number formatting together.  Currently, you need to create two separate objects with the same set of options, and we have had multiple bug reports come in about this process being unintuitive.  Further, the Intl.NumberFormat implementation requires plural rules under the hood anyway, so users are not getting optimal performance by having to create another object for the plural rules selection.
 
-This part proposes adding a method `formatSelect` that performs formatting and plural selection in one step.
+One possibility, to be hammered down in Stage 1, is adding a method `formatSelect` that performs formatting and plural selection in one step.
 
 ```javascript
 const fmt = new Intl.NumberFormat("fr-FR", {
@@ -36,7 +36,7 @@ console.log(string, pluralForm);
 // "2.5 M" many
 ```
 
-Peer methods will also be added:
+Peer methods would also be added:
 
 - `formatToPartsSelect`
 - `formatRangeSelect`
@@ -75,7 +75,7 @@ const nf = new Intl.NumberFormat("en-US", {
   scale: -6,
 });
 const micros = 1_000_000n;
-nf.formatRange(micros);  // "€1.00"
+nf.format(micros);  // "€1.00"
 ```
 
 ## Part 6: Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
@@ -84,12 +84,24 @@ The `format()` method currently accepts a Number or a BigInt, and strings are in
 
 ```javascript
 const nf = new Intl.NumberFormat("en-US");
-const string = "1.23E4";
-nf.formatRange(string);  // "12,300"
+const string = "987654321987654321";
+nf.format(string);
+// Current:  "987,654,321,987,654,300"
+// Proposed: "987,654,321,987,654,321"
 ```
 
-This part of the proposal requires specifying the syntax for the decimal number strings.  The syntax would be simple, such as:
+We will reference existing standards for interpreting decimal number strings where possible.
 
-```
-\d+(\.\d+)?(E\d+)?
-```
+## Part 7: Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
+
+Intl.NumberFormat always performs "half-up" rounding (for example, if you have 2.5, it gets rounded to 3).  However, we understand that there are users and use cases that would benefit from exposing more options for rounding modes.
+
+The list of rounding modes could be:
+
+1. `"halfUp"` (default)
+2. `"halfEven"`
+3. `"halfDown"`
+4. `"ceiling"`
+5. `"floor"`
+6. `"up"`
+7. `"down"`
