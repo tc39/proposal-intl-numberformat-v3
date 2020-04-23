@@ -4,7 +4,15 @@
 
 Intl.NumberFormat was first added in the initial Intl specification.  More recently, the ECMA-402 Proposal [Unified Intl.NumberFormat](https://github.com/tc39/proposal-unified-intl-numberformat) added several new key features.  This proposal, which I'm calling "Intl.NumberFormat V3", is one more batch of features that have been shown to be important to clients of this API.
 
-Champion: Shane F. Carr (sffc)
+## Motivation
+
+In ECMA-402, we receive dozens of feature requests each year.  When forming this proposal, the author ([sffc](https://github.com/sffc/)) considered every feature request relating to Intl.NumberFormat and put them up against the following criteria:
+
+1. The feature must have multiple stakeholders.
+2. The feature must have robust prior art, e.g., in CLDR, ICU, or Unicode.
+3. The feature must be difficult to implement in user land (such as a locale data dependency).
+
+All parts of this proposal meet that bar, and furthermore, the author's intent is that all Intl.NumberFormat feature requests meeting that bar are part of this proposal.
 
 ## Part 1: formatRange ([ECMA-402 #393](https://github.com/tc39/ecma402/issues/393))
 
