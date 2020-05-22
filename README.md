@@ -14,7 +14,7 @@ In ECMA-402, we receive dozens of feature requests each year.  When forming this
 
 All parts of this proposal meet that bar, and furthermore, the author's intent is that all Intl.NumberFormat feature requests meeting that bar are part of this proposal.
 
-## Part 1: formatRange ([ECMA-402 #393](https://github.com/tc39/ecma402/issues/393))
+## formatRange ([ECMA-402 #393](https://github.com/tc39/ecma402/issues/393))
 
 This piece is modeled off of the [Intl.DateTimeFormat.prototype.formatRange
 ](https://github.com/tc39/proposal-intl-DateTimeFormat-formatRange) proposal.  It involves adding a new function `.formatRange()` to the Intl.NumberFormat prototype, in large part following the semantics introduced by `.formatRange()` in Intl.DateTimeFormat.
@@ -31,28 +31,7 @@ Peer methods will also be added:
 
 - `formatRangeToParts`
 
-## Part 2: Better interop between PluralRules and NumberFormat ([ECMA-402 #397](https://github.com/tc39/ecma402/issues/397))
-
-It is common to want to perform both plural rules selection and number formatting together.  Currently, you need to create two separate objects with the same set of options, and we have had multiple bug reports come in about this process being unintuitive.  Further, the Intl.NumberFormat implementation requires plural rules under the hood anyway, so users are not getting optimal performance by having to create another object for the plural rules selection.
-
-One possibility, to be hammered down in Stage 1, is adding a method `formatSelect` that performs formatting and plural selection in one step.
-
-```javascript
-const fmt = new Intl.NumberFormat("fr-FR", {
-    notation: "compact"
-});
-const { string, pluralForm } = fmt.formatSelect(2.5e6);
-console.log(string, pluralForm);
-// "2.5 M" many
-```
-
-Peer methods would also be added:
-
-- `formatToPartsSelect`
-- `formatRangeSelect`
-- `formatRangeToPartsSelect`
-
-## Part 3: Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
+## Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
 
 Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to add the following strings as valid inputs to `{ useGrouping }`:
 
@@ -61,7 +40,7 @@ Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a
 - `"auto"` (default): display grouping separators based on the locale preference, which may also be dependent on the currency.  Most locales prefer to use grouping separators.
 - `"always"` (`true`): display grouping separators even if the locale prefers otherwise.
 
-## Part 4: New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
+## New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
 Additional Context: [Unified NumberFormat #9](https://github.com/tc39/proposal-unified-intl-numberformat/issues/9)
 
@@ -69,26 +48,19 @@ Currently, Intl.NumberFormat allows for two rounding strategies: min/max fractio
 
 I propose adding the following options to control rounding behavior:
 
-- `precision`: `"one"` (default) or `"nickel"`, to allow for nickel rounding, like 1.03 formatted to 1.05.  This is a popular feature in certain cash currencies, and it is easy to implement.
-- `fractionDigits`: Set both `minimumFractionDigits` and `maximumFractionDigits` at the same time, and also enable interoperability with significant digits and hiding fraction digits when near an integer.  Exact details to follow.
+- `roundingIncrement` = an integer, either 1 or 5 with any number of zeros.
+  - Example values: 1 (default), 5, 10, 50, 100
+  - Nickel rounding: `{ maximumFractionDigits: 2, roundingIncrement: 5 }`
+  - Dime rounding: `{ maximumFractionDigits: 2, roundingIncrement: 10 }`
+- `trailingZeros` = an enum expressing the strategy for resolving trailing zeros when combining min/max fraction and significant digits.
+  - `"auto"` = obey mininumFractionDigits or minimumSignificantDigits (default behavior).
+  - `"strip"` = always remove trailing zeros.
+  - `"stripIfInteger"` = remove them only when the entire fraction is zero.
+  - *optional:* `"keep"` = always keep trailing zeros according to the rounding magnitude.
 
-## Part 5: Scale Option ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
+The exact semantics of how to allow fraction digits and significant digits to interoperate are being tracked by [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8).
 
-Currently, only Number and BigInt are the two types that Intl.NumberFormat is able to format.  However, we have had users requesting the ability to format numbers that can't be represented by those two types.
-
-This proposal is to add a `{ scale }` option to Intl.NumberFormat that multiplies the input by a power of 10 before formatting.  When `{ style: "unit" }`, `scale` defaults to `-2`; otherwise, it defaults to `0`.
-
-```javascript
-const nf = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "EUR",
-  scale: -6,
-});
-const micros = 1_000_000n;
-nf.format(micros);  // "€1.00"
-```
-
-## Part 6: Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
+## Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
 
 The `format()` method currently accepts a Number or a BigInt, and strings are interpreted as Numbers.  This part proposes redefining strings to be represented as decimals instead of Numbers.
 
@@ -102,7 +74,7 @@ nf.format(string);
 
 We will reference existing standards for interpreting decimal number strings where possible.
 
-## Part 7: Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
+## Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
 Intl.NumberFormat always performs "half-up" rounding (for example, if you have 2.5, it gets rounded to 3).  However, we understand that there are users and use cases that would benefit from exposing more options for rounding modes.
 
