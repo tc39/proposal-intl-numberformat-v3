@@ -3,7 +3,9 @@
   "name": "template-for-proposals",
   "description": "A repository template for ECMAScript proposals.",
   "scripts": {
-    "build": "ecmarkup spec.emu index.html"
+    "build:numberformat": "mkdirp out/numberformat && ecmarkup numberformat/diff.emu out/numberformat/diff.html && ecmarkup numberformat/proposed.emu out/numberformat/proposed.html",
+    "build:readme": "marked -i README.md -o index.html",
+    "build": "mkdirp out && npm run build:readme && npm run build:numberformat"
   },
   "homepage": "https://github.com/tc39/template-for-proposals#readme",
   "repository": {
@@ -12,6 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "ecmarkup": "^3.11.5"
+    "ecmarkup": "^3.11.5",
+    "marked": "^1.1.0"
   }
 }

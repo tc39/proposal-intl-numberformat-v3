@@ -2,6 +2,8 @@
 
 **Status: Stage 1 (March 2020)**
 
+- Spec: Intl.NumberFormat ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/proposed.html))
+
 Intl.NumberFormat was first added in the initial Intl specification.  More recently, the ECMA-402 Proposal [Unified Intl.NumberFormat](https://github.com/tc39/proposal-unified-intl-numberformat) added several new key features.  This proposal, which I'm calling "Intl.NumberFormat V3", is one more batch of features that have been shown to be important to clients of this API.
 
 ## Motivation
