@@ -44,3 +44,5 @@ npm-shrinkwrap.json
 # Custom
 out/
 index.html
+numberformat_diff.html
+numberformat_proposed.html
