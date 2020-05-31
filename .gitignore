@@ -40,3 +40,7 @@ jspm_packages
 yarn.lock
 package-lock.json
 npm-shrinkwrap.json
+
+# Custom
+out/
+index.html
