@@ -4,8 +4,9 @@
   "description": "A repository template for ECMAScript proposals.",
   "scripts": {
     "build:numberformat": "mkdirp out/numberformat && ecmarkup numberformat/diff.emu out/numberformat/diff.html && ecmarkup numberformat/proposed.emu out/numberformat/proposed.html",
+    "build:negotiation": "mkdirp out/negotiation && ecmarkup negotiation/diff.emu out/negotiation/diff.html && ecmarkup negotiation/proposed.emu out/negotiation/proposed.html",
     "build:readme": "marked -i README.md -o index.html",
-    "build": "mkdirp out && npm run build:readme && npm run build:numberformat"
+    "build": "mkdirp out && npm run build:readme && npm run build:numberformat && npm run build:negotiation"
   },
   "homepage": "https://github.com/tc39/template-for-proposals#readme",
   "repository": {

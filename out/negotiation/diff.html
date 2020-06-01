@@ -1,0 +1,2022 @@
+<!doctype html>
+<head><meta charset="utf-8"><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"sec-internal-slots","aoid":null,"title":"Internal slots of Service Constructors","titleHTML":"Internal slots of Service Constructors","number":"1.1","namespace":"<no location>","location":"","referencingIds":["_ref_1"],"key":"Internal slots of Service Constructors"},{"type":"op","aoid":"CanonicalizeLocaleList","refId":"sec-canonicalizelocalelist","location":"","referencingIds":[],"key":"CanonicalizeLocaleList"},{"type":"clause","id":"sec-canonicalizelocalelist","aoid":"CanonicalizeLocaleList","title":"CanonicalizeLocaleList ( locales )","titleHTML":"CanonicalizeLocaleList ( <var>locales</var> )","number":"1.2.1","namespace":"<no location>","location":"","referencingIds":["_ref_14","_ref_16"],"key":"CanonicalizeLocaleList ( locales )"},{"type":"op","aoid":"BestAvailableLocale","refId":"sec-bestavailablelocale","location":"","referencingIds":[],"key":"BestAvailableLocale"},{"type":"clause","id":"sec-bestavailablelocale","aoid":"BestAvailableLocale","title":"BestAvailableLocale ( availableLocales, locale )","titleHTML":"BestAvailableLocale ( <var>availableLocales</var>, <var>locale</var> )","number":"1.2.2","namespace":"<no location>","location":"","referencingIds":["_ref_15","_ref_30"],"key":"BestAvailableLocale ( availableLocales, locale )"},{"type":"op","aoid":"LookupMatcher","refId":"sec-lookupmatcher","location":"","referencingIds":[],"key":"LookupMatcher"},{"type":"clause","id":"sec-lookupmatcher","aoid":"LookupMatcher","title":"LookupMatcher ( availableLocales, requestedLocales )","titleHTML":"LookupMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )","number":"1.2.3","namespace":"<no location>","location":"","referencingIds":["_ref_17","_ref_20"],"key":"LookupMatcher ( availableLocales, requestedLocales )"},{"type":"op","aoid":"BestFitMatcher","refId":"sec-bestfitmatcher","location":"","referencingIds":[],"key":"BestFitMatcher"},{"type":"clause","id":"sec-bestfitmatcher","aoid":"BestFitMatcher","title":"BestFitMatcher ( availableLocales, requestedLocales )","titleHTML":"BestFitMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )","number":"1.2.4","namespace":"<no location>","location":"","referencingIds":["_ref_21"],"key":"BestFitMatcher ( availableLocales, requestedLocales )"},{"type":"op","aoid":"UnicodeExtensionComponents","refId":"sec-unicode-extension-components","location":"","referencingIds":[],"key":"UnicodeExtensionComponents"},{"type":"clause","id":"sec-unicode-extension-components","aoid":"UnicodeExtensionComponents","title":"UnicodeExtensionComponents( extension )","titleHTML":"UnicodeExtensionComponents( <var>extension</var> )","number":"1.2.5","namespace":"<no location>","location":"","referencingIds":["_ref_22"],"key":"UnicodeExtensionComponents( extension )"},{"type":"op","aoid":"InsertUnicodeExtensionAndCanonicalize","refId":"sec-insert-unicode-extension-and-canonicalize","location":"","referencingIds":[],"key":"InsertUnicodeExtensionAndCanonicalize"},{"type":"clause","id":"sec-insert-unicode-extension-and-canonicalize","aoid":"InsertUnicodeExtensionAndCanonicalize","title":"InsertUnicodeExtensionAndCanonicalize( locale, extension )","titleHTML":"InsertUnicodeExtensionAndCanonicalize( <var>locale</var>, <var>extension</var> )","number":"1.2.6","namespace":"<no location>","location":"","referencingIds":["_ref_29"],"key":"InsertUnicodeExtensionAndCanonicalize( locale, extension )"},{"type":"op","aoid":"ResolveLocale","refId":"sec-resolvelocale","location":"","referencingIds":[],"key":"ResolveLocale"},{"type":"clause","id":"sec-resolvelocale","aoid":"ResolveLocale","title":"ResolveLocale ( availableLocales, requestedLocales, options, relevantExtensionKeys, localeData )","titleHTML":"ResolveLocale ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var>, <var>relevantExtensionKeys</var>, <var>localeData</var> )","number":"1.2.7","namespace":"<no location>","location":"","referencingIds":["_ref_0"],"key":"ResolveLocale ( availableLocales, requestedLocales, options, relevantExtensionKeys, localeData )"},{"type":"op","aoid":"LookupSupportedLocales","refId":"sec-lookupsupportedlocales","location":"","referencingIds":[],"key":"LookupSupportedLocales"},{"type":"clause","id":"sec-lookupsupportedlocales","aoid":"LookupSupportedLocales","title":"LookupSupportedLocales ( availableLocales, requestedLocales )","titleHTML":"LookupSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )","number":"1.2.8","namespace":"<no location>","location":"","referencingIds":["_ref_34"],"key":"LookupSupportedLocales ( availableLocales, requestedLocales )"},{"type":"op","aoid":"BestFitSupportedLocales","refId":"sec-bestfitsupportedlocales","location":"","referencingIds":[],"key":"BestFitSupportedLocales"},{"type":"clause","id":"sec-bestfitsupportedlocales","aoid":"BestFitSupportedLocales","title":"BestFitSupportedLocales ( availableLocales, requestedLocales )","titleHTML":"BestFitSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )","number":"1.2.9","namespace":"<no location>","location":"","referencingIds":["_ref_33"],"key":"BestFitSupportedLocales ( availableLocales, requestedLocales )"},{"type":"op","aoid":"SupportedLocales","refId":"sec-supportedlocales","location":"","referencingIds":[],"key":"SupportedLocales"},{"type":"clause","id":"sec-supportedlocales","aoid":"SupportedLocales","title":"SupportedLocales ( availableLocales, requestedLocales, options )","titleHTML":"SupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var> )","number":"1.2.10","namespace":"<no location>","location":"","referencingIds":[],"key":"SupportedLocales ( availableLocales, requestedLocales, options )"},{"type":"op","aoid":"GetOption","refId":"sec-getoption","location":"","referencingIds":[],"key":"GetOption"},{"type":"clause","id":"sec-getoption","aoid":"GetOption","title":"GetOption ( options, property, type, values, fallback )","titleHTML":"GetOption ( <var>options</var>, <var>property</var>, <var>type</var>, <var>values</var>, <var>fallback</var> )","number":"1.2.11","namespace":"<no location>","location":"","referencingIds":[],"key":"GetOption ( options, property, type, values, fallback )"},{"type":"op","aoid":"GetStringOrBooleanOption","refId":"sec-getoption","location":"","referencingIds":[],"key":"GetStringOrBooleanOption"},{"type":"clause","id":"sec-getoption","aoid":"GetStringOrBooleanOption","title":"GetStringOrBooleanOption ( options, property, values, trueValue, fallback )","titleHTML":"GetStringOrBooleanOption ( <var>options</var>, <var>property</var>, <var>values</var>, <var>trueValue</var>, <var>fallback</var> )","number":"1.2.12","namespace":"<no location>","location":"","referencingIds":["_ref_32"],"key":"GetStringOrBooleanOption ( options, property, values, trueValue, fallback )"},{"type":"op","aoid":"DefaultNumberOption","refId":"sec-defaultnumberoption","location":"","referencingIds":[],"key":"DefaultNumberOption"},{"type":"clause","id":"sec-defaultnumberoption","aoid":"DefaultNumberOption","title":"DefaultNumberOption ( value, minimum, maximum, fallback )","titleHTML":"DefaultNumberOption ( <var>value</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )","number":"1.2.13","namespace":"<no location>","location":"","referencingIds":["_ref_44"],"key":"DefaultNumberOption ( value, minimum, maximum, fallback )"},{"type":"op","aoid":"GetNumberOption","refId":"sec-getnumberoption","location":"","referencingIds":[],"key":"GetNumberOption"},{"type":"clause","id":"sec-getnumberoption","aoid":"GetNumberOption","title":"GetNumberOption ( options, property, minimum, maximum, fallback )","titleHTML":"GetNumberOption ( <var>options</var>, <var>property</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )","number":"1.2.14","namespace":"<no location>","location":"","referencingIds":[],"key":"GetNumberOption ( options, property, minimum, maximum, fallback )"},{"type":"op","aoid":"PartitionPattern","refId":"sec-partitionpattern","location":"","referencingIds":[],"key":"PartitionPattern"},{"type":"clause","id":"sec-partitionpattern","aoid":"PartitionPattern","title":"PartitionPattern ( pattern )","titleHTML":"PartitionPattern ( <var>pattern</var> )","number":"1.2.15","namespace":"<no location>","location":"","referencingIds":[],"key":"PartitionPattern ( pattern )"},{"type":"clause","id":"sec-abstract-operations","aoid":null,"title":"Abstract Operations","titleHTML":"Abstract Operations","number":"1.2","namespace":"<no location>","location":"","referencingIds":[],"key":"Abstract Operations"},{"type":"clause","id":"locale-and-parameter-negotiation","aoid":null,"title":"Locale and Parameter Negotiation","titleHTML":"Locale and Parameter Negotiation","number":"1","namespace":"<no location>","location":"","referencingIds":[],"key":"Locale and Parameter Negotiation"}]</script><script>"use strict";
+
+function Search(menu) {
+  this.menu = menu;
+  this.$search = document.getElementById('menu-search');
+  this.$searchBox = document.getElementById('menu-search-box');
+  this.$searchResults = document.getElementById('menu-search-results');
+
+  this.loadBiblio();
+
+  document.addEventListener('keydown', this.documentKeydown.bind(this));
+
+  this.$searchBox.addEventListener('keydown', debounce(this.searchBoxKeydown.bind(this), { stopPropagation: true }));
+  this.$searchBox.addEventListener('keyup', debounce(this.searchBoxKeyup.bind(this), { stopPropagation: true }));
+
+  // Perform an initial search if the box is not empty.
+  if (this.$searchBox.value) {
+    this.search(this.$searchBox.value);
+  }
+}
+
+Search.prototype.loadBiblio = function () {
+  var $biblio = document.getElementById('menu-search-biblio');
+  if (!$biblio) {
+    this.biblio = [];
+  } else {
+    this.biblio = JSON.parse($biblio.textContent);
+    this.biblio.clauses = this.biblio.filter(function (e) { return e.type === 'clause' });
+    this.biblio.byId = this.biblio.reduce(function (map, entry) {
+      map[entry.id] = entry;
+      return map;
+    }, {});
+  }
+}
+
+Search.prototype.documentKeydown = function (e) {
+  if (e.keyCode === 191) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.triggerSearch();
+  }
+}
+
+Search.prototype.searchBoxKeydown = function (e) {
+  e.stopPropagation();
+  e.preventDefault();
+  if (e.keyCode === 191 && e.target.value.length === 0) {
+    e.preventDefault();
+  } else if (e.keyCode === 13) {
+    e.preventDefault();
+    this.selectResult();
+  }
+}
+
+Search.prototype.searchBoxKeyup = function (e) {
+  if (e.keyCode === 13 || e.keyCode === 9) {
+    return;
+  }
+
+  this.search(e.target.value);
+}
+
+
+Search.prototype.triggerSearch = function (e) {
+  if (this.menu.isVisible()) {
+    this._closeAfterSearch = false;
+  } else {
+    this._closeAfterSearch = true;
+    this.menu.show();
+  }
+
+  this.$searchBox.focus();
+  this.$searchBox.select();
+}
+// bit 12 - Set if the result starts with searchString
+// bits 8-11: 8 - number of chunks multiplied by 2 if cases match, otherwise 1.
+// bits 1-7: 127 - length of the entry
+// General scheme: prefer case sensitive matches with fewer chunks, and otherwise
+// prefer shorter matches.
+function relevance(result, searchString) {
+  var relevance = 0;
+
+  relevance = Math.max(0, 8 - result.match.chunks) << 7;
+
+  if (result.match.caseMatch) {
+    relevance *= 2;
+  }
+
+  if (result.match.prefix) {
+    relevance += 2048
+  }
+
+  relevance += Math.max(0, 255 - result.entry.key.length);
+
+  return relevance;
+}
+
+Search.prototype.search = function (searchString) {
+  if (searchString === '') {
+    this.displayResults([]);
+    this.hideSearch();
+    return;
+  } else {
+    this.showSearch();
+  }
+
+  if (searchString.length === 1) {
+    this.displayResults([]);
+    return;
+  }
+
+  var results;
+
+  if (/^[\d\.]*$/.test(searchString)) {
+    results = this.biblio.clauses.filter(function (clause) {
+      return clause.number.substring(0, searchString.length) === searchString;
+    }).map(function (clause) {
+      return { entry: clause };
+    });
+  } else {
+    results = [];
+
+    for (var i = 0; i < this.biblio.length; i++) {
+      var entry = this.biblio[i];
+      if (!entry.key) {
+        // biblio entries without a key aren't searchable
+        continue;
+      }
+
+      var match = fuzzysearch(searchString, entry.key);
+      if (match) {
+        results.push({ entry: entry, match: match });
+      }
+    }
+
+    results.forEach(function (result) {
+      result.relevance = relevance(result, searchString);
+    });
+
+    results = results.sort(function (a, b) { return b.relevance - a.relevance });
+
+  }
+
+  if (results.length > 50) {
+    results = results.slice(0, 50);
+  }
+
+  this.displayResults(results);
+}
+Search.prototype.hideSearch = function () {
+  this.$search.classList.remove('active');
+}
+
+Search.prototype.showSearch = function () {
+  this.$search.classList.add('active');
+}
+
+Search.prototype.selectResult = function () {
+  var $first = this.$searchResults.querySelector('li:first-child a');
+
+  if ($first) {
+    document.location = $first.getAttribute('href');
+  }
+
+  this.$searchBox.value = '';
+  this.$searchBox.blur();
+  this.displayResults([]);
+  this.hideSearch();
+
+  if (this._closeAfterSearch) {
+    this.menu.hide();
+  }
+}
+
+Search.prototype.displayResults = function (results) {
+  if (results.length > 0) {
+    this.$searchResults.classList.remove('no-results');
+
+    var html = '<ul>';
+
+    results.forEach(function (result) {
+      var entry = result.entry;
+      var id = entry.id;
+      var cssClass = '';
+      var text = '';
+
+      if (entry.type === 'clause') {
+        var number = entry.number ? entry.number + ' ' : '';
+        text = number + entry.key;
+        cssClass = 'clause';
+        id = entry.id;
+      } else if (entry.type === 'production') {
+        text = entry.key;
+        cssClass = 'prod';
+        id = entry.id;
+      } else if (entry.type === 'op') {
+        text = entry.key;
+        cssClass = 'op';
+        id = entry.id || entry.refId;
+      } else if (entry.type === 'term') {
+        text = entry.key;
+        cssClass = 'term';
+        id = entry.id || entry.refId;
+      }
+
+      if (text) {
+        html += '<li class=menu-search-result-' + cssClass + '><a href="#' + id + '">' + text + '</a></li>';
+      }
+    });
+
+    html += '</ul>'
+
+    this.$searchResults.innerHTML = html;
+  } else {
+    this.$searchResults.innerHTML = '';
+    this.$searchResults.classList.add('no-results');
+  }
+}
+
+
+function Menu() {
+  this.$toggle = document.getElementById('menu-toggle');
+  this.$menu = document.getElementById('menu');
+  this.$toc = document.querySelector('menu-toc > ol');
+  this.$pins = document.querySelector('#menu-pins');
+  this.$pinList = document.getElementById('menu-pins-list');
+  this.$toc = document.querySelector('#menu-toc > ol');
+  this.$specContainer = document.getElementById('spec-container');
+  this.search = new Search(this);
+
+  this._pinnedIds = {}; 
+  this.loadPinEntries();
+
+  // toggle menu
+  this.$toggle.addEventListener('click', this.toggle.bind(this));
+
+  // keydown events for pinned clauses
+  document.addEventListener('keydown', this.documentKeydown.bind(this));
+
+  // toc expansion
+  var tocItems = this.$menu.querySelectorAll('#menu-toc li');
+  for (var i = 0; i < tocItems.length; i++) {
+    var $item = tocItems[i];
+    $item.addEventListener('click', function($item, event) {
+      $item.classList.toggle('active');
+      event.stopPropagation();
+    }.bind(null, $item));
+  }
+
+  // close toc on toc item selection
+  var tocLinks = this.$menu.querySelectorAll('#menu-toc li > a');
+  for (var i = 0; i < tocLinks.length; i++) {
+    var $link = tocLinks[i];
+    $link.addEventListener('click', function(event) {
+      this.toggle();
+      event.stopPropagation();
+    }.bind(this));
+  }
+
+  // update active clause on scroll
+  window.addEventListener('scroll', debounce(this.updateActiveClause.bind(this)));
+  this.updateActiveClause();
+
+  // prevent menu scrolling from scrolling the body
+  this.$toc.addEventListener('wheel', function (e) {
+    var target = e.currentTarget;
+    var offTop = e.deltaY < 0 && target.scrollTop === 0;
+    if (offTop) {
+      e.preventDefault();
+    }
+    var offBottom = e.deltaY > 0
+                    && target.offsetHeight + target.scrollTop >= target.scrollHeight;
+
+    if (offBottom) {
+      e.preventDefault();
+    }
+  });
+}
+
+Menu.prototype.documentKeydown = function (e) {
+  e.stopPropagation();
+  if (e.keyCode === 80) {
+    this.togglePinEntry();
+  } else if (e.keyCode > 48 && e.keyCode < 58) {
+    this.selectPin(e.keyCode - 49);
+  }
+}
+
+Menu.prototype.updateActiveClause = function () {
+  this.setActiveClause(findActiveClause(this.$specContainer))
+}
+
+Menu.prototype.setActiveClause = function (clause) {
+  this.$activeClause = clause;
+  this.revealInToc(this.$activeClause);
+}
+
+Menu.prototype.revealInToc = function (path) {
+  var current = this.$toc.querySelectorAll('li.revealed');
+  for (var i = 0; i < current.length; i++) {
+    current[i].classList.remove('revealed');
+    current[i].classList.remove('revealed-leaf');
+  }
+
+  var current = this.$toc;
+  var index = 0;
+  while (index < path.length) {
+    var children = current.children;
+    for (var i = 0; i < children.length; i++) {
+      if ('#' + path[index].id === children[i].children[1].getAttribute('href') ) {
+        children[i].classList.add('revealed');
+        if (index === path.length - 1) {
+          children[i].classList.add('revealed-leaf');
+          var rect = children[i].getBoundingClientRect();
+          // this.$toc.getBoundingClientRect().top;
+          var tocRect = this.$toc.getBoundingClientRect();
+          if (rect.top + 10 > tocRect.bottom) {
+            this.$toc.scrollTop = this.$toc.scrollTop + (rect.top - tocRect.bottom) + (rect.bottom - rect.top);
+          } else if (rect.top < tocRect.top) {
+            this.$toc.scrollTop = this.$toc.scrollTop - (tocRect.top - rect.top);
+          }
+        }
+        current = children[i].querySelector('ol');
+        index++;
+        break;
+      }
+    }
+
+  }
+}
+
+function findActiveClause(root, path) {
+  var clauses = new ClauseWalker(root);
+  var $clause;
+  var path = path || [];
+
+  while ($clause = clauses.nextNode()) {
+    var rect = $clause.getBoundingClientRect();
+    var $header = $clause.querySelector("h1");
+    var marginTop = parseInt(getComputedStyle($header)["margin-top"]);
+
+    if ((rect.top - marginTop) <= 0 && rect.bottom > 0) {
+      return findActiveClause($clause, path.concat($clause)) || path;
+    }
+  }
+
+  return path;
+}
+
+function ClauseWalker(root) {
+  var previous;
+  var treeWalker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_ELEMENT,
+    {
+      acceptNode: function (node) {
+        if (previous === node.parentNode) {
+          return NodeFilter.FILTER_REJECT;
+        } else {
+          previous = node;
+        }
+        if (node.nodeName === 'EMU-CLAUSE' || node.nodeName === 'EMU-INTRO' || node.nodeName === 'EMU-ANNEX') {
+          return NodeFilter.FILTER_ACCEPT;
+        } else {
+          return NodeFilter.FILTER_SKIP;
+        }
+      }
+    },
+    false
+    );
+
+  return treeWalker;
+}
+
+Menu.prototype.toggle = function () {
+  this.$menu.classList.toggle('active');
+}
+
+Menu.prototype.show = function () {
+  this.$menu.classList.add('active');
+}
+
+Menu.prototype.hide = function () {
+  this.$menu.classList.remove('active');
+}
+
+Menu.prototype.isVisible = function() {
+  return this.$menu.classList.contains('active');
+}
+
+Menu.prototype.showPins = function () {
+  this.$pins.classList.add('active');
+}
+
+Menu.prototype.hidePins = function () {
+  this.$pins.classList.remove('active');
+}
+
+Menu.prototype.addPinEntry = function (id) {
+  var entry = this.search.biblio.byId[id];
+  if (!entry) {
+    // id was deleted after pin (or something) so remove it
+    delete this._pinnedIds[id];
+    this.persistPinEntries();
+    return;
+  }
+
+  if (entry.type === 'clause') {
+    var prefix;
+    if (entry.number) {
+      prefix = entry.number + ' ';
+    } else {
+      prefix = '';
+    }
+    this.$pinList.innerHTML += '<li><a href="#' + entry.id + '">' + prefix + entry.titleHTML + '</a></li>';
+  } else {
+    this.$pinList.innerHTML += '<li><a href="#' + entry.id + '">' + entry.key + '</a></li>';
+  }
+
+  if (Object.keys(this._pinnedIds).length === 0) {
+    this.showPins();
+  }
+  this._pinnedIds[id] = true;
+  this.persistPinEntries();
+}
+
+Menu.prototype.removePinEntry = function (id) {
+  var item = this.$pinList.querySelector('a[href="#' + id + '"]').parentNode;
+  this.$pinList.removeChild(item);
+  delete this._pinnedIds[id];
+  if (Object.keys(this._pinnedIds).length === 0) {
+    this.hidePins();
+  }
+
+  this.persistPinEntries();
+}
+
+Menu.prototype.persistPinEntries = function () {
+  try {
+    if (!window.localStorage) return;
+  } catch (e) {
+    return;
+  }
+
+  localStorage.pinEntries = JSON.stringify(Object.keys(this._pinnedIds));
+}
+
+Menu.prototype.loadPinEntries = function () {
+  try {
+    if (!window.localStorage) return;
+  } catch (e) {
+    return;
+  }
+
+  var pinsString = window.localStorage.pinEntries;
+  if (!pinsString) return;
+  var pins = JSON.parse(pinsString);
+  for(var i = 0; i < pins.length; i++) {
+    this.addPinEntry(pins[i]);
+  }
+}
+
+Menu.prototype.togglePinEntry = function (id) {
+  if (!id) {
+    id = this.$activeClause[this.$activeClause.length - 1].id;
+  }
+
+  if (this._pinnedIds[id]) {
+    this.removePinEntry(id);
+  } else {
+    this.addPinEntry(id);
+  }
+}
+
+Menu.prototype.selectPin = function (num) {
+  document.location = this.$pinList.children[num].children[0].href;
+}
+
+var menu;
+function init() {
+  menu = new Menu();
+  var $container = document.getElementById('spec-container');
+  $container.addEventListener('mouseover', debounce(function (e) {
+    Toolbox.activateIfMouseOver(e);
+  }));
+  document.addEventListener('keydown', debounce(function (e) {
+    if (e.code === "Escape" && Toolbox.active) {
+      Toolbox.deactivate();
+    }
+  }));
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+function debounce(fn, opts) {
+  opts = opts || {};
+  var timeout;
+  return function(e) {
+    if (opts.stopPropagation) {
+      e.stopPropagation();
+    }
+    var args = arguments;
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(function() {
+      timeout = null;
+      fn.apply(this, args);
+    }.bind(this), 150);
+  }
+}
+
+var CLAUSE_NODES = ['EMU-CLAUSE', 'EMU-INTRO', 'EMU-ANNEX'];
+function findLocalReferences ($elem) {
+  var name = $elem.innerHTML;
+  var references = [];
+
+  var parentClause = $elem.parentNode;
+  while (parentClause && CLAUSE_NODES.indexOf(parentClause.nodeName) === -1) {
+    parentClause = parentClause.parentNode;
+  }
+
+  if(!parentClause) return;
+
+  var vars = parentClause.querySelectorAll('var');
+
+  for (var i = 0; i < vars.length; i++) {
+    var $var = vars[i];
+
+    if ($var.innerHTML === name) {
+      references.push($var);
+    }
+  }
+
+  return references;
+}
+
+function toggleFindLocalReferences($elem) {
+  var references = findLocalReferences($elem);
+  if ($elem.classList.contains('referenced')) {
+    references.forEach(function ($reference) {
+      $reference.classList.remove('referenced');
+    });
+  } else {
+    references.forEach(function ($reference) {
+      $reference.classList.add('referenced');
+    });
+  }
+}
+
+function installFindLocalReferences () {
+  document.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'VAR') {
+      toggleFindLocalReferences(e.target);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', installFindLocalReferences);
+
+
+
+
+// The following license applies to the fuzzysearch function
+// The MIT License (MIT)
+// Copyright © 2015 Nicolas Bevacqua
+// Copyright © 2016 Brian Terlson
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+function fuzzysearch (searchString, haystack, caseInsensitive) {
+  var tlen = haystack.length;
+  var qlen = searchString.length;
+  var chunks = 1;
+  var finding = false;
+
+  if (qlen > tlen) {
+    return false;
+  }
+
+  if (qlen === tlen) {
+    if (searchString === haystack) {
+      return { caseMatch: true, chunks: 1, prefix: true };
+    } else if (searchString.toLowerCase() === haystack.toLowerCase()) {
+      return { caseMatch: false, chunks: 1, prefix: true };
+    } else {
+      return false;
+    }
+  }
+
+  outer: for (var i = 0, j = 0; i < qlen; i++) {
+    var nch = searchString[i];
+    while (j < tlen) {
+      var targetChar = haystack[j++];
+      if (targetChar === nch) {
+        finding = true;
+        continue outer;
+      }
+      if (finding) {
+        chunks++;
+        finding = false;
+      }
+    }
+
+    if (caseInsensitive) { return false; }
+
+    return fuzzysearch(searchString.toLowerCase(), haystack.toLowerCase(), true);
+  }
+
+  return { caseMatch: !caseInsensitive, chunks: chunks, prefix: j <= qlen };
+}
+
+var Toolbox = {
+  init: function () {
+    this.$container = document.createElement('div');
+    this.$container.classList.add('toolbox');
+    this.$permalink = document.createElement('a');
+    this.$permalink.textContent = 'Permalink';
+    this.$pinLink = document.createElement('a');
+    this.$pinLink.textContent = 'Pin';
+    this.$pinLink.setAttribute('href', '#');
+    this.$pinLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.togglePinEntry(this.entry.id);
+    }.bind(this));
+
+    this.$refsLink = document.createElement('a');
+    this.$refsLink.setAttribute('href', '#');
+    this.$refsLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      referencePane.showReferencesFor(this.entry);
+    }.bind(this));
+    this.$container.appendChild(this.$permalink);
+    this.$container.appendChild(this.$pinLink);
+    this.$container.appendChild(this.$refsLink);
+    document.body.appendChild(this.$container);
+  },
+
+  activate: function (el, entry, target) {
+    if (el === this._activeEl) return;
+    this.active = true;
+    this.entry = entry;
+    this.$container.classList.add('active');
+    this.top = el.offsetTop - this.$container.offsetHeight - 10;
+    this.left = el.offsetLeft;
+    this.$container.setAttribute('style', 'left: ' + this.left + 'px; top: ' + this.top + 'px');
+    this.updatePermalink();
+    this.updateReferences();
+    this._activeEl = el;
+    if (this.top < document.body.scrollTop && el === target) {
+      // don't scroll unless it's a small thing (< 200px)
+      this.$container.scrollIntoView();
+    }
+  },
+
+  updatePermalink: function () {
+    this.$permalink.setAttribute('href', '#' + this.entry.id);
+  },
+
+  updateReferences: function () {
+    this.$refsLink.textContent = 'References (' + this.entry.referencingIds.length + ')';
+  },
+
+  activateIfMouseOver: function (e) {
+    var ref = this.findReferenceUnder(e.target);
+    if (ref && (!this.active || e.pageY > this._activeEl.offsetTop)) {
+      var entry = menu.search.biblio.byId[ref.id];
+      this.activate(ref.element, entry, e.target);
+    } else if (this.active && ((e.pageY < this.top) || e.pageY > (this._activeEl.offsetTop + this._activeEl.offsetHeight))) {
+      this.deactivate();
+    }
+  },
+
+  findReferenceUnder: function (el) {
+    while (el) {
+      var parent = el.parentNode;
+      if (el.nodeName === 'H1' && parent.nodeName.match(/EMU-CLAUSE|EMU-ANNEX|EMU-INTRO/) && parent.id) {
+        return { element: el, id: parent.id };
+      } else if (el.nodeName.match(/EMU-(?!CLAUSE|XREF|ANNEX|INTRO)|DFN/) &&
+                el.id && el.id[0] !== '_') {
+        if (el.nodeName === 'EMU-FIGURE' || el.nodeName === 'EMU-TABLE' || el.nodeName === 'EMU-EXAMPLE') {
+          // return the figcaption element
+          return { element: el.children[0].children[0], id: el.id };
+        } else if (el.nodeName === 'EMU-PRODUCTION') {
+          // return the LHS non-terminal element
+          return { element: el.children[0], id: el.id };
+        } else {
+          return { element: el, id: el.id };
+        }
+      }
+      el = parent;
+    }
+  },
+
+  deactivate: function () {
+    this.$container.classList.remove('active');
+    this._activeEl = null;
+    this.activeElBounds = null;
+    this.active = false;
+  }
+}
+
+var referencePane = {
+  init: function() {
+    this.$container = document.createElement('div');
+    this.$container.setAttribute('id', 'references-pane-container');
+
+    var $spacer = document.createElement('div');
+    $spacer.setAttribute('id', 'references-pane-spacer');
+
+    this.$pane = document.createElement('div');
+    this.$pane.setAttribute('id', 'references-pane');
+
+    this.$container.appendChild($spacer);
+    this.$container.appendChild(this.$pane);
+
+    this.$header = document.createElement('div');
+    this.$header.classList.add('menu-pane-header');
+    this.$header.textContent = 'References to ';
+    this.$headerRefId = document.createElement('a');
+    this.$header.appendChild(this.$headerRefId);
+    this.$closeButton = document.createElement('span');
+    this.$closeButton.setAttribute('id', 'references-pane-close');
+    this.$closeButton.addEventListener('click', function (e) {
+      this.deactivate();
+    }.bind(this));
+    this.$header.appendChild(this.$closeButton);
+
+    this.$pane.appendChild(this.$header);
+    var tableContainer = document.createElement('div');
+    tableContainer.setAttribute('id', 'references-pane-table-container');
+
+    this.$table = document.createElement('table');
+    this.$table.setAttribute('id', 'references-pane-table');
+
+    this.$tableBody = this.$table.createTBody();
+
+    tableContainer.appendChild(this.$table);
+    this.$pane.appendChild(tableContainer);
+
+    menu.$specContainer.appendChild(this.$container);
+  },
+
+  activate: function () {
+    this.$container.classList.add('active');
+  },
+
+  deactivate: function () {
+    this.$container.classList.remove('active');
+  },
+
+  showReferencesFor(entry) {
+    this.activate();
+    var newBody = document.createElement('tbody');
+    var previousId;
+    var previousCell;
+    var dupCount = 0;
+    this.$headerRefId.textContent = '#' + entry.id;
+    this.$headerRefId.setAttribute('href', '#' + entry.id);
+    entry.referencingIds.map(function (id) {
+      var target = document.getElementById(id);
+      var cid = findParentClauseId(target);
+      var clause = menu.search.biblio.byId[cid];
+      return { id: id, clause: clause }
+    }).sort(function (a, b) {
+      return sortByClauseNumber(a.clause, b.clause);
+    }).forEach(function (record, i) {
+      if (previousId === record.clause.id) {
+        previousCell.innerHTML += ' (<a href="#' + record.id + '">' + (dupCount + 2) + '</a>)';
+        dupCount++;
+      } else {
+        var row = newBody.insertRow();
+        var cell = row.insertCell();
+        cell.innerHTML = record.clause.number;
+        cell = row.insertCell();
+        cell.innerHTML = '<a href="#' + record.id + '">' + record.clause.titleHTML + '</a>';
+        previousCell = cell;
+        previousId = record.clause.id;
+        dupCount = 0;
+      }
+    }, this);
+    this.$table.removeChild(this.$tableBody);
+    this.$tableBody = newBody;
+    this.$table.appendChild(this.$tableBody);
+  }
+}
+function findParentClauseId(node) {
+  while (node && node.nodeName !== 'EMU-CLAUSE' && node.nodeName !== 'EMU-INTRO' && node.nodeName !== 'EMU-ANNEX') {
+    node = node.parentNode;
+  }
+  if (!node) return null;
+  return node.getAttribute('id');
+}
+
+function sortByClauseNumber(c1, c2) {
+  var c1c = c1.number.split('.');
+  var c2c = c2.number.split('.');
+
+  for (var i = 0; i < c1c.length; i++) {
+    if (i >= c2c.length) {
+      return 1;
+    }
+
+    var c1 = c1c[i];
+    var c2 = c2c[i];
+    var c1cn = Number(c1);
+    var c2cn = Number(c2);
+
+    if (Number.isNaN(c1cn) && Number.isNaN(c2cn)) {
+      if (c1 > c2) {
+        return 1;
+      } else if (c1 < c2) {
+        return -1;
+      }
+    } else if (!Number.isNaN(c1cn) && Number.isNaN(c2cn)) {
+      return -1;
+    } else if (Number.isNaN(c1cn) && !Number.isNaN(c2cn)) {
+      return 1;
+    } else if(c1cn > c2cn) {
+      return 1;
+    } else if (c1cn < c2cn) {
+      return -1;
+    }
+  }
+
+  if (c1c.length === c2c.length) {
+    return 0;
+  }
+  return -1;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  Toolbox.init();
+  referencePane.init();
+})
+var CLAUSE_NODES = ['EMU-CLAUSE', 'EMU-INTRO', 'EMU-ANNEX'];
+function findLocalReferences ($elem) {
+  var name = $elem.innerHTML;
+  var references = [];
+
+  var parentClause = $elem.parentNode;
+  while (parentClause && CLAUSE_NODES.indexOf(parentClause.nodeName) === -1) {
+    parentClause = parentClause.parentNode;
+  }
+
+  if(!parentClause) return;
+
+  var vars = parentClause.querySelectorAll('var');
+
+  for (var i = 0; i < vars.length; i++) {
+    var $var = vars[i];
+
+    if ($var.innerHTML === name) {
+      references.push($var);
+    }
+  }
+
+  return references;
+}
+
+function toggleFindLocalReferences($elem) {
+  var references = findLocalReferences($elem);
+  if ($elem.classList.contains('referenced')) {
+    references.forEach(function ($reference) {
+      $reference.classList.remove('referenced');
+    });
+  } else {
+    references.forEach(function ($reference) {
+      $reference.classList.add('referenced');
+    });
+  }
+}
+
+function installFindLocalReferences () {
+  document.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'VAR') {
+      toggleFindLocalReferences(e.target);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', installFindLocalReferences);
+</script><style>body {
+  display: flex;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif, serif;
+  padding: 0;
+  margin: 0;
+  color: #111;
+}
+
+#spec-container {
+  padding: 0 20px;
+  flex-grow: 1;
+  flex-basis: 66%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body.oldtoc {
+  margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #206ca7;
+}
+
+a:visited {
+  color: #206ca7;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #239dee;
+}
+
+
+code {
+    font-weight: bold;
+    font-family: Consolas, Monaco, monospace;
+    white-space: pre;
+}
+
+pre code {
+  font-weight: inherit;
+}
+
+pre code.hljs {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+ol.toc {
+    list-style: none;
+    padding-left: 0;
+}
+
+ol.toc ol.toc {
+    padding-left: 2ex;
+    list-style: none;
+}
+
+var {
+  color: #2aa198;
+  transition: background-color 0.25s ease;
+  cursor: pointer;
+}
+
+var.referenced {
+  background-color: #ffff33;
+}
+
+emu-const {
+  font-family: sans-serif;
+}
+
+emu-val {
+  font-weight: bold;
+}
+emu-alg ol, emu-alg ol ol ol ol {
+    list-style-type: decimal;
+}
+
+emu-alg ol ol, emu-alg ol ol ol ol ol {
+    list-style-type: lower-alpha;
+}
+
+emu-alg ol ol ol, ol ol ol ol ol ol {
+    list-style-type: lower-roman;
+}
+
+emu-eqn {
+  display: block;
+  margin-left: 4em;
+}
+
+emu-eqn.inline {
+  display: inline;
+  margin: 0;
+}
+
+emu-eqn div:first-child {
+  margin-left: -2em;
+}
+
+emu-note {
+    margin: 1em 0;
+    color: #666;
+    border-left: 5px solid #ccc;
+    display: flex;
+    flex-direction: row;
+}
+
+emu-note > span.note {
+    flex-basis: 100px;
+    min-width: 100px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+
+emu-note[type=editor] {
+  border-left-color: #faa;
+}
+
+emu-note > div.note-contents {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+emu-note > div.note-contents > p:first-of-type {
+  margin-top: 0;
+}
+
+emu-note > div.note-contents > p:last-of-type {
+  margin-bottom: 0;
+}
+
+emu-table td code {
+  white-space: normal;
+} 
+
+emu-figure {
+  display: block;
+}
+
+emu-example {
+  display: block;
+  margin: 1em 3em;
+}
+
+emu-example figure figcaption {
+  margin-top: 0.5em;
+  text-align: left;
+}
+
+emu-figure figure,
+emu-example figure,
+emu-table figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+emu-production {
+    display: block;
+}
+
+emu-grammar[type="example"] emu-production,
+emu-grammar[type="definition"] emu-production {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5ex;
+}
+
+emu-grammar.inline, emu-production.inline,
+emu-grammar.inline emu-production emu-rhs, emu-production.inline emu-rhs,
+emu-grammar[collapsed] emu-production emu-rhs, emu-production[collapsed] emu-rhs {
+    display: inline;
+    padding-left: 1ex;
+    margin-left: 0;
+}
+
+emu-grammar[collapsed] emu-production, emu-production[collapsed] {
+    margin: 0;
+}
+
+emu-constraints {
+    font-size: .75em;
+    margin-right: 1ex;
+}
+
+emu-gann {
+    margin-right: 1ex;
+}
+
+emu-gann emu-t:last-child,
+emu-gann emu-gprose:last-child,
+emu-gann emu-nt:last-child {
+    margin-right: 0;
+}
+
+emu-geq {
+    margin-left: 1ex;
+    font-weight: bold;
+}
+
+emu-oneof {
+    font-weight: bold;
+    margin-left: 1ex;
+}
+
+emu-nt {
+    display: inline-block;
+    font-style: italic;
+    white-space: nowrap;
+    text-indent: 0;
+}
+
+emu-nt a, emu-nt a:visited {
+  color: #333;
+}
+
+emu-rhs emu-nt {
+    margin-right: 1ex;
+}
+
+emu-t {
+    display: inline-block;
+    font-family: monospace;
+    font-weight: bold;
+    white-space: nowrap;
+    text-indent: 0;
+}
+
+emu-production emu-t {
+    margin-right: 1ex;
+}
+
+emu-rhs {
+    display: block;
+    padding-left: 75px;
+    text-indent: -25px;
+}
+
+emu-mods {
+    font-size: .85em;
+    vertical-align: sub;
+    font-style: normal;
+    font-weight: normal;
+}
+
+emu-params, emu-opt {
+  margin-right: 1ex;
+  font-family: monospace;
+}
+
+emu-params, emu-constraints {
+  color: #2aa198;
+}
+
+emu-opt {
+  color: #b58900;
+}
+
+emu-gprose {
+    font-size: 0.9em;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+emu-production emu-gprose {
+    margin-right: 1ex;
+}
+
+h1.shortname {
+  color: #f60;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+h1.version {
+  color: #f60;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+h1.title {
+  margin-top: 0;
+  color: #f60;
+}
+
+h1.first {
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+}
+
+h1 .secnum {
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+h1 span.title {
+  order: 2;
+}
+
+
+h1 { font-size: 2.67em; margin-top: 2em; margin-bottom: 0; line-height: 1em;}
+h2 { font-size: 2em; }
+h3 { font-size: 1.56em; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1.11em; }
+h6 { font-size: 1em; }
+
+h1:hover span.utils {
+  display: block;
+}
+
+span.utils {
+  font-size: 18px;
+  line-height: 18px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  font-weight: normal;
+}
+
+span.utils:before {
+    content: "⤷";
+    display: inline-block;
+    padding: 0 5px;
+}
+
+span.utils > * {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+h1 span.utils span.anchor a,
+h2 span.utils span.anchor a,
+h3 span.utils span.anchor a,
+h4 span.utils span.anchor a,
+h5 span.utils span.anchor a,
+h6 span.utils span.anchor a {
+  text-decoration: none;
+  font-variant: small-caps;
+}
+
+h1 span.utils span.anchor a:hover,
+h2 span.utils span.anchor a:hover,
+h3 span.utils span.anchor a:hover,
+h4 span.utils span.anchor a:hover,
+h5 span.utils span.anchor a:hover,
+h6 span.utils span.anchor a:hover {
+  color: #333;
+}
+
+emu-intro h1, emu-clause h1, emu-annex h1 { font-size: 2em; }
+emu-intro h2, emu-clause h2, emu-annex h2 { font-size: 1.56em; }
+emu-intro h3, emu-clause h3, emu-annex h3 { font-size: 1.25em; }
+emu-intro h4, emu-clause h4, emu-annex h4 { font-size: 1.11em; }
+emu-intro h5, emu-clause h5, emu-annex h5 { font-size: 1em; }
+emu-intro h6, emu-clause h6, emu-annex h6 { font-size: 0.9em; }
+emu-intro emu-intro h1, emu-clause emu-clause h1, emu-annex emu-annex h1 { font-size: 1.56em; }
+emu-intro emu-intro h2, emu-clause emu-clause h2, emu-annex emu-annex h2 { font-size: 1.25em; }
+emu-intro emu-intro h3, emu-clause emu-clause h3, emu-annex emu-annex h3 { font-size: 1.11em; }
+emu-intro emu-intro h4, emu-clause emu-clause h4, emu-annex emu-annex h4 { font-size: 1em; }
+emu-intro emu-intro h5, emu-clause emu-clause h5, emu-annex emu-annex h5 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex h1 { font-size: 1.25em; }
+emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex h2 { font-size: 1.11em; }
+emu-intro emu-intro emu-intro h3, emu-clause emu-clause emu-clause h3, emu-annex emu-annex emu-annex h3 { font-size: 1em; }
+emu-intro emu-intro emu-intro h4, emu-clause emu-clause emu-clause h4, emu-annex emu-annex emu-annex h4 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex h1 { font-size: 1.11em; }
+emu-intro emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex emu-annex h2 { font-size: 1em; }
+emu-intro emu-intro emu-intro emu-intro h3, emu-clause emu-clause emu-clause emu-clause h3, emu-annex emu-annex emu-annex emu-annex h3 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex emu-annex h1 { font-size: 1em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro h2, emu-clause emu-clause emu-clause emu-clause emu-clause h2, emu-annex emu-annex emu-annex emu-annex emu-annex h2 { font-size: 0.9em; }
+emu-intro emu-intro emu-intro emu-intro emu-intro emu-intro h1, emu-clause emu-clause emu-clause emu-clause emu-clause emu-clause h1, emu-annex emu-annex emu-annex emu-annex emu-annex emu-annex h1 { font-size: 0.9em }
+
+emu-clause, emu-intro, emu-annex {
+    display: block;
+}
+
+/* Figures and tables */
+figure { display: block; margin: 1em 0 3em 0; }
+figure object { display: block; margin: 0 auto; }
+figure table.real-table { margin: 0 auto; }
+figure figcaption {
+    display: block;
+    color: #555555;
+    font-weight: bold;
+    text-align: center;
+}
+
+emu-table table {
+  margin: 0 auto;
+}
+
+emu-table table, table.real-table {
+    border-collapse: collapse;
+}
+
+emu-table td, emu-table th, table.real-table td, table.real-table th {
+    border: 1px solid black;
+    padding: 0.4em;
+    vertical-align: baseline;
+}
+emu-table th, emu-table thead td, table.real-table th {
+    background-color: #eeeeee;
+}
+
+/* Note: the left content edges of table.lightweight-table >tbody >tr >td
+   and div.display line up. */
+table.lightweight-table {
+    border-collapse: collapse;
+    margin: 0 0 0 1.5em;
+}
+table.lightweight-table td, table.lightweight-table th {
+    border: none;
+    padding: 0 0.5em;
+    vertical-align: baseline;
+}
+
+/* diff styles */
+ins {
+    background-color: #e0f8e0;
+    text-decoration: none;
+    border-bottom: 1px solid #396;
+}
+
+del {
+    background-color: #fee;
+}
+
+ins.block, del.block,
+emu-production > ins, emu-production > del,
+emu-grammar > ins, emu-grammar > del {
+  display: block;
+}
+emu-rhs > ins, emu-rhs > del { 
+  display: inline;
+}
+
+tr.ins > td > ins {
+  border-bottom: none;
+}
+
+tr.ins > td {
+  background-color: #e0f8e0;
+}
+
+tr.del > td {
+  background-color: #fee;
+}
+
+/* Menu Styles */
+#menu-toggle {
+  font-size: 2em;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1.5em;
+  height: 1.5em;
+  z-index: 3;
+  visibility: hidden;
+  color: #1567a2;
+  background-color: #fff;
+
+  line-height: 1.5em;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;;
+
+  cursor: pointer;
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  width: 33%; height: 100vh;
+  max-width: 500px;
+  box-sizing: border-box;
+  background-color: #ddd;
+  overflow: hidden;
+  transition: opacity 0.1s linear;
+  padding: 0 5px;
+  position: fixed;
+  left: 0; top: 0;
+  border-right: 2px solid #bbb;
+
+  z-index: 2;
+}
+
+#menu-spacer {
+  flex-basis: 33%;
+  max-width: 500px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+#menu a {
+  color: #1567a2;
+}
+
+#menu.active {
+  display: flex;
+  opacity: 1;
+  z-index: 2;
+}
+
+#menu-pins {
+  flex-grow: 1;
+  display: none;
+}
+
+#menu-pins.active {
+  display: block;
+}
+
+#menu-pins-list {
+  margin: 0;
+  padding: 0;
+  counter-reset: pins-counter;
+}
+
+#menu-pins-list > li:before {
+  content: counter(pins-counter);
+  counter-increment: pins-counter;
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+  border: 1px solid #bbb;
+  padding: 2px;
+  margin: 4px;
+  box-sizing: border-box;
+  line-height: 1em;
+  background-color: #ccc;
+  border-radius: 4px;
+}
+#menu-toc > ol {
+  padding: 0;
+  flex-grow: 1;
+}
+
+#menu-toc > ol li {
+  padding: 0;
+}
+
+#menu-toc > ol , #menu-toc > ol ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#menu-toc > ol ol {
+  padding-left: 0.75em;
+}
+
+#menu-toc li {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#menu-toc .item-toggle {
+  display: inline-block;
+  transform: rotate(-45deg) translate(-5px, -5px);
+  transition: transform 0.1s ease;
+  text-align: center;
+  width: 20px;
+
+  color: #aab;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;;
+
+  cursor: pointer;
+}
+
+#menu-toc .item-toggle-none {
+  display: inline-block;
+  width: 20px;
+}
+
+#menu-toc li.active > .item-toggle {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+#menu-toc li > ol {
+  display: none;
+}
+
+#menu-toc li.active > ol {
+  display: block;
+}
+
+#menu-toc li.revealed > a {
+  background-color: #bbb;
+  font-weight: bold;
+  /*
+  background-color: #222;
+  color: #c6d8e4;
+  */
+}
+
+#menu-toc li.revealed-leaf> a {
+  color: #206ca7;
+  /*
+  background-color: #222;
+  color: #c6d8e4;
+  */
+}
+
+#menu-toc li.revealed > .item-toggle {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+#menu-toc li.revealed > ol {
+  display: block;
+}
+
+#menu-toc li > a {
+  padding: 2px 5px;
+}
+
+#menu > * {
+  margin-bottom: 5px;
+}
+
+.menu-pane-header {
+  padding: 0 5px;
+  text-transform: uppercase;
+  background-color: #aaa;
+  color: #335;
+  font-weight: bold;
+  letter-spacing: 2px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 0.8em;
+}
+
+#menu-toc {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+#menu-toc ol.toc {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#menu-search {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  
+  max-height: 300px;
+}
+
+#menu-trace-list {
+  display: none;
+}
+
+#menu-search-box {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 5px 0 0 0;
+  font-size: 1em;
+  padding: 2px;
+  background-color: #bbb;
+  border: 1px solid #999;
+}
+
+#menu-search-results {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+li.menu-search-result-clause:before {
+    content: 'clause';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%;
+}
+li.menu-search-result-op:before {
+    content: 'op';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%;
+}
+
+li.menu-search-result-prod:before {
+    content: 'prod';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%
+}
+
+
+li.menu-search-result-term:before {
+    content: 'term';
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1ex;
+    color: #666;
+    font-size: 75%
+}
+
+#menu-search-results ul {
+  padding: 0 5px;
+  margin: 0;
+}
+
+#menu-search-results li {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+#menu-trace-list {
+  counter-reset: item;
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+#menu-trace-list li {
+  display: block;
+  white-space: nowrap;
+}
+
+#menu-trace-list li .secnum:after {
+  content: " ";
+}
+#menu-trace-list li:before {
+    content: counter(item) " ";
+    background-color: #222;
+    counter-increment: item;
+    color: #999;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    text-align: center;
+    margin: 2px 4px 2px 0;
+}
+
+@media (max-width: 1000px) {
+  body {
+    margin: 0;
+    display: block;
+  }
+
+  #menu {
+    display: none;
+    padding-top: 3em;
+    width: 450px;
+  }
+
+  #menu.active {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 300px;
+  }
+
+  #menu-toggle {
+    visibility: visible;
+  }
+
+  #spec-container {
+    padding: 0 5px;
+  }
+
+  #references-pane-spacer {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #menu {
+    width: 100%;
+  }
+
+  h1 .secnum:empty {
+    margin: 0; padding: 0;
+  }
+}
+
+
+/* Toolbox */
+.toolbox {
+	position: absolute;
+	background: #ddd;
+	border: 1px solid #aaa;
+  display: none;
+  color: #eee;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.toolbox.active {
+  display: inline-block;
+}
+
+.toolbox a {
+  text-decoration: none;
+  padding: 0 5px;
+}
+
+.toolbox a:hover {
+  text-decoration: underline;
+}
+
+.toolbox:after, .toolbox:before {
+	top: 100%;
+	left: 15px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.toolbox:after {
+	border-color: rgba(0, 0, 0, 0);
+	border-top-color: #ddd;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.toolbox:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-top-color: #aaa;
+	border-width: 12px;
+	margin-left: -12px;
+}
+
+#references-pane-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  display: none;
+  background-color: #ddd;
+  z-index: 1;
+}
+
+#references-pane-table-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#references-pane-spacer {
+  flex-basis: 33%;
+  max-width: 500px;
+}
+
+#references-pane {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#references-pane-container.active {
+  display: flex;
+}
+
+#references-pane-close:after {
+  content: '✖';
+  float: right;
+  cursor: pointer;
+}
+
+#references-pane table tr td:first-child {
+  text-align: right;
+  padding-right: 5px;
+}
+
+@media print {
+  #menu-toggle {
+    display: none; 
+  }
+}
+</style></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle">◢</span><a href="#locale-and-parameter-negotiation" title="Locale and Parameter Negotiation"><span class="secnum">1</span> Locale and Parameter Negotiation</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-internal-slots" title="Internal slots of Service Constructors"><span class="secnum">1.1</span> Internal slots of Service Constructors</a></li><li><span class="item-toggle">◢</span><a href="#sec-abstract-operations" title="Abstract Operations"><span class="secnum">1.2</span> Abstract Operations</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-canonicalizelocalelist" title="CanonicalizeLocaleList ( locales )"><span class="secnum">1.2.1</span> CanonicalizeLocaleList ( <var>locales</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-bestavailablelocale" title="BestAvailableLocale ( availableLocales, locale )"><span class="secnum">1.2.2</span> BestAvailableLocale ( <var>availableLocales</var>, <var>locale</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-lookupmatcher" title="LookupMatcher ( availableLocales, requestedLocales )"><span class="secnum">1.2.3</span> LookupMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-bestfitmatcher" title="BestFitMatcher ( availableLocales, requestedLocales )"><span class="secnum">1.2.4</span> BestFitMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-unicode-extension-components" title="UnicodeExtensionComponents( extension )"><span class="secnum">1.2.5</span> UnicodeExtensionComponents( <var>extension</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-insert-unicode-extension-and-canonicalize" title="InsertUnicodeExtensionAndCanonicalize( locale, extension )"><span class="secnum">1.2.6</span> InsertUnicodeExtensionAndCanonicalize( <var>locale</var>, <var>extension</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-resolvelocale" title="ResolveLocale ( availableLocales, requestedLocales, options, relevantExtensionKeys, localeData )"><span class="secnum">1.2.7</span> ResolveLocale ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var>, <var>relevantExtensionKeys</var>, <var>localeData</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-lookupsupportedlocales" title="LookupSupportedLocales ( availableLocales, requestedLocales )"><span class="secnum">1.2.8</span> LookupSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-bestfitsupportedlocales" title="BestFitSupportedLocales ( availableLocales, requestedLocales )"><span class="secnum">1.2.9</span> BestFitSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-supportedlocales" title="SupportedLocales ( availableLocales, requestedLocales, options )"><span class="secnum">1.2.10</span> SupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-getoption" title="GetOption ( options, property, type, values, fallback )"><span class="secnum">1.2.11</span> GetOption ( <var>options</var>, <var>property</var>, <var>type</var>, <var>values</var>, <var>fallback</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-getoption" title="GetStringOrBooleanOption ( options, property, values, trueValue, fallback )"><span class="secnum">1.2.12</span> GetStringOrBooleanOption ( <var>options</var>, <var>property</var>, <var>values</var>, <var>trueValue</var>, <var>fallback</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-defaultnumberoption" title="DefaultNumberOption ( value, minimum, maximum, fallback )"><span class="secnum">1.2.13</span> DefaultNumberOption ( <var>value</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-getnumberoption" title="GetNumberOption ( options, property, minimum, maximum, fallback )"><span class="secnum">1.2.14</span> GetNumberOption ( <var>options</var>, <var>property</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-partitionpattern" title="PartitionPattern ( pattern )"><span class="secnum">1.2.15</span> PartitionPattern ( <var>pattern</var> )</a></li></ol></li></ol></li></ol></div></div><div id="spec-container"><emu-clause id="locale-and-parameter-negotiation">
+  <h1 class="first"><span class="secnum">1</span> Locale and Parameter Negotiation</h1>
+
+  <p>
+    The constructors for the objects providing locale sensitive services, Collator, NumberFormat, DateTimeFormat, PluralRules, and RelativeTimeFormat, use a common pattern to negotiate the requests represented by the locales and options arguments against the actual capabilities of their implementations. The common behaviour is described here in terms of internal slots describing the capabilities and of <emu-xref href="#sec-algorithm-conventions-abstract-operations"><a href="https://tc39.es/ecma262/#sec-algorithm-conventions-abstract-operations">abstract operations</a></emu-xref> using these internal slots.
+  </p>
+
+  <emu-clause id="sec-internal-slots">
+    <h1><span class="secnum">1.1</span> Internal slots of Service Constructors</h1>
+
+    <p>
+      The constructors Intl.Collator, Intl.NumberFormat, Intl.DateTimeFormat, Intl.PluralRules, and Intl.RelativeTimeFormat have the following internal slots:
+    </p>
+
+    <ul>
+      <li>[[AvailableLocales]] is a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> that contains structurally valid (<emu-xref href="#sec-isstructurallyvalidlanguagetag"></emu-xref>) and canonicalized (<emu-xref href="#sec-canonicalizeunicodelocaleid"></emu-xref>) Unicode BCP 47 locale identifiers identifying the locales for which the implementation provides the functionality of the constructed objects. Language tags on the list must not have a Unicode locale extension sequence. The list must include the value returned by the DefaultLocale abstract operation (<emu-xref href="#sec-defaultlocale"></emu-xref>), and must not include duplicates. Implementations must include in [[AvailableLocales]] locales that can serve as fallbacks in the algorithm used to resolve locales (see <emu-xref href="#sec-resolvelocale" id="_ref_0"><a href="#sec-resolvelocale">1.2.7</a></emu-xref>). For example, implementations that provide a <emu-val>"de-DE"</emu-val> locale must include a <emu-val>"de"</emu-val> locale that can serve as a fallback for requests such as <emu-val>"de-AT"</emu-val> and <emu-val>"de-CH"</emu-val>. For locales that in current usage would include a script subtag (such as Chinese locales), old-style language tags without script subtags must be included such that, for example, requests for <emu-val>"zh-TW"</emu-val> and <emu-val>"zh-HK"</emu-val> lead to output in traditional Chinese rather than the default simplified Chinese. The ordering of the locales within [[AvailableLocales]] is irrelevant.</li>
+      <li>[[RelevantExtensionKeys]] is a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of keys of the language tag extensions defined in Unicode Technical Standard 35 that are relevant for the functionality of the constructed objects.</li>
+      <li>[[SortLocaleData]] and [[SearchLocaleData]] (for Intl.Collator) and [[LocaleData]] (for Intl.NumberFormat, Intl.DateTimeFormat, Intl.PluralRules, and Intl.RelativeTimeFormat) are records that have fields for each locale contained in [[AvailableLocales]]. The value of each of these fields must be a record that has fields for each key contained in [[RelevantExtensionKeys]]. The value of each of these fields must be a non-empty list of those values defined in Unicode Technical Standard 35 for the given key that are supported by the implementation for the given locale, with the first element providing the default value.</li>
+    </ul>
+
+    <p>
+      EXAMPLE     An implementation of DateTimeFormat might include the language tag <emu-val>"th"</emu-val> in its [[AvailableLocales]] internal slot, and must (according to <emu-xref href="#sec-intl.datetimeformat-internal-slots"></emu-xref>) include the key <emu-val>"ca"</emu-val> in its [[RelevantExtensionKeys]] internal slot. For Thai, the <emu-val>"buddhist"</emu-val> calendar is usually the default, but an implementation might also support the calendars <emu-val>"gregory"</emu-val>, <emu-val>"chinese"</emu-val>, and <emu-val>"islamicc"</emu-val> for the locale <emu-val>"th"</emu-val>. The [[LocaleData]] internal slot would therefore at least include {[[th]]: {[[ca]]: « <emu-val>"buddhist"</emu-val>, <emu-val>"gregory"</emu-val>, <emu-val>"chinese"</emu-val>, <emu-val>"islamicc"</emu-val> »}}.
+    </p>
+  </emu-clause>
+
+  <emu-clause id="sec-abstract-operations">
+    <h1><span class="secnum">1.2</span> Abstract Operations</h1>
+
+    <p>
+      Where the following <emu-xref href="#sec-algorithm-conventions-abstract-operations"><a href="https://tc39.es/ecma262/#sec-algorithm-conventions-abstract-operations">abstract operations</a></emu-xref> take an <var>availableLocales</var> argument, it must be an [[AvailableLocales]] <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> as specified in <emu-xref href="#sec-internal-slots" id="_ref_1"><a href="#sec-internal-slots">1.1</a></emu-xref>.
+    </p>
+
+    <emu-clause id="sec-canonicalizelocalelist" aoid="CanonicalizeLocaleList">
+      <h1><span class="secnum">1.2.1</span> CanonicalizeLocaleList ( <var>locales</var> )</h1>
+
+      <p>
+        The abstract operation CanonicalizeLocaleList takes the following steps:
+      </p>
+
+      <emu-alg><ol><li>If <var>locales</var> is <emu-val>undefined</emu-val>, then<ol><li>Return a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li></ol></li><li>Let <var>seen</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>If <emu-xref aoid="Type" id="_ref_2"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>locales</var>) is String or <emu-xref aoid="Type" id="_ref_3"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>locales</var>) is Object and <var>locales</var> has an [[InitializedLocale]] internal slot, then<ol><li>Let <var>O</var> be <emu-xref aoid="CreateArrayFromList" id="_ref_4"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(« <var>locales</var> »).</li></ol></li><li>Else,<ol><li>Let <var>O</var> be ?&nbsp;<emu-xref aoid="ToObject" id="_ref_5"><a href="https://tc39.es/ecma262/#sec-toobject">ToObject</a></emu-xref>(<var>locales</var>).</li></ol></li><li>Let <var>len</var> be ?&nbsp;<emu-xref aoid="ToLength" id="_ref_6"><a href="https://tc39.es/ecma262/#sec-tolength">ToLength</a></emu-xref>(? <emu-xref aoid="Get" id="_ref_7"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>O</var>, <emu-val>"length"</emu-val>)).</li><li>Let <var>k</var> be 0.</li><li>Repeat, while <var>k</var> &lt; <var>len</var><ol><li>Let <var>Pk</var> be <emu-xref aoid="ToString" id="_ref_8"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<var>k</var>).</li><li>Let <var>kPresent</var> be ?&nbsp;<emu-xref aoid="HasProperty" id="_ref_9"><a href="https://tc39.es/ecma262/#sec-hasproperty">HasProperty</a></emu-xref>(<var>O</var>, <var>Pk</var>).</li><li>If <var>kPresent</var> is <emu-val>true</emu-val>, then<ol><li>Let <var>kValue</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_10"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>O</var>, <var>Pk</var>).</li><li>If <emu-xref aoid="Type" id="_ref_11"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>kValue</var>) is not String or Object, throw a <emu-val>TypeError</emu-val> exception.</li><li>If <emu-xref aoid="Type" id="_ref_12"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>kValue</var>) is Object and <var>kValue</var> has an [[InitializedLocale]] internal slot, then<ol><li>Let <var>tag</var> be <var>kValue</var>.[[Locale]].</li></ol></li><li>Else,<ol><li>Let <var>tag</var> be ?&nbsp;<emu-xref aoid="ToString" id="_ref_13"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<var>kValue</var>).</li></ol></li><li>If IsStructurallyValidLanguageTag(<var>tag</var>) is <emu-val>false</emu-val>, throw a <emu-val>RangeError</emu-val> exception.</li><li>Let <var>canonicalizedTag</var> be CanonicalizeUnicodeLocaleId(<var>tag</var>).</li><li>If <var>canonicalizedTag</var> is not an element of <var>seen</var>, append <var>canonicalizedTag</var> as the last element of <var>seen</var>.</li></ol></li><li>Increase <var>k</var> by 1.</li></ol></li><li>Return <var>seen</var>.</li></ol></emu-alg>
+
+      <emu-note><span class="note">Note 1</span><div class="note-contents">
+        Non-normative summary: The abstract operation interprets the <var>locales</var> argument as an array and copies its elements into a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>, validating the elements as structurally valid language tags and canonicalizing them, and omitting duplicates.
+      </div></emu-note>
+
+      <emu-note><span class="note">Note 2</span><div class="note-contents">
+        Requiring <var>kValue</var> to be a String or Object means that the <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref> <emu-val>NaN</emu-val> will not be interpreted as the language tag <emu-val>"nan"</emu-val>, which stands for Min Nan Chinese.
+      </div></emu-note>
+    </emu-clause>
+
+    <emu-clause id="sec-bestavailablelocale" aoid="BestAvailableLocale">
+      <h1><span class="secnum">1.2.2</span> BestAvailableLocale ( <var>availableLocales</var>, <var>locale</var> )</h1>
+
+      <p>
+        The BestAvailableLocale abstract operation compares the provided argument <var>locale</var>, which must be a String value with a structurally valid and canonicalized Unicode BCP 47 locale identifier, against the locales in <var>availableLocales</var> and returns either the longest non-empty prefix of <var>locale</var> that is an element of <var>availableLocales</var>, or <emu-val>undefined</emu-val> if there is no such element. It uses the fallback mechanism of RFC 4647, section 3.4. The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>candidate</var> be <var>locale</var>.</li><li>Repeat,<ol><li>If <var>availableLocales</var> contains an element equal to <var>candidate</var>, return <var>candidate</var>.</li><li>Let <var>pos</var> be the character index of the last occurrence of <emu-val>"-"</emu-val> (U+002D) within <var>candidate</var>. If that character does not occur, return <emu-val>undefined</emu-val>.</li><li>If <var>pos</var> ≥ 2 and the character <emu-val>"-"</emu-val> occurs at index <var>pos</var>-2 of candidate, decrease <var>pos</var> by 2.</li><li>Let <var>candidate</var> be the substring of <var>candidate</var> from position 0, inclusive, to position <var>pos</var>, exclusive.</li></ol></li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-lookupmatcher" aoid="LookupMatcher">
+      <h1><span class="secnum">1.2.3</span> LookupMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )</h1>
+
+      <p>
+        The LookupMatcher abstract operation compares <var>requestedLocales</var>, which must be a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> as returned by <emu-xref aoid="CanonicalizeLocaleList" id="_ref_14"><a href="#sec-canonicalizelocalelist">CanonicalizeLocaleList</a></emu-xref>, against the locales in <var>availableLocales</var> and determines the best available language to meet the request. The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>result</var> be a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>.</li><li>For each element <var>locale</var> of <var>requestedLocales</var> in <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> order, do<ol><li>Let <var>noExtensionsLocale</var> be the String value that is <var>locale</var> with all Unicode locale extension sequences removed.</li><li>Let <var>availableLocale</var> be <emu-xref aoid="BestAvailableLocale" id="_ref_15"><a href="#sec-bestavailablelocale">BestAvailableLocale</a></emu-xref>(<var>availableLocales</var>, <var>noExtensionsLocale</var>).</li><li>If <var>availableLocale</var> is not <emu-val>undefined</emu-val>, then<ol><li>Set <var>result</var>.[[locale]] to <var>availableLocale</var>.</li><li>If <var>locale</var> and <var>noExtensionsLocale</var> are not the same String value, then<ol><li>Let <var>extension</var> be the String value consisting of the first substring of <var>locale</var> that is a Unicode locale extension sequence.</li><li>Set <var>result</var>.[[extension]] to <var>extension</var>.</li></ol></li><li>Return <var>result</var>.</li></ol></li></ol></li><li>Let <var>defLocale</var> be DefaultLocale().</li><li>Set <var>result</var>.[[locale]] to <var>defLocale</var>.</li><li>Return <var>result</var>.</li></ol></emu-alg>
+
+      <emu-note><span class="note">Note</span><div class="note-contents">
+        The algorithm is based on the Lookup algorithm described in RFC 4647 section 3.4, but options specified through Unicode locale extension sequences are ignored in the lookup. Information about such subsequences is returned separately. The abstract operation returns a record with a [[locale]] field, whose value is the language tag of the selected locale, which must be an element of <var>availableLocales</var>. If the language tag of the request locale that led to the selected locale contained a Unicode locale extension sequence, then the returned record also contains an [[extension]] field whose value is the first Unicode locale extension sequence within the request locale language tag.
+      </div></emu-note>
+    </emu-clause>
+
+    <emu-clause id="sec-bestfitmatcher" aoid="BestFitMatcher">
+      <h1><span class="secnum">1.2.4</span> BestFitMatcher ( <var>availableLocales</var>, <var>requestedLocales</var> )</h1>
+
+      <p>
+        The BestFitMatcher abstract operation compares <var>requestedLocales</var>, which must be a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> as returned by <emu-xref aoid="CanonicalizeLocaleList" id="_ref_16"><a href="#sec-canonicalizelocalelist">CanonicalizeLocaleList</a></emu-xref>, against the locales in <var>availableLocales</var> and determines the best available language to meet the request. The algorithm is implementation dependent, but should produce results that a typical user of the requested locales would perceive as at least as good as those produced by the <emu-xref aoid="LookupMatcher" id="_ref_17"><a href="#sec-lookupmatcher">LookupMatcher</a></emu-xref> abstract operation. Options specified through Unicode locale extension sequences must be ignored by the algorithm. Information about such subsequences is returned separately. The abstract operation returns a record with a [[locale]] field, whose value is the language tag of the selected locale, which must be an element of <var>availableLocales</var>. If the language tag of the request locale that led to the selected locale contained a Unicode locale extension sequence, then the returned record also contains an [[extension]] field whose value is the first Unicode locale extension sequence within the request locale language tag.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-unicode-extension-components" aoid="UnicodeExtensionComponents">
+      <h1><span class="secnum">1.2.5</span> UnicodeExtensionComponents( <var>extension</var> )</h1>
+      <p>
+        The UnicodeExtensionComponents abstract operation returns the attributes and keywords from <var>extension</var>, which must be a Unicode locale extension sequence. If an attribute or a <emu-xref href="#sec-keywords-and-reserved-words"><a href="https://tc39.es/ecma262/#sec-keywords-and-reserved-words">keyword</a></emu-xref> occurs multiple times in <var>extension</var>, only the first occurence is returned. The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>attributes</var> be the empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>keywords</var> be the empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>isKeyword</var> be <emu-val>false</emu-val>.</li><li>Let <var>size</var> be the number of elements in <var>extension</var>.</li><li>Let <var>k</var> be 3.</li><li>Repeat, while <var>k</var> &lt; <var>size</var><ol><li>Let <var>e</var> be !&nbsp;<emu-xref aoid="Call" id="_ref_18"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(%StringProto_indexOf%, <var>extension</var>, « <emu-val>"-"</emu-val>, <var>k</var> »).</li><li>If <var>e</var> = -1, let <var>len</var> be <var>size</var> - <var>k</var>; else let <var>len</var> be <var>e</var> - <var>k</var>.</li><li>Let <var>subtag</var> be the String value equal to the substring of <var>extension</var> consisting of the code units at indices <var>k</var> (inclusive) through <var>k</var> + <var>len</var> (exclusive).</li><li>If <var>isKeyword</var> is <emu-val>false</emu-val>, then<ol><li>If <var>len</var> ≠ 2 and <var>subtag</var> is not an element of <var>attributes</var>, then<ol><li>Append <var>subtag</var> to <var>attributes</var>.</li></ol></li></ol></li><li>Else,<ol><li>If <var>len</var> = 2, then<ol><li>If <var>keywords</var> does not contain an element whose [[Key]] is the same as <var>key</var>, then<ol><li>Append the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>{[[Key]]: <var>key</var>, [[Value]]: <var>value</var>} to <var>keywords</var>.</li></ol></li></ol></li><li>Else,<ol><li>If <var>value</var> is not the empty String, then<ol><li>Let <var>value</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <var>value</var> and <emu-val>"-"</emu-val>.</li></ol></li><li>Let <var>value</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <var>value</var> and <var>subtag</var>.</li></ol></li></ol></li><li>If <var>len</var> = 2, then<ol><li>Let <var>isKeyword</var> be <emu-val>true</emu-val>.</li><li>Let <var>key</var> be <var>subtag</var>.</li><li>Let <var>value</var> be the empty String.</li></ol></li><li>Let <var>k</var> be <var>k</var> + <var>len</var> + 1.</li></ol></li><li>If <var>isKeyword</var> is <emu-val>true</emu-val>, then<ol><li>If <var>keywords</var> does not contain an element whose [[Key]] is the same as <var>key</var>, then<ol><li>Append the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>{[[Key]]: <var>key</var>, [[Value]]: <var>value</var>} to <var>keywords</var>.</li></ol></li></ol></li><li>Return the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>{[[Attributes]]: <var>attributes</var>, [[Keywords]]: <var>keywords</var>}.</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-insert-unicode-extension-and-canonicalize" aoid="InsertUnicodeExtensionAndCanonicalize">
+      <h1><span class="secnum">1.2.6</span> InsertUnicodeExtensionAndCanonicalize( <var>locale</var>, <var>extension</var> )</h1>
+      <p>
+        The InsertUnicodeExtensionAndCanonicalize abstract operation inserts <var>extension</var>, which must be a Unicode locale extension sequence, into <var>locale</var>, which must be a String value with a structurally valid and canonicalized Unicode BCP 47 locale identifier. The following steps are taken:
+      </p>
+      <p>
+        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
+      </p>
+
+      <emu-alg><ol><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>locale</var> does not contain a substring that is a Unicode locale extension sequence.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>extension</var> is a Unicode locale extension sequence.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>tag</var> matches the <code>unicode_locale_id</code> production.</li><li>Let <var>privateIndex</var> be !&nbsp;<emu-xref aoid="Call" id="_ref_19"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(%StringProto_indexOf%, <var>locale</var>, « <emu-val>"-x-"</emu-val> »).</li><li>If <var>privateIndex</var> = -1, then<ol><li>Let <var>locale</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <var>locale</var> and <var>extension</var>.</li></ol></li><li>Else,<ol><li>Let <var>preExtension</var> be the substring of <var>locale</var> from position 0, inclusive, to position <var>privateIndex</var>, exclusive.</li><li>Let <var>postExtension</var> be the substring of <var>locale</var> from position <var>privateIndex</var> to the end of the string.</li><li>Let <var>locale</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <var>preExtension</var>, <var>extension</var>, and <var>postExtension</var>.</li></ol></li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: IsStructurallyValidLanguageTag(<var>locale</var>) is <emu-val>true</emu-val>.</li><li>Return !&nbsp;CanonicalizeUnicodeLocaleId(<var>locale</var>).</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-resolvelocale" aoid="ResolveLocale">
+      <h1><span class="secnum">1.2.7</span> ResolveLocale ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var>, <var>relevantExtensionKeys</var>, <var>localeData</var> )</h1>
+
+      <p>
+        The ResolveLocale abstract operation compares a BCP 47 language priority list <var>requestedLocales</var> against the locales in <var>availableLocales</var> and determines the best available language to meet the request. <var>availableLocales</var>, <var>requestedLocales</var>, and <var>relevantExtensionKeys</var> must be provided as <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> values, <var>options</var> and <var>localeData</var> as Records.
+      </p>
+
+      <p>
+        The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>matcher</var> be <var>options</var>.[[localeMatcher]].</li><li>If <var>matcher</var> is <emu-val>"lookup"</emu-val>, then<ol><li>Let <var>r</var> be <emu-xref aoid="LookupMatcher" id="_ref_20"><a href="#sec-lookupmatcher">LookupMatcher</a></emu-xref>(<var>availableLocales</var>, <var>requestedLocales</var>).</li></ol></li><li>Else,<ol><li>Let <var>r</var> be <emu-xref aoid="BestFitMatcher" id="_ref_21"><a href="#sec-bestfitmatcher">BestFitMatcher</a></emu-xref>(<var>availableLocales</var>, <var>requestedLocales</var>).</li></ol></li><li>Let <var>foundLocale</var> be <var>r</var>.[[locale]].</li><li>Let <var>result</var> be a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>.</li><li>Set <var>result</var>.[[dataLocale]] to <var>foundLocale</var>.</li><li>If <var>r</var> has an [[extension]] field, then<ol><li>Let <var>components</var> be !&nbsp;<emu-xref aoid="UnicodeExtensionComponents" id="_ref_22"><a href="#sec-unicode-extension-components">UnicodeExtensionComponents</a></emu-xref>(<var>r</var>.[[extension]]).</li><li>Let <var>keywords</var> be <var>components</var>.[[Keywords]].</li></ol></li><li>Let <var>supportedExtension</var> be <emu-val>"-u"</emu-val>.</li><li>For each element <var>key</var> of <var>relevantExtensionKeys</var> in <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> order, do<ol><li>Let <var>foundLocaleData</var> be <var>localeData</var>.[[&lt;<var>foundLocale</var>&gt;]].</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_23"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>foundLocaleData</var>) is <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>.</li><li>Let <var>keyLocaleData</var> be <var>foundLocaleData</var>.[[&lt;<var>key</var>&gt;]].</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_24"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>keyLocaleData</var>) is <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>value</var> be <var>keyLocaleData</var>[0].</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_25"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>value</var>) is either String or Null.</li><li>Let <var>supportedExtensionAddition</var> be <emu-val>""</emu-val>.</li><li>If <var>r</var> has an [[extension]] field, then<ol><li>If <var>keywords</var> contains an element whose [[Key]] is the same as <var>key</var>, then<ol><li>Let <var>entry</var> be the element of <var>keywords</var> whose [[Key]] is the same as <var>key</var>.</li><li>Let <var>requestedValue</var> be <var>entry</var>.[[Value]].</li><li>If <var>requestedValue</var> is not the empty String, then<ol><li>If <var>keyLocaleData</var> contains <var>requestedValue</var>, then<ol><li>Let <var>value</var> be <var>requestedValue</var>.</li><li>Let <var>supportedExtensionAddition</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <emu-val>"-"</emu-val>, <var>key</var>, <emu-val>"-"</emu-val>, and <var>value</var>.</li></ol></li></ol></li><li>Else if <var>keyLocaleData</var> contains <emu-val>"true"</emu-val>, then<ol><li>Let <var>value</var> be <emu-val>"true"</emu-val>.</li><li>Let <var>supportedExtensionAddition</var> be the <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">string-concatenation</a></emu-xref> of <emu-val>"-"</emu-val> and <var>key</var>.</li></ol></li></ol></li></ol></li><li>If <var>options</var> has a field [[&lt;<var>key</var>&gt;]], then<ol><li>Let <var>optionsValue</var> be <var>options</var>.[[&lt;<var>key</var>&gt;]].</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_26"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>optionsValue</var>) is either String, Undefined, or Null.</li><li>If <emu-xref aoid="Type" id="_ref_27"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>optionsValue</var>) is String, then<ol><li>Let <var>optionsValue</var> be the string <var>optionsValue</var> after performing the algorithm steps to transform Unicode extension values to canonical syntax per <a href="https://unicode.org/reports/tr35/#Canonical_Unicode_Locale_Identifiers">Unicode Technical Standard #35 LDML § 3.2.1 Canonical Unicode Locale Identifiers</a>, treating <var>key</var> as <code>ukey</code> and <var>optionsValue</var> as <code>uvalue</code> productions.</li><li>Let <var>optionsValue</var> be the string <var>optionsValue</var> after performing the algorithm steps to replace Unicode extension values with their canonical form per <a href="https://unicode.org/reports/tr35/#Canonical_Unicode_Locale_Identifiers">Unicode Technical Standard #35 LDML § 3.2.1 Canonical Unicode Locale Identifiers</a>, treating <var>key</var> as <code>ukey</code> and <var>optionsValue</var> as <code>uvalue</code> productions.</li><li>If <var>optionsValue</var> is the empty String, then<ol><li>Let <var>optionsValue</var> be <emu-val>"true"</emu-val>.</li></ol></li></ol></li><li>If <var>keyLocaleData</var> contains <var>optionsValue</var>, then<ol><li>If <emu-xref aoid="SameValue" id="_ref_28"><a href="https://tc39.es/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>optionsValue</var>, <var>value</var>) is <emu-val>false</emu-val>, then<ol><li>Let <var>value</var> be <var>optionsValue</var>.</li><li>Let <var>supportedExtensionAddition</var> be <emu-val>""</emu-val>.</li></ol></li></ol></li></ol></li><li>Set <var>result</var>.[[&lt;<var>key</var>&gt;]] to <var>value</var>.</li><li>Append <var>supportedExtensionAddition</var> to <var>supportedExtension</var>.</li></ol></li><li>If the number of elements in <var>supportedExtension</var> is greater than 2, then<ol><li>Let <var>foundLocale</var> be <emu-xref aoid="InsertUnicodeExtensionAndCanonicalize" id="_ref_29"><a href="#sec-insert-unicode-extension-and-canonicalize">InsertUnicodeExtensionAndCanonicalize</a></emu-xref>(<var>foundLocale</var>, <var>supportedExtension</var>).</li></ol></li><li>Set <var>result</var>.[[locale]] to <var>foundLocale</var>.</li><li>Return <var>result</var>.</li></ol></emu-alg>
+
+      <emu-note><span class="note">Note</span><div class="note-contents">
+        Non-normative summary: Two algorithms are available to match the locales: the Lookup algorithm described in RFC 4647 section 3.4, and an implementation dependent best-fit algorithm. Independent of the locale matching algorithm, options specified through Unicode locale extension sequences are negotiated separately, taking the caller's relevant extension keys and locale data as well as client-provided options into consideration. The abstract operation returns a record with a [[locale]] field whose value is the language tag of the selected locale, and fields for each key in <var>relevantExtensionKeys</var> providing the selected value for that key.
+      </div></emu-note>
+    </emu-clause>
+
+    <emu-clause id="sec-lookupsupportedlocales" aoid="LookupSupportedLocales">
+      <h1><span class="secnum">1.2.8</span> LookupSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )</h1>
+
+      <p>
+        The LookupSupportedLocales abstract operation returns the subset of the provided BCP 47 language priority list <var>requestedLocales</var> for which <var>availableLocales</var> has a matching locale when using the BCP 47 Lookup algorithm. Locales appear in the same order in the returned list as in <var>requestedLocales</var>. The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>subset</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>For each element <var>locale</var> of <var>requestedLocales</var> in <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> order, do<ol><li>Let <var>noExtensionsLocale</var> be the String value that is <var>locale</var> with all Unicode locale extension sequences removed.</li><li>Let <var>availableLocale</var> be <emu-xref aoid="BestAvailableLocale" id="_ref_30"><a href="#sec-bestavailablelocale">BestAvailableLocale</a></emu-xref>(<var>availableLocales</var>, <var>noExtensionsLocale</var>).</li><li>If <var>availableLocale</var> is not <emu-val>undefined</emu-val>, append <var>locale</var> to the end of <var>subset</var>.</li></ol></li><li>Return <var>subset</var>.</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-bestfitsupportedlocales" aoid="BestFitSupportedLocales">
+      <h1><span class="secnum">1.2.9</span> BestFitSupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var> )</h1>
+
+      <p>
+        The BestFitSupportedLocales abstract operation returns the subset of the provided BCP 47 language priority list <var>requestedLocales</var> for which <var>availableLocales</var> has a matching locale when using the Best Fit Matcher algorithm. Locales appear in the same order in the returned list as in <var>requestedLocales</var>. The steps taken are implementation dependent.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-supportedlocales" aoid="SupportedLocales">
+      <h1><span class="secnum">1.2.10</span> SupportedLocales ( <var>availableLocales</var>, <var>requestedLocales</var>, <var>options</var> )</h1>
+
+      <p>
+        The SupportedLocales abstract operation returns the subset of the provided BCP 47 language priority list <var>requestedLocales</var> for which <var>availableLocales</var> has a matching locale. Two algorithms are available to match the locales: the Lookup algorithm described in RFC 4647 section 3.4, and an implementation dependent best-fit algorithm. Locales appear in the same order in the returned list as in <var>requestedLocales</var>. The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>If <var>options</var> is not <emu-val>undefined</emu-val>, then<ol><li>Let <var>options</var> be ?&nbsp;<emu-xref aoid="ToObject" id="_ref_31"><a href="https://tc39.es/ecma262/#sec-toobject">ToObject</a></emu-xref>(<var>options</var>).</li><li>Let <var>matcher</var> be ?&nbsp;<emu-xref aoid="GetOption" id="_ref_32"><a href="#sec-getoption">GetOption</a></emu-xref>(<var>options</var>, <emu-val>"localeMatcher"</emu-val>, <emu-val>"string"</emu-val>, « <emu-val>"lookup"</emu-val>, <emu-val>"best fit"</emu-val> », <emu-val>"best fit"</emu-val>).</li></ol></li><li>Else, let <var>matcher</var> be <emu-val>"best fit"</emu-val>.</li><li>If <var>matcher</var> is <emu-val>"best fit"</emu-val>, then<ol><li>Let <var>supportedLocales</var> be <emu-xref aoid="BestFitSupportedLocales" id="_ref_33"><a href="#sec-bestfitsupportedlocales">BestFitSupportedLocales</a></emu-xref>(<var>availableLocales</var>, <var>requestedLocales</var>).</li></ol></li><li>Else,<ol><li>Let <var>supportedLocales</var> be <emu-xref aoid="LookupSupportedLocales" id="_ref_34"><a href="#sec-lookupsupportedlocales">LookupSupportedLocales</a></emu-xref>(<var>availableLocales</var>, <var>requestedLocales</var>).</li></ol></li><li>Return <emu-xref aoid="CreateArrayFromList" id="_ref_35"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(<var>supportedLocales</var>).</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-getoption" aoid="GetOption">
+      <h1><span class="secnum">1.2.11</span> GetOption ( <var>options</var>, <var>property</var>, <var>type</var>, <var>values</var>, <var>fallback</var> )</h1>
+
+      <p>
+        The abstract operation GetOption extracts the value of the property named <var>property</var> from the provided <var>options</var> object, converts it to the required <var>type</var>, checks whether it is one of a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of allowed <var>values</var>, and fills in a <var>fallback</var> value if necessary. If <var>values</var> is <emu-val>undefined</emu-val>, there is no fixed set of values and any is permitted.
+      </p>
+
+      <emu-alg><ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_36"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>options</var>, <var>property</var>).</li><li>If <var>value</var> is not <emu-val>undefined</emu-val>, then<ol><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>type</var> is <emu-val>"boolean"</emu-val> or <emu-val>"string"</emu-val>.</li><li>If <var>type</var> is <emu-val>"boolean"</emu-val>, then<ol><li>Let <var>value</var> be <emu-xref aoid="ToBoolean" id="_ref_37"><a href="https://tc39.es/ecma262/#sec-toboolean">ToBoolean</a></emu-xref>(<var>value</var>).</li></ol></li><li>If <var>type</var> is <emu-val>"string"</emu-val>, then<ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="ToString" id="_ref_38"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<var>value</var>).</li></ol></li><li>If <var>values</var> is not <emu-val>undefined</emu-val>, then<ol><li>If <var>values</var> does not contain an element equal to <var>value</var>, throw a <emu-val>RangeError</emu-val> exception.</li></ol></li><li>Return <var>value</var>.</li></ol></li><li>Else, return <var>fallback</var>.</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-getoption" aoid="GetStringOrBooleanOption">
+      <h1><span class="secnum">1.2.12</span> GetStringOrBooleanOption ( <var>options</var>, <var>property</var>, <var>values</var>, <var>trueValue</var>, <var>fallback</var> )</h1>
+
+      <p>
+        The abstract operation GetStringOrBooleanOption extracts the value of the property named <var>property</var> from the provided <var>options</var> object. If the value is <emu-val>undefined</emu-val>, the operation returns <var>fallback</var>. If the value is <emu-val>true</emu-val>, the operation returns <var>trueValue</var>. If the value is falsy, the operation returns <emu-val>false</emu-val>. Otherwise, the operation converts the value to a String, checks whether it is one of a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of allowed <var>values</var> (which must not be <emu-val>undefined</emu-val>), and returns the stringified value.
+      </p>
+
+      <emu-alg><ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_39"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>options</var>, <var>property</var>).</li><li>If <var>value</var> is <emu-val>undefined</emu-val>, then return <var>fallback</var>.</li><li>If <var>value</var> is <emu-val>true</emu-val>, then return <var>trueValue</var>.</li><li>Let <var>valueBoolean</var> be <emu-xref aoid="ToBoolean" id="_ref_40"><a href="https://tc39.es/ecma262/#sec-toboolean">ToBoolean</a></emu-xref>(<var>value</var>).</li><li>If <var>valueBoolean</var> is <emu-val>false</emu-val>, then return <var>valueBoolean</var>.</li><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="ToString" id="_ref_41"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<var>value</var>).</li><li>If <var>values</var> does not contain an element equal to <var>value</var>, throw a <emu-val>RangeError</emu-val> exception.</li><li>Return <var>value</var>.</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-defaultnumberoption" aoid="DefaultNumberOption">
+      <h1><span class="secnum">1.2.13</span> DefaultNumberOption ( <var>value</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )</h1>
+
+      <p>
+        The abstract operation DefaultNumberOption converts <var>value</var> to a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref>, checks whether it is in the allowed range, and fills in a <var>fallback</var> value if necessary.
+      </p>
+
+      <emu-alg><ol><li>If <var>value</var> is not <emu-val>undefined</emu-val>, then<ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="ToNumber" id="_ref_42"><a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a></emu-xref>(<var>value</var>).</li><li>If <var>value</var> is <emu-val>NaN</emu-val> or less than <var>minimum</var> or greater than <var>maximum</var>, throw a <emu-val>RangeError</emu-val> exception.</li><li>Return <emu-xref aoid="floor"><a href="https://tc39.es/ecma262/#eqn-floor">floor</a></emu-xref>(<var>value</var>).</li></ol></li><li>Else, return <var>fallback</var>.</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-getnumberoption" aoid="GetNumberOption">
+      <h1><span class="secnum">1.2.14</span> GetNumberOption ( <var>options</var>, <var>property</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var> )</h1>
+
+      <p>
+        The abstract operation GetNumberOption extracts the value of the property named <var>property</var> from the provided <var>options</var> object, converts it to a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref>, checks whether it is in the allowed range, and fills in a <var>fallback</var> value if necessary.
+      </p>
+
+      <emu-alg><ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_43"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>options</var>, <var>property</var>).</li><li>Return ?&nbsp;<emu-xref aoid="DefaultNumberOption" id="_ref_44"><a href="#sec-defaultnumberoption">DefaultNumberOption</a></emu-xref>(<var>value</var>, <var>minimum</var>, <var>maximum</var>, <var>fallback</var>).</li></ol></emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-partitionpattern" aoid="PartitionPattern">
+      <h1><span class="secnum">1.2.15</span> PartitionPattern ( <var>pattern</var> )</h1>
+
+      <p>
+        The PartitionPattern abstract operation is called with argument <var>pattern</var>.
+        This abstract operation parses an abstract pattern string into a list of Records with two fields, [[Type]] and [[Value]].
+        The [[Value]] field will be a String value if [[Type]] is <emu-val>"literal"</emu-val>, and <emu-val>undefined</emu-val> otherwise.
+        The syntax of the abstract pattern strings is an implementation detail and is not exposed to users of ECMA-402.
+        The following steps are taken:
+      </p>
+
+      <emu-alg><ol><li>Let <var>result</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Let <var>beginIndex</var> be !&nbsp;<emu-xref aoid="Call" id="_ref_45"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(%StringProto_indexOf%, <var>pattern</var>, « <emu-val>"{"</emu-val>, 0 »).</li><li>Let <var>endIndex</var> be 0.</li><li>Let <var>nextIndex</var> be 0.</li><li>Let <var>length</var> be the number of code units in <var>pattern</var>.</li><li>Repeat, while <var>beginIndex</var> is an <emu-xref href="#integer-index"><a href="https://tc39.es/ecma262/#integer-index">integer index</a></emu-xref> into <var>pattern</var><ol><li>Set <var>endIndex</var> to !&nbsp;<emu-xref aoid="Call" id="_ref_46"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(%StringProto_indexOf%, <var>pattern</var>, « <emu-val>"}"</emu-val>, <var>beginIndex</var> »).</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>endIndex</var> is greater than <var>beginIndex</var>.</li><li>If <var>beginIndex</var> is greater than <var>nextIndex</var>, then<ol><li>Let <var>literal</var> be a substring of <var>pattern</var> from position <var>nextIndex</var>, inclusive, to position <var>beginIndex</var>, exclusive.</li><li>Append a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Type]]: <emu-val>"literal"</emu-val>, [[Value]]: <var>literal</var> } as the last element of the list <var>result</var>.</li></ol></li><li>Let <var>p</var> be the substring of <var>pattern</var> from position <var>beginIndex</var>, exclusive, to position <var>endIndex</var>, exclusive.</li><li>Append a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Type]]: <var>p</var>, [[Value]]: <emu-val>undefined</emu-val> } as the last element of the list <var>result</var>.</li><li>Set <var>nextIndex</var> to <var>endIndex</var> + 1.</li><li>Set <var>beginIndex</var> to !&nbsp;<emu-xref aoid="Call" id="_ref_47"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(%StringProto_indexOf%, <var>pattern</var>, « <emu-val>"{"</emu-val>, <var>nextIndex</var> »).</li></ol></li><li>If <var>nextIndex</var> is less than <var>length</var>, then<ol><li>Let <var>literal</var> be the substring of <var>pattern</var> from position <var>nextIndex</var>, inclusive, to position <var>length</var>, exclusive.</li><li>Append a new <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Type]]: <emu-val>"literal"</emu-val>, [[Value]]: <var>literal</var> } as the last element of the list <var>result</var>.</li></ol></li><li>Return <var>result</var>.</li></ol></emu-alg>
+    </emu-clause>
+
+  </emu-clause>
+</emu-clause>
+</div></body>
