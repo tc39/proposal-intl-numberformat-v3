@@ -3,7 +3,7 @@
   "name": "template-for-proposals",
   "description": "A repository template for ECMAScript proposals.",
   "scripts": {
-    "build:numberformat": "ecmarkup numberformat/diff.emu numberformat_diff.html && ecmarkup numberformat/proposed.emu numberformat_proposed.html",
+    "build:numberformat": "mkdirp out/numberformat && ecmarkup numberformat/diff.emu out/numberformat/diff.html && ecmarkup numberformat/proposed.emu out/numberformat/proposed.html",
     "build:readme": "marked -i README.md -o index.html",
     "build": "mkdirp out && npm run build:readme && npm run build:numberformat"
   },
