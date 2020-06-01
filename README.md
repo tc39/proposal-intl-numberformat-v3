@@ -37,10 +37,11 @@ Peer methods will also be added:
 
 Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to add the following strings as valid inputs to `{ useGrouping }`:
 
-- `"never"` (`false`): do not display grouping separators.
 - `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group).
 - `"auto"` (default): display grouping separators based on the locale preference, which may also be dependent on the currency.  Most locales prefer to use grouping separators.
 - `"always"` (`true`): display grouping separators even if the locale prefers otherwise.
+
+Previously considered was an option `"never"` corresponding to the current value `false`.  The current proposal does not add that option, because `false` will continue to work, and since non-empty strings are truthy, `if(nf.resolvedOptions().useGrouping)` will continue to work as expected.
 
 ## New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
