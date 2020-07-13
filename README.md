@@ -1,6 +1,6 @@
 # ECMA-402 Proposal: Intl.NumberFormat V3
 
-**Status: Stage 1 (March 2020)**
+**Status: Stage 2 (June 2020)**
 
 - Spec: Intl.NumberFormat ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/proposed.html))
 - Spec: Parameter Resolution ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/negotiation/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/negotiation/proposed.html))
