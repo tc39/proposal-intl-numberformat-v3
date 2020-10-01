@@ -33,6 +33,14 @@ nf.formatRange(3, 5);  // "€3–5"
 Peer methods will also be added:
 
 - `formatRangeToParts`
+- `selectRange` ([#16](https://github.com/tc39/proposal-intl-numberformat-v3/issues/16))
+
+For example:
+
+```javascript
+const pl = new Intl.PluralRules("sl");
+pl.selectRange(102, 201);  // "few"
+```
 
 ## Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
 
