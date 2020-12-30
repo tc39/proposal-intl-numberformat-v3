@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<head>
+	<title>NFv3 Rounding Examples</title>
+	<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure.css" />
+	<style type="text/css">
+		body {
+			width: 90%;
+			max-width: 960px;
+			background-color: rgb(192, 80, 80);
+			margin: 0 auto;
+			padding: 0;
+			font: 12px/16px Verdana, sans-serif;
+		}
+
+		div#main {
+			background-color: #FFF;
+			margin: 0;
+			padding: 10px;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="main">
+		<h1>NFv3 Rounding Examples</h1>
+
+		<h2>Matrix</h2>
+		<table class="pure-table pure-table-bordered">
+			<thead>
+				<tr>
+					<td>Input</td>
+					<td v-for="number in numbers">
+						{{ number }}
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="row in matrix">
+					<td><pre>{{ row.optionBag }}</pre></td>
+					<td v-for="col in row">
+						({{ col.roundingMagnitude === -Infinity ? "-Inf" : col.roundingMagnitude }}, {{ col.displayMagnitude }})<br/>
+						<tt>{{ col.string }}</tt>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<hr/>
+		<h2>Numbers</h2>
+		<ul>
+			<li v-for="(number, index) in numbers">
+				{{ number }}
+				<button v-on:click="removeNumber(index)">⌫</button>
+			</li>
+		</ul>
+		<form class="pure-form" @submit="addNumber">
+			<input type="number" step="any" placeholder="Enter number and press enter" v-model="newNumber" />
+			<button type="submit" class="pure-button pure-button-primary">Add</button>
+		</form>
+
+		<hr/>
+		<h2>Option Bags</h2>
+		<ul>
+			<li v-for="(optionBag, index) in optionBags">
+				{{ optionBag }}
+				<button v-on:click="removeOptionBag(index)">⌫</button>
+			</li>
+		</ul>
+		<form class="pure-form" @submit="addOptionBag">
+			<textarea rows="8" style="width: 95%; max-width: 500px;" v-model="newOptionBag"></textarea><br/>
+			<button type="submit" class="pure-button pure-button-primary">Add</button>
+		</form>
+
+	</div>
+</body>
+<script type="text/javascript">
+
+	function getMagnitude(number) {
+		if (number === 0) {
+			return 0;
+		}
+		return Math.floor(Math.log10(number));
+	}
+
+	function computeMagnitudes(magnitude, optionBag) {
+		let maxFraMag = -(optionBag.maximumFractionDigits ?? Infinity);
+		let maxSigMag = magnitude - (optionBag.maximumSignificantDigits ?? Infinity) + 1;
+		let maxMag = Math.max(maxFraMag, maxSigMag);
+		let minFraMag = -(optionBag.minimumFractionDigits ?? -Infinity);
+		let minSigMag = magnitude - (optionBag.minimumSignificantDigits ?? 1) + 1;
+		let minMag = Math.min(minFraMag, minSigMag);
+		return { minMag, maxMag };
+	}
+
+	function roundToMagnitude(number, roundingMagnitude) {
+		if (roundingMagnitude === -Infinity) {
+			return number;
+		}
+		let scaled = number * Math.pow(10, -roundingMagnitude);
+		let rounded = Math.round(scaled);
+		return rounded * Math.pow(10, roundingMagnitude);
+	}
+
+	function renderString(number, roundingMagnitude, displayMagnitude) {
+		if (displayMagnitude > 0) {
+			return number.toLocaleString("und");
+		}
+		if (displayMagnitude < roundingMagnitude) {
+			roundingMagnitude = displayMagnitude;
+		}
+		return number.toLocaleString("und", {
+			minimumFractionDigits: Math.max(0, -displayMagnitude),
+			maximumFractionDigits: Math.min(20, Math.max(0, -roundingMagnitude)),
+		});
+	}
+
+	new Vue({
+		el: "#main",
+		data: {
+			numbers: [
+				876.5,
+				87.65,
+				8.765,
+				0.8765,
+				42,
+				3,
+				99.999,
+				0,
+			],
+			newNumber: 0,
+			optionBags: [
+				{},
+				{
+					maximumFractionDigits: 2,
+				},
+				{
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+				},
+				{
+					minimumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				},
+				{
+					minimumSignificantDigits: 3,
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+					minimumSignificantDigits: 3,
+					maximumSignificantDigits: 3,
+				},
+				{
+					maximumFractionDigits: 0,
+					minimumSignificantDigits: 2,
+				},
+				{
+					maximumFractionDigits: 0,
+					maximumSignificantDigits: 2,
+				},
+			],
+			newOptionBag: "{\n\tminimumFractionDigits: undefined,\n\tmaximumFractionDigits: undefined,\n\tminimumSignificantDigits: undefined,\n\tmaximumSignificantDigits: undefined,\n}",
+		},
+		methods: {
+			addNumber: function(e) {
+				e.preventDefault();
+				this.numbers.push(this.newNumber)
+			},
+			removeNumber: function(index) {
+				this.numbers.splice(index, 1)
+			},
+			addOptionBag: function(e) {
+				e.preventDefault();
+				this.optionBags.push(Function("return " + this.newOptionBag)());
+			},
+			removeOptionBag: function(index) {
+				this.optionBags.splice(index, 1)
+			},
+		},
+		computed: {
+			matrix: function() {
+				return this.optionBags.map((optionBag) => {
+					let row = this.numbers.map((number) => {
+						let magnitude = getMagnitude(number);
+						let magnitudes = computeMagnitudes(magnitude, optionBag);
+						let roundingMagnitude = Math.min(magnitudes.minMag, magnitudes.maxMag);
+						let x = roundToMagnitude(number, roundingMagnitude);
+						magnitude = getMagnitude(x);
+						magnitudes = computeMagnitudes(magnitude, optionBag);
+						let displayMagnitude = Math.max(magnitudes.minMag, magnitudes.maxMag);
+						return {
+							roundingMagnitude,
+							displayMagnitude,
+							string: renderString(x, roundingMagnitude, displayMagnitude)
+						};
+					});
+					row.optionBag = optionBag;
+					return row;
+				});
+			}
+		}
+	})
+</script>
+
+</html>
