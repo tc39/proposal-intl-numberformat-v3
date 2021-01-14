@@ -71,7 +71,7 @@ const nf = new Intl.NumberFormat("en-US", {
 nf.formatRange(-0.25, 0.50);  // "-25% – 50%"
 ```
 
-When both sides of the range resolve to the same value after rounding, the display will fall back to the approximately sign (see below).
+When both sides of the range resolve to the same value after rounding, the display will fall back to the approximately sign (see below).  The automatic approximately sign will occur only if `signDisplay` is set to `"auto"`; otherwise, the user's requested `signDisplay` will be used.
 
 ```javascript
 const nf = new Intl.NumberFormat("en-US", {
