@@ -5,10 +5,8 @@
 	<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure.css" />
 	<style type="text/css">
 		body {
-			width: 90%;
-			max-width: 960px;
 			background-color: rgb(192, 80, 80);
-			margin: 0 auto;
+			margin: 0 0 0 10px;
 			padding: 0;
 			font: 12px/16px Verdana, sans-serif;
 		}
@@ -40,7 +38,7 @@
 				<tr v-for="row in matrix">
 					<td><pre>{{ row.optionBag }}</pre></td>
 					<td v-for="col in row">
-						({{ col.roundingMagnitude === -Infinity ? "-Inf" : col.roundingMagnitude }}, {{ col.displayMagnitude }})<br/>
+						({{ col.roundingMagnitude === -Infinity ? "-Inf" : col.roundingMagnitude }}, {{ col.displayMagnitude === Infinity ? "Inf" : col.displayMagnitude }})<br/>
 						<tt>{{ col.string }}</tt>
 					</td>
 				</tr>
@@ -88,19 +86,20 @@
 		let maxFraMag = -(optionBag.maximumFractionDigits ?? Infinity);
 		let maxSigMag = magnitude - (optionBag.maximumSignificantDigits ?? Infinity) + 1;
 		let maxMag = Math.max(maxFraMag, maxSigMag);
-		let minFraMag = -(optionBag.minimumFractionDigits ?? -Infinity);
-		let minSigMag = magnitude - (optionBag.minimumSignificantDigits ?? 1) + 1;
+		let minFraMag = -(optionBag.minimumFractionDigits ?? (optionBag.trailingZeros === "keep" ? (optionBag.maximumFractionDigits ?? -Infinity) : -Infinity));
+		let minSigMag = magnitude - (optionBag.minimumSignificantDigits ?? (optionBag.trailingZeros === "keep" ? (optionBag.maximumSignificantDigits ?? 1) : 1)) + 1;
 		let minMag = Math.min(minFraMag, minSigMag);
 		return { minMag, maxMag };
 	}
 
-	function roundToMagnitude(number, roundingMagnitude) {
+	function roundToMagnitude(number, roundingMagnitude, optionBag) {
 		if (roundingMagnitude === -Infinity) {
 			return number;
 		}
-		let scaled = number * Math.pow(10, -roundingMagnitude);
+		let increment = optionBag.roundingIncrement ?? 1;
+		let scaled = number * Math.pow(10, -roundingMagnitude) / increment;
 		let rounded = Math.round(scaled);
-		return rounded * Math.pow(10, roundingMagnitude);
+		return rounded * Math.pow(10, roundingMagnitude) * increment;
 	}
 
 	function renderString(number, roundingMagnitude, displayMagnitude) {
@@ -120,12 +119,13 @@
 		el: "#main",
 		data: {
 			numbers: [
-				876.5,
-				87.65,
-				8.765,
-				0.8765,
-				42,
-				3,
+				1234,
+				123.4,
+				12.34,
+				1.234,
+				1.034,
+				.1034,
+				.1234,
 				99.999,
 				0,
 			],
@@ -136,17 +136,35 @@
 					maximumFractionDigits: 2,
 				},
 				{
-					maximumSignificantDigits: 3,
+					maximumFractionDigits: 2,
+					trailingZeros: "keep",
+				},
+				{
+					maximumSignificantDigits: 2,
+				},
+				{
+					maximumSignificantDigits: 2,
+					trailingZeros: "keep",
 				},
 				{
 					minimumFractionDigits: 2,
 				},
 				{
-					minimumSignificantDigits: 3,
+					minimumSignificantDigits: 2,
 				},
 				{
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+					trailingZeros: "keep",
+				},
+				{
+					minimumSignificantDigits: 3,
+					maximumSignificantDigits: 3,
+					trailingZeros: "keep",
 				},
 				{
 					minimumSignificantDigits: 3,
@@ -164,10 +182,52 @@
 				},
 				{
 					maximumFractionDigits: 0,
+					minimumSignificantDigits: 2,
+					trailingZeros: "keep",
+				},
+				{
+					maximumFractionDigits: 0,
+					minimumSignificantDigits: 3,
+				},
+				{
+					maximumFractionDigits: 0,
+					minimumSignificantDigits: 3,
+					trailingZeros: "keep",
+				},
+				{
+					maximumFractionDigits: 0,
 					maximumSignificantDigits: 2,
 				},
+				{
+					maximumFractionDigits: 2,
+					roundingIncrement: 5,
+				},
+				{
+					maximumFractionDigits: 2,
+					roundingIncrement: 5,
+					trailingZeros: "keep",
+				},
+				{
+					maximumFractionDigits: 2,
+					roundingIncrement: 10,
+				},
+				{
+					maximumFractionDigits: 2,
+					roundingIncrement: 10,
+					trailingZeros: "keep",
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+					trailingZeros: "keep",
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+					trailingZeros: "whole",
+				},
 			],
-			newOptionBag: "{\n\tminimumFractionDigits: undefined,\n\tmaximumFractionDigits: undefined,\n\tminimumSignificantDigits: undefined,\n\tmaximumSignificantDigits: undefined,\n}",
+			newOptionBag: "{\n\tminimumFractionDigits: undefined,\n\tmaximumFractionDigits: undefined,\n\tminimumSignificantDigits: undefined,\n\tmaximumSignificantDigits: undefined,\n\ttrailingZeros: undefined,\n}",
 		},
 		methods: {
 			addNumber: function(e) {
@@ -192,10 +252,23 @@
 						let magnitude = getMagnitude(number);
 						let magnitudes = computeMagnitudes(magnitude, optionBag);
 						let roundingMagnitude = Math.min(magnitudes.minMag, magnitudes.maxMag);
-						let x = roundToMagnitude(number, roundingMagnitude);
+						let x = roundToMagnitude(number, roundingMagnitude, optionBag);
 						magnitude = getMagnitude(x);
 						magnitudes = computeMagnitudes(magnitude, optionBag);
-						let displayMagnitude = Math.max(magnitudes.minMag, magnitudes.maxMag);
+						let displayMagnitude;
+						switch (optionBag.trailingZeros ?? "auto") {
+							case "auto":
+								displayMagnitude = Math.max(magnitudes.minMag, magnitudes.maxMag);
+								break;
+							case "keep":
+								displayMagnitude = magnitudes.minMag;
+								break;
+							case "whole":
+								displayMagnitude = Number.isInteger(x) ? 0 : Math.max(magnitudes.minMag, magnitudes.maxMag);
+								break;
+							default:
+								throw new RangeError("Unknown trailingZeros option:", optionBag.trailingZeros);
+						}
 						return {
 							roundingMagnitude,
 							displayMagnitude,
