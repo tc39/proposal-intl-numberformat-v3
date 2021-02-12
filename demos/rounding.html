@@ -177,6 +177,31 @@
 					maximumSignificantDigits: 3,
 				},
 				{
+					minimumFractionDigits: 1,
+					maximumFractionDigits: 3,
+					minimumSignificantDigits: 2,
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 5,
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumSignificantDigits: 3,
+				},
+				{
+					minimumFractionDigits: 2,
+					maximumSignificantDigits: 3,
+					trailingZeros: "keep",
+				},
+				{
 					maximumFractionDigits: 0,
 					minimumSignificantDigits: 2,
 				},
@@ -252,6 +277,7 @@
 						let magnitude = getMagnitude(number);
 						let magnitudes = computeMagnitudes(magnitude, optionBag);
 						let roundingMagnitude = Math.min(magnitudes.minMag, magnitudes.maxMag);
+						// let roundingMagnitude = magnitudes.maxMag;
 						let x = roundToMagnitude(number, roundingMagnitude, optionBag);
 						magnitude = getMagnitude(x);
 						magnitudes = computeMagnitudes(magnitude, optionBag);
