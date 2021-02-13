@@ -75,14 +75,7 @@
 </body>
 <script type="text/javascript">
 
-	function getMagnitude(number) {
-		if (number === 0) {
-			return 0;
-		}
-		return Math.floor(Math.log10(number));
-	}
-
-	function computeMagnitudes(magnitude, optionBag) {
+	function computeMagnitudesV1(magnitude, optionBag) {
 		let maxFraMag = -(optionBag.maximumFractionDigits ?? Infinity);
 		let maxSigMag = magnitude - (optionBag.maximumSignificantDigits ?? Infinity) + 1;
 		let maxMag = Math.max(maxFraMag, maxSigMag);
@@ -90,6 +83,102 @@
 		let minSigMag = magnitude - (optionBag.minimumSignificantDigits ?? (optionBag.trailingZeros === "keep" ? (optionBag.maximumSignificantDigits ?? 1) : 1)) + 1;
 		let minMag = Math.min(minFraMag, minSigMag);
 		return { minMag, maxMag };
+	}
+
+	function processV1(optionBag, number) {
+		let magnitude = getMagnitude(number);
+		let magnitudes = computeMagnitudesV1(magnitude, optionBag);
+		let roundingMagnitude = Math.min(magnitudes.minMag, magnitudes.maxMag);
+		// let roundingMagnitude = magnitudes.maxMag;
+		let x = roundToMagnitude(number, roundingMagnitude, optionBag);
+		magnitude = getMagnitude(x);
+		magnitudes = computeMagnitudesV1(magnitude, optionBag);
+		let displayMagnitude;
+		switch (optionBag.trailingZeros ?? "auto") {
+			case "auto":
+				displayMagnitude = Math.max(magnitudes.minMag, magnitudes.maxMag);
+				break;
+			case "keep":
+				displayMagnitude = magnitudes.minMag;
+				break;
+			case "whole":
+				displayMagnitude = Number.isInteger(x) ? 0 : Math.max(magnitudes.minMag, magnitudes.maxMag);
+				break;
+			default:
+				throw new RangeError("Unknown trailingZeros option:", optionBag.trailingZeros);
+		}
+		return {
+			roundingMagnitude,
+			displayMagnitude,
+			string: renderString(x, roundingMagnitude, displayMagnitude)
+		};
+	}
+
+	function computeMagnitudesV2(magnitude, optionBag) {
+		let maxFraMag = -(optionBag.maximumFractionDigits ?? 6);
+		let maxSigMag = magnitude - (optionBag.maximumSignificantDigits ?? Infinity) + 1;
+		let minFraMag = -(optionBag.minimumFractionDigits ?? 0);
+		let minSigMag = magnitude - (optionBag.minimumSignificantDigits ?? 1) + 1;
+
+		let roundingMagnitude;
+		switch (optionBag.mode) {
+			case "loose-loose":
+			case "loose-strict":
+				roundingMagnitude = Math.min(maxFraMag, maxSigMag);
+				break;
+			case "strict-loose":
+			case "strict-strict":
+				roundingMagnitude = Math.max(maxFraMag, maxSigMag);
+				break;
+			case "auto":
+			default:
+				if (optionBag.maximumSignificantDigits || optionBag.minimumSignificantDigits) {
+					roundingMagnitude = maxSigMag;
+				} else {
+					roundingMagnitude = maxFraMag;
+				}
+		}
+
+		let displayMagnitude;
+		switch (optionBag.mode) {
+			case "loose-loose":
+			case "strict-loose":
+				displayMagnitude = Math.max(minFraMag, minSigMag);
+				break;
+			case "loose-strict":
+			case "strict-strict":
+				displayMagnitude = Math.min(minFraMag, minSigMag);
+				break;
+			case "auto":
+			default:
+				if (optionBag.maximumSignificantDigits || optionBag.minimumSignificantDigits) {
+					displayMagnitude = minSigMag;
+				} else {
+					displayMagnitude = minFraMag;
+				}
+		}
+
+		return { roundingMagnitude, displayMagnitude };
+	}
+
+	function processV2(optionBag, number) {
+		let magnitude = getMagnitude(number);
+		let {roundingMagnitude} = computeMagnitudesV2(magnitude, optionBag);
+		let x = roundToMagnitude(number, roundingMagnitude, optionBag);
+		magnitude = getMagnitude(x);
+		let {displayMagnitude} = computeMagnitudesV2(magnitude, optionBag);
+		return {
+			roundingMagnitude,
+			displayMagnitude,
+			string: renderString(x, roundingMagnitude, displayMagnitude)
+		};
+	}
+
+	function getMagnitude(number) {
+		if (number === 0) {
+			return 0;
+		}
+		return Math.floor(Math.log10(number));
 	}
 
 	function roundToMagnitude(number, roundingMagnitude, optionBag) {
@@ -224,6 +313,7 @@
 					maximumSignificantDigits: 2,
 				},
 				{
+					minimumFractionDigits: 2,
 					maximumFractionDigits: 2,
 					roundingIncrement: 5,
 				},
@@ -251,6 +341,23 @@
 					maximumFractionDigits: 2,
 					trailingZeros: "whole",
 				},
+				{
+					maximumFractionDigits: 0,
+					maximumSignificantDigits: 2,
+					mode: "loose-loose",
+				},
+				{
+					maximumFractionDigits: 0,
+					maximumSignificantDigits: 2,
+					minimumSignificantDigits: 2,
+					mode: "loose-loose",
+				},
+				{
+					maximumFractionDigits: 0,
+					maximumSignificantDigits: 2,
+					minimumSignificantDigits: 2,
+					mode: "loose-strict",
+				}
 			],
 			newOptionBag: "{\n\tminimumFractionDigits: undefined,\n\tmaximumFractionDigits: undefined,\n\tminimumSignificantDigits: undefined,\n\tmaximumSignificantDigits: undefined,\n\ttrailingZeros: undefined,\n}",
 		},
@@ -274,32 +381,7 @@
 			matrix: function() {
 				return this.optionBags.map((optionBag) => {
 					let row = this.numbers.map((number) => {
-						let magnitude = getMagnitude(number);
-						let magnitudes = computeMagnitudes(magnitude, optionBag);
-						let roundingMagnitude = Math.min(magnitudes.minMag, magnitudes.maxMag);
-						// let roundingMagnitude = magnitudes.maxMag;
-						let x = roundToMagnitude(number, roundingMagnitude, optionBag);
-						magnitude = getMagnitude(x);
-						magnitudes = computeMagnitudes(magnitude, optionBag);
-						let displayMagnitude;
-						switch (optionBag.trailingZeros ?? "auto") {
-							case "auto":
-								displayMagnitude = Math.max(magnitudes.minMag, magnitudes.maxMag);
-								break;
-							case "keep":
-								displayMagnitude = magnitudes.minMag;
-								break;
-							case "whole":
-								displayMagnitude = Number.isInteger(x) ? 0 : Math.max(magnitudes.minMag, magnitudes.maxMag);
-								break;
-							default:
-								throw new RangeError("Unknown trailingZeros option:", optionBag.trailingZeros);
-						}
-						return {
-							roundingMagnitude,
-							displayMagnitude,
-							string: renderString(x, roundingMagnitude, displayMagnitude)
-						};
+						return processV2(optionBag, number);
 					});
 					row.optionBag = optionBag;
 					return row;
