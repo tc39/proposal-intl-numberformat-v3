@@ -102,4 +102,4 @@ The list of rounding modes could be:
 
 
 ## v8 Prototype
-A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146
+A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146 w/ the flag --harmony_intl_number_format_v3
