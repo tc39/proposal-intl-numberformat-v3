@@ -99,3 +99,7 @@ The list of rounding modes could be:
 5. `"floor"`
 6. `"up"`
 7. `"down"`
+
+
+## v8 Prototype
+A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146
