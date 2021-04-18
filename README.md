@@ -62,7 +62,7 @@ nf.formatRangeToParts(3, 5);
 */
 ```
 
-When both sides of the range resolve to the same value after rounding, the display will fall back to the approximately sign (see below).  The automatic approximately sign will occur only if `signDisplay` is set to `"auto"`; otherwise, the user's requested `signDisplay` will be used.
+When both sides of the range resolve to the same value after rounding, an approximately sign will be added.
 
 ```javascript
 const nf = new Intl.NumberFormat("en-US", {
@@ -71,37 +71,83 @@ const nf = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 nf.formatRange(2.9, 3.1);  // "~€3"
+
+const nf = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "EUR",
+  signDisplay: "always",
+});
+nf.formatRange(2.900, 3.001);  // "~+€3.00"
 ```
 
 ## Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
 
-Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to add the following strings as valid inputs to `{ useGrouping }`:
+Main Issue: [#3](https://github.com/tc39/proposal-intl-numberformat-v3/issues/3)
 
+Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
+
+- `false`: do not display grouping separators
 - `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group).
 - `"auto"` (default): display grouping separators based on the locale preference, which may also be dependent on the currency.  Most locales prefer to use grouping separators.
-- `"always"` (`true`): display grouping separators even if the locale prefers otherwise.
+- `"always"`: display grouping separators even if the locale prefers otherwise.
+- `true`: alias for `"always"`
+- `undefined` (default): alias for `"auto"`
 
-Previously considered was an option `"never"` corresponding to the current value `false`.  The current proposal does not add that option, because `false` will continue to work, and since non-empty strings are truthy, `if(nf.resolvedOptions().useGrouping)` will continue to work as expected.
+In `resolvedOptions`, either `false` or one of the three strings will be returned.  This is an observable behavior change, because currently only the booleans `true` and `false` are returned.
 
 ## New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
+Main Issue: [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8
+
 Additional Context: [Unified NumberFormat #9](https://github.com/tc39/proposal-unified-intl-numberformat/issues/9)
 
-Currently, Intl.NumberFormat allows for two rounding strategies: min/max fraction digits, or min/max significant digits.  Those strategies cannot be combined.
+The following additional options are proposed to the Intl.NumberFormat options bag to control rounding behavior:
 
-I propose adding the following options to control rounding behavior:
-
+- `roundingPriority` = a string set to either `"significantDigits"`, `"morePrecision"`, or `"lessPrecision"` (details below)
 - `roundingIncrement` = an integer, either 1 or 5 with any number of zeros.
   - Example values: 1 (default), 5, 10, 50, 100
-  - Nickel rounding: `{ maximumFractionDigits: 2, roundingIncrement: 5 }`
-  - Dime rounding: `{ maximumFractionDigits: 2, roundingIncrement: 10 }`
-- `trailingZeros` = an enum expressing the strategy for resolving trailing zeros when combining min/max fraction and significant digits.
-  - `"auto"` = obey mininumFractionDigits or minimumSignificantDigits (default behavior).
-  - `"strip"` = always remove trailing zeros.
-  - `"stripIfInteger"` = remove them only when the entire fraction is zero.
-  - *optional:* `"keep"` = always keep trailing zeros according to the rounding magnitude.
+  - Nickel rounding: `{ minimumFractionDigits: 2, maximumFractionDigits: 2, roundingIncrement: 5 }`
+  - Dime rounding: `{ minimumFractionDigits: 2, maximumFractionDigits: 2, roundingIncrement: 10 }`
+- `trailingZeroDisplay` = a string expressing the strategy for displaying trailing zeros on whole numbers:
+  - `"auto"` = current behavior. Keep trailing zeros according to minimumFractionDigits and minimumSignificantDigits.
+  - `"stripIfInteger"` = same as `"auto"`, but remove the fraction digits if they are all zero.
 
-The exact semantics of how to allow fraction digits and significant digits to interoperate are being tracked by [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8).
+### Rounding Priority
+
+Currently, Intl.NumberFormat allows for two rounding strategies: min/max fraction digits, or min/max significant digits.  Currently, if both min/max fraction digits and min/max significant digits are both specified, significant digit settings take priority and fraction digit settings are ignored.
+
+The new option `roundingPriority` specifies two new strategies to resolve mixed fraction digits and significant digits settings.  To best express the new strategies, consider the following option bag:
+
+```
+{
+    maximumFractionDigits: 2,
+    maximumSignificantDigits: 2
+}
+```
+
+The above options should be interpreted to mean:
+
+1. Round the number at the hundredths place
+2. Round the number after the second significant digit
+
+Now, consider the number "4.321". `maximumFractionDigits` wants to round at the hundredths place, producing "4.32". However, `maximumSignificantDigits` wants to round after two significant digits, producing "4.3". We therefore have a conflict.
+
+The new setting `roundingPriority` offers a hint on how to resolve this conflict. There are three options:
+
+1. `roundingPriority: "significantDigits"` means that significant digits always win a conflict.
+2. `roundingPriority: "morePrecision"` means that the result with more precision wins a conflict.
+3. `roundingPriority: "lessPrecision"` means that the result with less precision wins a conflict.
+
+This resolution algorithm applies separately between the maximum digits settings and the minimum digits settings.  So, for example, suppose you had
+
+```
+{
+    minimumFractionDigits: 2,
+    minimumSignificantDigits: 2
+}
+```
+
+Consider the input number "1".  `minimumFractionDigits` wants to retain trailing zeros up to the hundredths place, producing "1.00", whereas `minimumSignificantDigits` wants to retain only as many as are required to render two significant digits, producing "1.0".  We again have a conflict, and the conflict is resolved in the same way.
 
 ## Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
 
@@ -119,18 +165,21 @@ We will reference existing standards for interpreting decimal number strings whe
 
 ## Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
+Main Issue: [#7](https://github.com/tc39/proposal-intl-numberformat-v3/issues/7)
+
 Intl.NumberFormat always performs "half-up" rounding (for example, if you have 2.5, it gets rounded to 3).  However, we understand that there are users and use cases that would benefit from exposing more options for rounding modes.
 
-The list of rounding modes could be:
+The list of rounding modes is proposed to be:
 
-1. `"halfUp"` (default)
-2. `"halfEven"`
-3. `"halfDown"`
-4. `"ceiling"`
-5. `"floor"`
-6. `"up"`
-7. `"down"`
-
+1. ceil (toward +∞)
+2. floor (toward -∞)
+3. expand (away from 0)
+4. trunc (toward 0)
+5. halfCeil (ties toward +∞)
+6. halfFloor (ties toward -∞)
+7. halfExpand (ties away from 0; current behavior; default)
+8. halfTrunc (ties toward 0)
+9. halfEven (ties toward the value with even cardinality)
 
 ## v8 Prototype
 A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146 w/ the flag --harmony_intl_number_format_v3
