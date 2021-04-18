@@ -26,20 +26,51 @@ This piece is modeled off of the [Intl.DateTimeFormat.prototype.formatRange
 const nf = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "EUR",
+  maximumFractionDigits: 0,
 });
 nf.formatRange(3, 5);  // "€3–5"
 ```
 
 Peer methods will also be added:
 
-- `formatRangeToParts`
-- `selectRange` ([#16](https://github.com/tc39/proposal-intl-numberformat-v3/issues/16))
+- `Intl.NumberFormat.prototype.formatRangeToParts`
+- `Intl.PluralRules.prototype.selectRange` ([#16](https://github.com/tc39/proposal-intl-numberformat-v3/issues/16))
 
 For example:
 
 ```javascript
 const pl = new Intl.PluralRules("sl");
 pl.selectRange(102, 201);  // "few"
+```
+
+The formatToParts semantics from Intl.DateTimeFormat will be adopted here: parts will gain a `source` property that will be either `"shared"`, `"startRange"`, or `"endRange"`.
+
+```javascript
+const nf = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
+nf.formatRangeToParts(3, 5);
+/*
+[
+  {type: "currency", value: "€", source: "startRange"}
+  {type: "integer", value: "3", source: "startRange"}
+  {type: "literal", value: "–", source: "shared"}
+  {type: "integer", value: "5", source: "endRange"}
+]
+*/
+```
+
+When both sides of the range resolve to the same value after rounding, the display will fall back to the approximately sign (see below).  The automatic approximately sign will occur only if `signDisplay` is set to `"auto"`; otherwise, the user's requested `signDisplay` will be used.
+
+```javascript
+const nf = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
+nf.formatRange(2.9, 3.1);  // "~€3"
 ```
 
 ## Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
