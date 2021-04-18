@@ -79,7 +79,7 @@ const nf = new Intl.NumberFormat("en-US", {
   currency: "EUR",
   signDisplay: "always",
 });
-nf.formatRange(2.900, 3.001);  // "~+€3.00"
+nf.formatRange(2.999, 3.001);  // "~+€3.00"
 ```
 
 Ranges to infinity are supported, but if either value is NaN, an error is thrown. ([#12](https://github.com/tc39/proposal-intl-numberformat-v3/issues/12))
