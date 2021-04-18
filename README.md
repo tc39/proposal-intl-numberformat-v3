@@ -17,7 +17,9 @@ In ECMA-402, we receive dozens of feature requests each year.  When forming this
 
 All parts of this proposal meet that bar, and furthermore, the author's intent is that all Intl.NumberFormat feature requests meeting that bar are part of this proposal.
 
-## formatRange ([ECMA-402 #393](https://github.com/tc39/ecma402/issues/393))
+## Features
+
+### formatRange ([ECMA-402 #393](https://github.com/tc39/ecma402/issues/393))
 
 This piece is modeled off of the [Intl.DateTimeFormat.prototype.formatRange
 ](https://github.com/tc39/proposal-intl-DateTimeFormat-formatRange) proposal.  It involves adding a new function `.formatRange()` to the Intl.NumberFormat prototype, in large part following the semantics introduced by `.formatRange()` in Intl.DateTimeFormat.
@@ -62,7 +64,7 @@ nf.formatRangeToParts(3, 5);
 */
 ```
 
-When both sides of the range resolve to the same value after rounding, an approximately sign will be added.
+When both sides of the range resolve to the same value after rounding, an approximately sign will be added.  The approximately sign is appended to the number in addition to a minus or plus sign, as applicable. ([#10](https://github.com/tc39/proposal-intl-numberformat-v3/issues/10), [#11](https://github.com/tc39/proposal-intl-numberformat-v3/issues/11), [#13](https://github.com/tc39/proposal-intl-numberformat-v3/issues/13))
 
 ```javascript
 const nf = new Intl.NumberFormat("en-US", {
@@ -80,14 +82,22 @@ const nf = new Intl.NumberFormat("en-US", {
 nf.formatRange(2.900, 3.001);  // "~+€3.00"
 ```
 
-## Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
+Ranges to infinity are supported, but if either value is NaN, an error is thrown. ([#12](https://github.com/tc39/proposal-intl-numberformat-v3/issues/12))
+
+```javascript
+const nf = new Intl.NumberFormat("en-US");
+nf.formatRange(500, 1/0);  // "3–∞"
+nf.formatRange(500, 0/0);  // RangeError
+```
+
+### Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
 
 Main Issue: [#3](https://github.com/tc39/proposal-intl-numberformat-v3/issues/3)
 
 Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
 
 - `false`: do not display grouping separators
-- `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group).
+- `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group). (Bikeshed: [#23](https://github.com/tc39/proposal-intl-numberformat-v3/issues/23))
 - `"auto"` (default): display grouping separators based on the locale preference, which may also be dependent on the currency.  Most locales prefer to use grouping separators.
 - `"always"`: display grouping separators even if the locale prefers otherwise.
 - `true`: alias for `"always"`
@@ -95,7 +105,7 @@ Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a
 
 In `resolvedOptions`, either `false` or one of the three strings will be returned.  This is an observable behavior change, because currently only the booleans `true` and `false` are returned.
 
-## New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
+### New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
 Main Issue: [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8
 
@@ -112,7 +122,7 @@ The following additional options are proposed to the Intl.NumberFormat options b
   - `"auto"` = current behavior. Keep trailing zeros according to minimumFractionDigits and minimumSignificantDigits.
   - `"stripIfInteger"` = same as `"auto"`, but remove the fraction digits if they are all zero.
 
-### Rounding Priority
+#### Rounding Priority
 
 Currently, Intl.NumberFormat allows for two rounding strategies: min/max fraction digits, or min/max significant digits.  Currently, if both min/max fraction digits and min/max significant digits are both specified, significant digit settings take priority and fraction digit settings are ignored.
 
@@ -149,7 +159,7 @@ This resolution algorithm applies separately between the maximum digits settings
 
 Consider the input number "1".  `minimumFractionDigits` wants to retain trailing zeros up to the hundredths place, producing "1.00", whereas `minimumSignificantDigits` wants to retain only as many as are required to render two significant digits, producing "1.0".  We again have a conflict, and the conflict is resolved in the same way.
 
-## Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
+### Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
 
 The `format()` method currently accepts a Number or a BigInt, and strings are interpreted as Numbers.  This part proposes redefining strings to be represented as decimals instead of Numbers.
 
@@ -163,7 +173,7 @@ nf.format(string);
 
 We will reference existing standards for interpreting decimal number strings where possible.
 
-## Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
+### Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
 Main Issue: [#7](https://github.com/tc39/proposal-intl-numberformat-v3/issues/7)
 
@@ -181,5 +191,28 @@ The list of rounding modes is proposed to be:
 8. halfTrunc (ties toward 0)
 9. halfEven (ties toward the value with even cardinality)
 
-## v8 Prototype
+The behavior of these modes will reflect the [ICU user guide](https://unicode-org.github.io/icu/userguide/format_parse/numbers/rounding-modes.html), where "expand" maps to ICU "UP" and "trunc" maps to ICU "DOWN".
+
+Rounding does not look at or change the sign bit of the number. Therefore, -0 and 0 are equivalent for the purposes of rounding. ([#21](https://github.com/tc39/proposal-intl-numberformat-v3/issues/21))
+
+### Sign Display Negative
+
+Main Issue: [#17](https://github.com/tc39/proposal-intl-numberformat-v3/issues/17)
+
+A new option `signDisplay: "negative"` is proposed, according to feedback from clients.  The new option will behave like `"auto"` except that the sign will not be shown on negative zero.
+
+```javascript
+var nf = new Intl.NumberFormat("en", {
+  signDisplay: "negative"
+});
+nf.format(-1.0);  // -1
+nf.format(-0.0);  // 0  (note: "auto" produces "-0" here)
+nf.format(0.0);   // 0
+nf.format(1.0);   // 1  (note: "exceptZero" produces "+1" here)
+```
+
+## Implementation Status
+
+### v8 Prototype
+
 A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146 w/ the flag --harmony_intl_number_format_v3
