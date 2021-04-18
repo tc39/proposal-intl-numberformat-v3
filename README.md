@@ -107,7 +107,7 @@ In `resolvedOptions`, either `false` or one of the three strings will be returne
 
 ### New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
-Main Issue: [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8
+Main Issue: [#8](https://github.com/tc39/proposal-intl-numberformat-v3/issues/8)
 
 Additional Context: [Unified NumberFormat #9](https://github.com/tc39/proposal-unified-intl-numberformat/issues/9)
 
