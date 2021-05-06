@@ -143,15 +143,16 @@
         1. If _x_ &lt; 0 or _x_ is *-0*<sub>𝔽</sub>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
         1. If _isNegative_, then
           1. Let _x_ be -_x_.
+        1. Let _positiveRoundingMode_ be GetPositiveRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).
         1. If _intlObject_.[[RoundingType]] is ~significantDigits~, then
-          1. Let _result_ be ToRawPrecision(_x_, _intlObject_.[[MinimumSignificantDigits]], _intlObject_.[[MaximumSignificantDigits]]).
+          1. Let _result_ be ToRawPrecision(_x_, _intlObject_.[[MinimumSignificantDigits]], _intlObject_.[[MaximumSignificantDigits]], _positiveRoundingMode_).
         1. Else if _intlObject_.[[RoundingType]] is ~fractionDigits~, then
-          1. Let _result_ be ToRawFixed(_x_, _intlObject_.[[MinimumFractionDigits]], _intlObject_.[[MaximumFractionDigits]]).
+          1. Let _result_ be ToRawFixed(_x_, _intlObject_.[[MinimumFractionDigits]], _intlObject_.[[MaximumFractionDigits]], _positiveRoundingMode_).
         1. Else,
           1. Assert: _intlObject_.[[RoundingType]] is ~compactRounding~.
-          1. Let _result_ be ToRawPrecision(_x_, 1, 2).
+          1. Let _result_ be ToRawPrecision(_x_, 1, 2, _positiveRoundingMode_).
           1. If _result_.[[IntegerDigitsCount]] &gt; 1, then
-            1. Let _result_ be ToRawFixed(_x_, 0, 0).
+            1. Let _result_ be ToRawFixed(_x_, 0, 0, _positiveRoundingMode_).
         1. Let _x_ be _result_.[[RoundedNumber]].
         1. Let _string_ be _result_.[[FormattedString]].
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
@@ -295,7 +296,7 @@
                 1. Let _minusSignSymbol_ be the ILND String representing the minus sign.
                 1. Append a new Record { [[Type]]: *"exponentMinusSign"*, [[Value]]: _minusSignSymbol_ } as the last element of _result_.
                 1. Let _exponent_ be -_exponent_.
-              1. Let _exponentResult_ be ToRawFixed(_exponent_, 1, 0, 0).
+              1. Let _exponentResult_ be ToRawFixed(_exponent_, 1, 0, 0, *undefined*).
               1. Append a new Record { [[Type]]: *"exponentInteger"*, [[Value]]: _exponentResult_.[[FormattedString]] } as the last element of _result_.
             1. Else,
               1. Let _unknown_ be an ILND String based on _x_ and _p_.
@@ -626,10 +627,10 @@
     </emu-clause>
 
     <emu-clause id="sec-torawprecision" aoid="ToRawPrecision">
-      <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_ )</h1>
+      <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_, _positiveRoundingMode_ )</h1>
 
       <p>
-        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical value), _minPrecision_, and _maxPrecision_ (both must be integers between 1 and 21), the following steps are taken:
+        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical value), _minPrecision_, _maxPrecision_ (both must be integers between 1 and 21), and _positiveRoundingMode_ (a String value or *undefined*), the following steps are taken:
       </p>
 
       <emu-alg>
@@ -639,11 +640,25 @@
           1. Let _e_ be 0.
           1. Let _xFinal_ be 0.
         1. Else,
-          1. Let _e_ be the base 10 logarithm of _x_ rounded down to the nearest integer.
-          1. Let _n_ be an integer such that 10<sup>_p_–1</sup> ≤ _n_ < 10<sup>_p_</sup> and for which the exact mathematical value of _n_ × 10<sup>_e_–_p_+1</sup> – _x_ is as close to zero as possible. If there is more than one such _n_, pick the one for which _n_ × 10<sup>_e_–_p_+1</sup> is larger.
-          1. TODO: Use [[RoundingMode]] here.
+          1. Let _e1_ and _n1_ be integers such that 10<sup>_p_–1</sup> ≤ _n1_ &lt; 10<sup>_p_</sup> and for which the exact mathematical value of _n1_ × 10<sup>_e1_–_p_+1</sup> – _x_ is negative and as close to zero as possible.
+          1. Let _r1_ be _n1_ × 10<sup>_e1_–_p_+1</sup>.
+          1. If _r1_ is equal to _x_, then
+            1. Let _n_ be _n1_.
+            1. Let _e_ be _e1_.
+            1. Let _xFinal_ be _r1_.
+          1. Else,
+            1. Let _e2_ and _n2_ be integers such that 10<sup>_p_–1</sup> ≤ _n2_ &lt; 10<sup>_p_</sup> and for which the exact mathematical value of _n2_ × 10<sup>_e2_–_p_+1</sup> – _x_ is positive and as close to zero as possible.
+            1. Let _r2_ be _n2_ × 10<sup>_e2_–_p_+1</sup>.
+            1. Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).
+            1. If _r_ is _r1_, then
+              1. Let _n_ be _n1_.
+              1. Let _e_ be _e1_.
+              1. Let _xFinal_ be _r1_.
+            1. Else,
+              1. Let _n_ be _n2_.
+              1. Let _e_ be _e2_.
+              1. Let _xFinal_ be _r2_.
           1. Let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
-          1. Let _xFinal_ be _n_ × 10<sup>_e_–_p_+1</sup>.
         1. If _e_ ≥ _p_–1, then
           1. Let _m_ be the string-concatenation of _m_ and _e_–_p_+1 occurrences of the character *"0"*.
           1. Let _int_ be _e_+1.
@@ -666,17 +681,29 @@
     </emu-clause>
 
     <emu-clause id="sec-torawfixed" aoid="ToRawFixed">
-      <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_ )</h1>
+      <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_, _positiveRoundingMode_ )</h1>
 
       <p>
-        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical value), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, and _maxFraction_ (which must be integers between 0 and 20), the following steps are taken:
+        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical value), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, _maxFraction_ (which must be integers between 0 and 20), and _positiveRoundingMode_ (a String value or *undefined*), the following steps are taken:
       </p>
 
       <emu-alg>
         1. Let _f_ be _maxFraction_.
-        1. Let _n_ be an integer for which the exact mathematical value of _n_ / 10<sup>_f_</sup> – _x_ is as close to zero as possible. If there are two such _n_, pick the larger _n_.
-        1. TODO: Use [[RoundingMode]] here.
-        1. Let _xFinal_ be _n_ / 10<sup>_f_</sup>.
+        1. Let _n1_ be an integer for which the exact mathematical value of _n1_ / 10<sup>_f_</sup> – _x_ is negative and as close to zero as possible.
+        1. Let _r1_ be _n1_ / 10<sup>_f_</sup>.
+        1. If _r1_ is equal to _x_, then
+          1. Let _n_ be _n1_.
+          1. Let _xFinal_ be _r1_.
+        1. Else,
+          1. Let _n2_ be an integer for which the exact mathematical value of _n2_ / 10<sup>_f_</sup> – _x_ is positive and as close to zero as possible.
+          1. Let _r2_ be _n2_ / 10<sup>_f_</sup>.
+          1. Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).
+          1. If _r_ is _r1_, then
+            1. Let _n_ be _n1_.
+            1. Let _xFinal_ be _r1_.
+          1. Else,
+            1. Let _n_ be _n2_.
+            1. Let _xFinal_ be _r2_.
         1. If _n_ = 0, let _m_ be the String *"0"*. Otherwise, let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
         1. If _f_ ≠ 0, then
           1. Let _k_ be the number of characters in _m_.
@@ -1004,6 +1031,26 @@
           1. Let _str_ be be ! Number::toString(_x_).
         1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
         1. Return _mv_.
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-getpositiveroundingmode" aoid="GetPositiveRoundingMode">
+      <h1>GetPositiveRoundingMode ( _roundingMode_, _isNegative_ )</h1>
+      <p>
+        The abstract operation GetPositiveRoundingMode TODO
+      </p>
+      <emu-alg>
+        1. TODO
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-applypositiveroundingmode" aoid="ApplyPositiveRoundingMode">
+      <h1>ApplyPositiveRoundingMode ( _x_, _r1_, _r2_, _positiveRoundingMode_ )</h1>
+      <p>
+        The abstract operation ApplyPositiveRoundingMode TODO
+      </p>
+      <emu-alg>
+        1. TODO
       </emu-alg>
     </emu-clause>
 
