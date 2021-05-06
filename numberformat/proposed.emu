@@ -95,7 +95,7 @@
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, *"string"*, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
-        1. Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, *"string"*, &laquo; *"halfUp"*, *"halfEven"*, *"halfDown"*, *"ceiling"*, *"floor"*, *"up"*, *"down"* &raquo;, *"halfUp"*).
+        1. Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, *"string"*, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).
         1. Set _numberFormat_.[[RoundingMode]] to _roundingMode_.
         1. Return _numberFormat_.
       </emu-alg>
@@ -696,6 +696,109 @@
           1. Remove the last character from _m_.
         1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_ }.
       </emu-alg>
+
+      <emu-table id="table-rounding-modes">
+        <emu-caption>Rounding modes in Intl.NumberFormat</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Identifier</th>
+              <th rowspan="2">Description</th>
+              <th colspan="5">Examples: Round to 0 fraction digits</th>
+            </tr>
+            <tr>
+              <th>-1.5</th>
+              <th>0.4</th>
+              <th>0.5</th>
+              <th>0.6</th>
+              <th>1.5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>*"ceil"*</td>
+              <td>Toward positive infinity</td>
+              <td>➕ [-1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [2]</td>
+            </tr>
+            <tr>
+              <td>*"floor"*</td>
+              <td>Toward negative infinity</td>
+              <td>➖ [-2]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➖ [1]</td>
+            </tr>
+            <tr>
+              <td>*"expand"*</td>
+              <td>Away from zero</td>
+              <td>➖ [-2]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [2]</td>
+            </tr>
+            <tr>
+              <td>*"trunc"*</td>
+              <td>Toward zero</td>
+              <td>➕ [-1]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➖ [1]</td>
+            </tr>
+            <tr>
+              <td>*"halfCeil"*</td>
+              <td>Ties toward positive infinity</td>
+              <td>➕ [-1]</td>
+              <td>➖ [0]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [2]</td>
+            </tr>
+            <tr>
+              <td>*"halfFloor"*</td>
+              <td>Ties toward negative infinity</td>
+              <td>➖ [-2]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➕ [1]</td>
+              <td>➖ [1]</td>
+            </tr>
+            <tr>
+              <td>*"halfExpand"*</td>
+              <td>Ties away from zero</td>
+              <td>➖ [-2]</td>
+              <td>➖ [0]</td>
+              <td>➕ [1]</td>
+              <td>➕ [1]</td>
+              <td>➕ [2]</td>
+            </tr>
+            <tr>
+              <td>*"halfTrunc"*</td>
+              <td>Ties toward zero</td>
+              <td>➕ [-1]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➕ [1]</td>
+              <td>➖ [1]</td>
+            </tr>
+            <tr>
+              <td>*"halfEven"*</td>
+              <td>Ties toward even cardinality</td>
+              <td>➖ [-2]</td>
+              <td>➖ [0]</td>
+              <td>➖ [0]</td>
+              <td>➕ [1]</td>
+              <td>➕ [2]</td>
+            </tr>
+        </table>
+        <emu-note>The examples are illustrative of the unique behavior of each option. ➕ means "resolves toward positive infinity"; ➖ means "resolves toward negative infinity".</emu-note>
+      </emu-table>
     </emu-clause>
 
     <emu-clause id="sec-unwrapnumberformat" aoid="UnwrapNumberFormat">
@@ -1266,6 +1369,10 @@
             <td>[[SignDisplay]]</td>
             <td>*"signDisplay"*</td>
           </tr>
+          <tr>
+            <td>[[RoundingMode]]</td>
+            <td>*"roundingMode"*</td>
+          </tr>
         </table>
       </emu-table>
     </emu-clause>
@@ -1304,7 +1411,7 @@
       <li>[[Notation]] is one of the String values *"standard"*, *"scientific"*, *"engineering"*, or *"compact"*, specifying whether the number should be displayed without scaling, scaled to the units place with the power of ten in scientific notation, scaled to the nearest thousand with the power of ten in scientific notation, or scaled to the nearest locale-dependent compact decimal notation power of ten with the corresponding compact decimal notation affix.</li>
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
       <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, or *"exceptZero"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, or positive and negative numbers but not zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
-      <li>[[RoundingMode]] is one of the String values *"halfUp"*, *"halfEven"*, *"halfDown"*, *"ceiling"*, *"floor"*, *"up"*, or *"down"*, specifying the rounding strategy for the number. TODO: Reference the decimal spec? Should this list live elsewhere?</li>
+      <li>[[RoundingMode]] is one of the String values in the *"Identifier"* column of <emu-xref href="#table-rounding-modes"></emu-xref> , specifying the rounding strategy for the number.</li>
     </ul>
 
     <p>
