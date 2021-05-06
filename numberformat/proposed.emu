@@ -123,7 +123,7 @@
         1. Let _nf_ be _F_.[[NumberFormat]].
         1. Assert: Type(_nf_) is Object and _nf_ has an [[InitializedNumberFormat]] internal slot.
         1. If _value_ is not provided, let _value_ be *undefined*.
-        1. Let _x_ be ? ToNumeric(_value_).
+        1. Let _x_ be ? ToIntlMathematicalValue(_value_).
         1. Return ? FormatNumeric(_nf_, _x_).
       </emu-alg>
 
@@ -136,7 +136,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a Number or BigInt value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a mathematical value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
@@ -169,7 +169,7 @@
       <h1>PartitionNumberPattern ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a Number or BigInt value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
+        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
       </p>
 
       <emu-alg>
@@ -592,7 +592,7 @@
       <h1>FormatNumeric ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a Number or BigInt value), and performs the following steps:
+        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -608,7 +608,7 @@
       <h1>FormatNumericToParts ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a Number or BigInt value), and performs the following steps:
+        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -629,7 +629,7 @@
       <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_ )</h1>
 
       <p>
-        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative Number or BigInt), _minPrecision_, and _maxPrecision_ (both must be integers between 1 and 21), the following steps are taken:
+        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical), _minPrecision_, and _maxPrecision_ (both must be integers between 1 and 21), the following steps are taken:
       </p>
 
       <emu-alg>
@@ -669,7 +669,7 @@
       <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_ )</h1>
 
       <p>
-        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative Number or BigInt), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, and _maxFraction_ (which must be integers between 0 and 20), the following steps are taken:
+        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative mathematical), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, and _maxFraction_ (which must be integers between 0 and 20), the following steps are taken:
       </p>
 
       <emu-alg>
@@ -989,10 +989,28 @@
       </emu-alg>
     </emu-clause>
 
+    <emu-clause id="sec-tointlmathematicalvalue" aoid="ToIntlMathematicalValue">
+      <h1>ToIntlMathematicalValue ( _value_ )</h1>
+      <p>
+        The abstract operation ToIntlMathematicalValue takes argument _value_. It returns _value_ converted to a mathematical value, as discussed in <emu-xref href="#sec-mathematical-operations"></emu-xref>. This is similar to <emu-xref href="#sec-tonumeric"></emu-xref>, but a mathematical value is returned instead of a Number or BigInt, so that exact decimal values can be represented. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. Let _primValue_ be ? ToPrimitive(_value_, ~number~).
+        1. If Type(_primValue_) is BigInt, return the mathematical value of _primValue_.
+        1. If Type(_primValue_) is String,
+          1. Let _str_ be _primValue_.
+        1. Else,
+          1. Let _x_ be ? ToNumber(_primValue_).
+          1. Let _str_ be be ! Number::toString(_x_).
+        1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
+        1. Return _mv_.
+      </emu-alg>
+    </emu-clause>
+
     <emu-clause id="sec-partitionnumberrangepattern" aoid="PartitionNumberRangePattern">
       <h1>PartitionNumberRangePattern ( _numberFormat_, _x_, _y_ )</h1>
       <p>
-        The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be a Number or BigInt value), _y_ (which must be a Number or BigInt value), the effective locale, and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
+        The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be a mathematical value), _y_ (which must be a mathematical value), the effective locale, and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
       </p>
       <emu-alg>
         1. TODO: Flesh this out more before Stage 3.
@@ -1015,7 +1033,7 @@
       <h1>FormatNumericRange( _numberFormat_, _x_, _y_ )</h1>
 
       <p>
-        The FormatNumericRange abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a Number or BigInt value), and _y_ (which must be a Number or BigInt value greater than or equal to _x_), and performs the following steps:
+        The FormatNumericRange abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a mathematical value), and _y_ (which must be a mathematical value greater than or equal to _x_), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -1031,7 +1049,7 @@
       <h1>FormatNumericRangeToParts( _numberFormat_, _x_, _y_ )</h1>
 
       <p>
-        The FormatNumericRangeToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a Number or BigInt value), and _y_ (which must be a Number or BigInt value greater than or equal to _x_), and performs the following steps:
+        The FormatNumericRangeToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a mathematical value), and _y_ (which must be a mathematical value greater than or equal to _x_), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -1227,7 +1245,7 @@
       <emu-alg>
         1. Let _nf_ be the *this* value.
         1. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
-        1. Let _x_ be ? ToNumeric(_value_).
+        1. Let _x_ be ? ToIntlMathematicalValue(_value_).
         1. Return ? FormatNumericToParts(_nf_, _x_).
       </emu-alg>
     </emu-clause>
@@ -1243,8 +1261,8 @@
         1. Let _nf_ be the *this* value.
         1. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
         1. If _start_ is *undefined* or _end_ is *undefined*, throw a *TypeError* exception.
-        1. Let _x_ be ? ToNumeric(_start_).
-        1. Let _y_ be ? ToNumeric(_end_).
+        1. Let _x_ be ? ToIntlMathematicalValue(_start_).
+        1. Let _y_ be ? ToIntlMathematicalValue(_end_).
         1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
         1. If _x_ is a non-finite Number or _y_ is is a non-finite Number, throw a *RangeError* exception.
         1. If _x_ is greater than _y_, throw a *RangeError* exception.
@@ -1263,8 +1281,8 @@
         1. Let _nf_ be the *this* value.
         1. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
         1. If _start_ is *undefined* or _end_ is *undefined*, throw a *TypeError* exception.
-        1. Let _x_ be ? ToNumeric(_start_).
-        1. Let _y_ be ? ToNumeric(_end_).
+        1. Let _x_ be ? ToIntlMathematicalValue(_start_).
+        1. Let _y_ be ? ToIntlMathematicalValue(_end_).
         1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
         1. If _x_ is a non-finite Number or _y_ is is a non-finite Number, throw a *RangeError* exception.
         1. If _x_ is greater than _y_, throw a *RangeError* exception.
