@@ -136,7 +136,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical value</ins> value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical</ins> value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
@@ -169,7 +169,7 @@
       <h1>PartitionNumberPattern ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical value</ins> value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
+        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical</ins> value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
       </p>
 
       <emu-alg>
@@ -592,7 +592,7 @@
       <h1>FormatNumeric ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical value</ins> value), and performs the following steps:
+        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical</ins> value), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -608,7 +608,7 @@
       <h1>FormatNumericToParts ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical value</ins> value), and performs the following steps:
+        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a <del>Number or BigInt</del><ins>mathematical</ins> value), and performs the following steps:
       </p>
 
       <emu-alg>
