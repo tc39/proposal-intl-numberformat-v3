@@ -91,11 +91,11 @@
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, *"string"*, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. If _notation_ is *"compact"*, then
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
-        1. Let _useGrouping_ be ? GetOption<ins>OrBooleanOption</ins>(_options_, *"useGrouping"*, *"boolean"*, <del>*undefined*, *true*</del> <ins>&laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *"auto"*</ins>).
+        1. Let _useGrouping_ be ? Get<ins>StringOrBoolean</ins>Option(_options_, *"useGrouping"*, <del>*"boolean"*, *undefined*, *true*</del> <ins>&laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *"auto"*</ins>).
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, *"string"*, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
-        1. <ins class="block>Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, *"string"*, &laquo; *"halfUp"*, *"halfEven"*, *"halfDown"*, *"ceiling"*, *"floor"*, *"up"*, *"down"* &raquo;, *"halfUp"*).</ins>
+        1. <ins class="block">Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, *"string"*, &laquo; *"halfUp"*, *"halfEven"*, *"halfDown"*, *"ceiling"*, *"floor"*, *"up"*, *"down"* &raquo;, *"halfUp"*).</ins>
         1. <ins class="block">Set _numberFormat_.[[RoundingMode]] to _roundingMode_.</ins>
         1. Return _numberFormat_.
       </emu-alg>
@@ -965,7 +965,7 @@
 
       <emu-alg>
         1. If NewTarget is *undefined*, let _newTarget_ be the active function object, else let _newTarget_ be NewTarget.
-        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], [[RoundingMode]], [[BoundFormat]] &raquo;).
+        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], <ins>[[RoundingMode]],</ins> [[BoundFormat]] &raquo;).
         1. Perform ? InitializeNumberFormat(_numberFormat_, _locales_, _options_).
       </emu-alg>
       <emu-normative-optional>
