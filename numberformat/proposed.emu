@@ -136,7 +136,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a mathematical value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be an Intl mathematical value), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
@@ -170,7 +170,7 @@
       <h1>PartitionNumberPattern ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
+        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be an Intl mathematical value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
       </p>
 
       <emu-alg>
@@ -593,7 +593,7 @@
       <h1>FormatNumeric ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), and performs the following steps:
+        The FormatNumeric abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be an Intl mathematical value), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -609,7 +609,7 @@
       <h1>FormatNumericToParts ( _numberFormat_, _x_ )</h1>
 
       <p>
-        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be a mathematical value), and performs the following steps:
+        The FormatNumericToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be an Intl mathematical value), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -1023,7 +1023,7 @@
     <emu-clause id="sec-tointlmathematicalvalue" aoid="ToIntlMathematicalValue">
       <h1>ToIntlMathematicalValue ( _value_ )</h1>
       <p>
-        The abstract operation ToIntlMathematicalValue takes argument _value_. It returns _value_ converted to a mathematical value, as discussed in <emu-xref href="#sec-mathematical-operations"></emu-xref>. This is similar to <emu-xref href="#sec-tonumeric"></emu-xref>, but a mathematical value is returned instead of a Number or BigInt, so that exact decimal values can be represented. The following steps are taken:
+        The abstract operation ToIntlMathematicalValue takes argument _value_. It returns _value_ converted to an <dfn id="intl-mathematical-value">Intl mathematical value</dfn>, which is a mathematical value together with *+&infin;*, *-&infin;*, *NaN*, and *-0*. This abstract operation is similar to <emu-xref href="#sec-tonumeric"></emu-xref>, but a mathematical value can be returned instead of a Number or BigInt, so that exact decimal values can be represented. The following steps are taken:
       </p>
       <emu-alg>
         1. Let _primValue_ be ? ToPrimitive(_value_, ~number~).
@@ -1033,7 +1033,11 @@
         1. Else,
           1. Let _x_ be ? ToNumber(_primValue_).
           1. Let _str_ be be ! Number::toString(_x_).
+        1. If the grammar cannot interpret _str_ as an expansion of |StringNumericLiteral|, return *NaN*.
         1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
+        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
+        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return *+&infin;*.
+        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return *-&infin;*.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
@@ -1061,7 +1065,7 @@
     <emu-clause id="sec-partitionnumberrangepattern" aoid="PartitionNumberRangePattern">
       <h1>PartitionNumberRangePattern ( _numberFormat_, _x_, _y_ )</h1>
       <p>
-        The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be a mathematical value), _y_ (which must be a mathematical value), the effective locale, and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
+        The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be an Intl mathematical value), _y_ (which must be an Intl mathematical value), the effective locale, and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
       </p>
       <emu-alg>
         1. TODO: Flesh this out more before Stage 3.
@@ -1084,7 +1088,7 @@
       <h1>FormatNumericRange( _numberFormat_, _x_, _y_ )</h1>
 
       <p>
-        The FormatNumericRange abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a mathematical value), and _y_ (which must be a mathematical value greater than or equal to _x_), and performs the following steps:
+        The FormatNumericRange abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be an Intl mathematical value), and _y_ (which must be an Intl mathematical value greater than or equal to _x_), and performs the following steps:
       </p>
 
       <emu-alg>
@@ -1100,7 +1104,7 @@
       <h1>FormatNumericRangeToParts( _numberFormat_, _x_, _y_ )</h1>
 
       <p>
-        The FormatNumericRangeToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be a mathematical value), and _y_ (which must be a mathematical value greater than or equal to _x_), and performs the following steps:
+        The FormatNumericRangeToParts abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which must be an Intl mathematical value), and _y_ (which must be an Intl mathematical value greater than or equal to _x_), and performs the following steps:
       </p>
 
       <emu-alg>
