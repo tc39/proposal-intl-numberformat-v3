@@ -629,6 +629,17 @@
     <emu-clause id="sec-torawprecision" aoid="ToRawPrecision">
       <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_<ins>, _positiveRoundingMode_</ins> )</h1>
 
+      <ins class="block">
+      <p>
+        ToRawPrecision is an abstract operation that involves solving the following equation, which returns a valid mathematical value given integer inputs:
+      </p>
+
+      <emu-eqn id="eqn-ToRawPrecisionFn" aoid="ToRawPrecisionFn">
+        ToRawPrecisionFn(_n_, _e_, _p_) = _n_ × 10<sup>_e_–_p_+1</sup>
+        where 10<sup>_p_–1</sup> ≤ _n_ &lt; 10<sup>_p_</sup>
+      </emu-eqn>
+      </ins>
+
       <p>
         When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minPrecision_, <del>and</del> _maxPrecision_ (both must be integers between 1 and 21)<ins>, and _positiveRoundingMode_ (a String value or *undefined*)</ins>, the following steps are taken:
       </p>
@@ -642,24 +653,17 @@
         1. Else,
           1. <del class="block">Let _e_ be the base 10 logarithm of _x_ rounded down to the nearest integer.</del>
           1. <del class="block">Let _n_ be an integer such that 10<sup>_p_–1</sup> ≤ _n_ < 10<sup>_p_</sup> and for which the exact mathematical value of _n_ × 10<sup>_e_–_p_+1</sup> – _x_ is as close to zero as possible. If there is more than one such _n_, pick the one for which _n_ × 10<sup>_e_–_p_+1</sup> is larger.</del>
-          1. <ins class="block">Let _e1_ and _n1_ be integers such that 10<sup>_p_–1</sup> ≤ _n1_ &lt; 10<sup>_p_</sup> and for which the exact mathematical value of _n1_ × 10<sup>_e1_–_p_+1</sup> – _x_ is negative and as close to zero as possible.</ins>
-          1. <ins class="block">Let _r1_ be _n1_ × 10<sup>_e1_–_p_+1</sup>.</ins>
-          1. <ins class="block">If _r1_ is equal to _x_, then</ins>
+          1. <ins class="block">Let _n1_ and _e1_ each be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawPrecisionFn(_n1_, _e1_, _p_)</emu-eqn>, such that <emu-eqn>_r1_ ≤ _x_</emu-eqn> and _r1_ is maximized.</ins>
+          1. <ins class="block">Let _n2_ and _e2_ each be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawPrecisionFn(_n2_, _e2_, _p_)</emu-eqn>, such that <emu-eqn>_r2_ ≥ _x_</emu-eqn> and _r2_ is minimized.</ins>
+          1. <ins class="block">Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).</ins>
+          1. <ins class="block">If _r_ is _r1_, then</ins>
             1. <ins class="block">Let _n_ be _n1_.</ins>
             1. <ins class="block">Let _e_ be _e1_.</ins>
             1. <ins class="block">Let _xFinal_ be _r1_.</ins>
           1. <ins class="block">Else,</ins>
-            1. <ins class="block">Let _e2_ and _n2_ be integers such that 10<sup>_p_–1</sup> ≤ _n2_ &lt; 10<sup>_p_</sup> and for which the exact mathematical value of _n2_ × 10<sup>_e2_–_p_+1</sup> – _x_ is positive and as close to zero as possible.</ins>
-            1. <ins class="block">Let _r2_ be _n2_ × 10<sup>_e2_–_p_+1</sup>.</ins>
-            1. <ins class="block">Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).</ins>
-            1. <ins class="block">If _r_ is _r1_, then</ins>
-              1. <ins class="block">Let _n_ be _n1_.</ins>
-              1. <ins class="block">Let _e_ be _e1_.</ins>
-              1. <ins class="block">Let _xFinal_ be _r1_.</ins>
-            1. <ins class="block">Else,</ins>
-              1. <ins class="block">Let _n_ be _n2_.</ins>
-              1. <ins class="block">Let _e_ be _e2_.</ins>
-              1. <ins class="block">Let _xFinal_ be _r2_.</ins>
+            1. <ins class="block">Let _n_ be _n2_.</ins>
+            1. <ins class="block">Let _e_ be _e2_.</ins>
+            1. <ins class="block">Let _xFinal_ be _r2_.</ins>
           1. Let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
           1. <del class="block">Let _xFinal_ be _n_ × 10<sup>_e_–_p_+1</sup>.</del>
         1. If _e_ ≥ _p_–1, then
@@ -686,6 +690,16 @@
     <emu-clause id="sec-torawfixed" aoid="ToRawFixed">
       <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_<ins>, _positiveRoundingMode_</ins> )</h1>
 
+      <ins class="block">
+      <p>
+        ToRawFixed is an abstract operation that involves solving the following equation, which returns a valid mathematical value given integer inputs:
+      </p>
+
+      <emu-eqn id="eqn-ToRawFixedFn" aoid="ToRawFixedFn">
+        ToRawFixedFn(_n_, _f_) = _n_ × 10<sup>–_f_</sup>
+      </emu-eqn>
+      </ins>
+
       <p>
         When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, <del>and</del> _maxFraction_ (which must be integers between 0 and 20)<ins>, and _positiveRoundingMode_ (a String value or *undefined*)</ins>, the following steps are taken:
       </p>
@@ -694,21 +708,15 @@
         1. Let _f_ be _maxFraction_.
         1. <del class="block">Let _n_ be an integer for which the exact mathematical value of _n_ / 10<sup>_f_</sup> – _x_ is as close to zero as possible. If there are two such _n_, pick the larger _n_.</del>
         1. <del class="block">Let _xFinal_ be _n_ / 10<sup>_f_</sup>.</del>
-        1. <ins class="block">Let _n1_ be an integer for which the exact mathematical value of _n1_ / 10<sup>_f_</sup> – _x_ is negative and as close to zero as possible.</ins>
-        1. <ins class="block">Let _r1_ be _n1_ / 10<sup>_f_</sup>.</ins>
-        1. <ins class="block">If _r1_ is equal to _x_, then</ins>
+        1. <ins class="block">Let _n1_ be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawFixedFn(_n1_, _f_)</emu-eqn>, such that <emu-eqn>_r1_ ≤ _x_</emu-eqn> and _r1_ is maximized.</ins>
+        1. <ins class="block">Let _n2_ be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawFixedFn(_n2_, _f_)</emu-eqn>, such that <emu-eqn>_r2_ ≥ _x_</emu-eqn> and _r2_ is minimized.</ins>
+        1. <ins class="block">Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).</ins>
+        1. <ins class="block">If _r_ is _r1_, then</ins>
           1. <ins class="block">Let _n_ be _n1_.</ins>
           1. <ins class="block">Let _xFinal_ be _r1_.</ins>
         1. <ins class="block">Else,</ins>
-          1. <ins class="block">Let _n2_ be an integer for which the exact mathematical value of _n2_ / 10<sup>_f_</sup> – _x_ is positive and as close to zero as possible.</ins>
-          1. <ins class="block">Let _r2_ be _n2_ / 10<sup>_f_</sup>.</ins>
-          1. <ins class="block">Let _r_ be ApplyRoundingMode(_x_, _r1_, _r2_, _positiveRoundingMode_).</ins>
-          1. <ins class="block">If _r_ is _r1_, then</ins>
-            1. <ins class="block">Let _n_ be _n1_.</ins>
-            1. <ins class="block">Let _xFinal_ be _r1_.</ins>
-          1. <ins class="block">Else,</ins>
-            1. <ins class="block">Let _n_ be _n2_.</ins>
-            1. <ins class="block">Let _xFinal_ be _r2_.</ins>
+          1. <ins class="block">Let _n_ be _n2_.</ins>
+          1. <ins class="block">Let _xFinal_ be _r2_.</ins>
         1. If _n_ = 0, let _m_ be the String *"0"*. Otherwise, let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
         1. If _f_ ≠ 0, then
           1. Let _k_ be the number of characters in _m_.
