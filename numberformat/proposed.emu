@@ -1155,11 +1155,25 @@
     <emu-clause id="sec-applyunsignedroundingmode" aoid="ApplyUnsignedRoundingMode">
       <h1>ApplyUnsignedRoundingMode ( _x_, _r1_, _r2_, _unsignedRoundingMode_ )</h1>
       <p>
-        The abstract operation ApplyUnsignedRoundingMode TODO
-        (a specification type from <emu-xref href="#table-unsigned-rounding-mode"></emu-xref> or *undefined*)
+        The abstract operation ApplyUnsignedRoundingMode considers _x_ (a mathematical value), bracketed below by _r1_ (a mathematical value) and above by _r2_ (a mathematical value), and returns either _r1_ or _r2_ according to _unsignedRoundingMode_ (a specification type from <emu-xref href="#table-unsigned-rounding-mode"></emu-xref> or *undefined*). The following steps are taken:
       </p>
       <emu-alg>
-        1. TODO
+        1. If _x_ is equal to _r1_, return _r1_.
+        1. Assert: _r1_ &lt; _x_ &lt; _r2_.
+        1. Assert: _unsignedRoundingMode_ is not *undefined*.
+        1. If _unsignedRoundingMode_ is ~zero~, return _r1_.
+        1. If _unsignedRoundingMode_ is ~infinity~, return _r2_.
+        1. Let _d1_ be <emu-eqn>_x_ – _r1_</emu-eqn>.
+        1. Let _d2_ be <emu-eqn>_r2_ – _x_</emu-eqn>.
+        1. If _d1_ &lt; _d2_, return _r1_.
+        1. If _d2_ &lt; _d1_, return _r2_.
+        1. Assert: _d1_ is equal to _d2_.
+        1. If _unsignedRoundingMode_ is ~half-zero~, return _r1_.
+        1. If _unsignedRoundingMode_ is ~half-infinity~, return _r2_.
+        1. Assert: _unsignedRoundingMode_ is ~half-even~.
+        1. Let _cardinality_ be <emu-eqn>(_r1_ / (_r2_ – _r1_)) modulo 2</emu-eqn>.
+        1. If _cardinality_ is 0, return _r1_.
+        1. Return _r2_.
       </emu-alg>
     </emu-clause>
 
