@@ -649,7 +649,7 @@
       </ins>
 
       <p>
-        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minPrecision_, <del>and</del> _maxPrecision_ (both must be integers between 1 and 21)<ins>, and _unsignedRoundingMode_ (a specification type from <emu-xref href="#table-unsigned-rounding-mode"></emu-xref> or *undefined*)</ins>, the following steps are taken:
+        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minPrecision_, <del>and</del> _maxPrecision_ (both must be integers between 1 and 21)<ins>, and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -709,7 +709,7 @@
       </ins>
 
       <p>
-        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, <del>and</del> _maxFraction_ (which must be integers between 0 and 20)<ins>, and _unsignedRoundingMode_ (a specification type from <emu-xref href="#table-unsigned-rounding-mode"></emu-xref> or *undefined*)</ins>, the following steps are taken:
+        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, <del>and</del> _maxFraction_ (which must be integers between 0 and 20)<ins>, and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -744,111 +744,6 @@
           1. Remove the last character from _m_.
         1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_ }.
       </emu-alg>
-
-      <ins class="block">
-      <emu-table id="table-rounding-modes">
-        <emu-caption>Rounding modes in Intl.NumberFormat</emu-caption>
-        <table class="real-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Identifier</th>
-              <th rowspan="2">Description</th>
-              <th colspan="5">Examples: Round to 0 fraction digits</th>
-            </tr>
-            <tr>
-              <th>-1.5</th>
-              <th>0.4</th>
-              <th>0.5</th>
-              <th>0.6</th>
-              <th>1.5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>*"ceil"*</td>
-              <td>Toward positive infinity</td>
-              <td>➕ [-1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [2]</td>
-            </tr>
-            <tr>
-              <td>*"floor"*</td>
-              <td>Toward negative infinity</td>
-              <td>➖ [-2]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➖ [1]</td>
-            </tr>
-            <tr>
-              <td>*"expand"*</td>
-              <td>Away from zero</td>
-              <td>➖ [-2]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [2]</td>
-            </tr>
-            <tr>
-              <td>*"trunc"*</td>
-              <td>Toward zero</td>
-              <td>➕ [-1]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➖ [1]</td>
-            </tr>
-            <tr>
-              <td>*"halfCeil"*</td>
-              <td>Ties toward positive infinity</td>
-              <td>➕ [-1]</td>
-              <td>➖ [0]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [2]</td>
-            </tr>
-            <tr>
-              <td>*"halfFloor"*</td>
-              <td>Ties toward negative infinity</td>
-              <td>➖ [-2]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➕ [1]</td>
-              <td>➖ [1]</td>
-            </tr>
-            <tr>
-              <td>*"halfExpand"*</td>
-              <td>Ties away from zero</td>
-              <td>➖ [-2]</td>
-              <td>➖ [0]</td>
-              <td>➕ [1]</td>
-              <td>➕ [1]</td>
-              <td>➕ [2]</td>
-            </tr>
-            <tr>
-              <td>*"halfTrunc"*</td>
-              <td>Ties toward zero</td>
-              <td>➕ [-1]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➕ [1]</td>
-              <td>➖ [1]</td>
-            </tr>
-            <tr>
-              <td>*"halfEven"*</td>
-              <td>Ties toward even cardinality</td>
-              <td>➖ [-2]</td>
-              <td>➖ [0]</td>
-              <td>➖ [0]</td>
-              <td>➕ [1]</td>
-              <td>➕ [2]</td>
-            </tr>
-        </table>
-        <emu-note>The examples are illustrative of the unique behavior of each option. ➕ means "resolves toward positive infinity"; ➖ means "resolves toward negative infinity".</emu-note>
-      </emu-table>
-      </ins>
     </emu-clause>
 
     <emu-clause id="sec-unwrapnumberformat" aoid="UnwrapNumberFormat">
@@ -1065,13 +960,13 @@
     <emu-clause id="sec-getunsignedroundingmode" aoid="GetUnsignedRoundingMode">
       <h1>GetUnsignedRoundingMode ( _roundingMode_, _isNegative_ )</h1>
       <p>
-        The abstract operation GetUnsignedRoundingMode returns the rounding mode that should be applied to the absolute value of a number to produce the same result as if _roundingMode_, a String value from the list in <emu-xref href="#table-rounding-modes"></emu-xref>, were applied to the signed value of the number (negative if the boolean _isNegative_ is *true*, or positive otherwise). The following steps are taken:
+        The abstract operation GetUnsignedRoundingMode returns the rounding mode that should be applied to the absolute value of a number to produce the same result as if _roundingMode_, one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, were applied to the signed value of the number (negative if the boolean _isNegative_ is *true*, or positive otherwise). The following steps are taken:
       </p>
       <emu-alg>
-        1. If _isNegative_ is *true*, return the specification type in the third column of <emu-xref href="#table-unsigned-rounding-modes"></emu-xref> where the first column is _roundingMode_ and the second column is "negative".
-        1. Else, return the specification type in the third column of <emu-xref href="#table-unsigned-rounding-modes"></emu-xref> where the first column is _roundingMode_ and the second column is "positive".
+        1. If _isNegative_ is *true*, return the specification type in the third column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> where the first column is _roundingMode_ and the second column is "negative".
+        1. Else, return the specification type in the third column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> where the first column is _roundingMode_ and the second column is "positive".
       </emu-alg>
-      <emu-table id="table-unsigned-rounding-mode">
+      <emu-table id="table-intl-unsigned-rounding-modes">
         <emu-caption>Conversion from rounding mode to unsigned rounding mode</emu-caption>
         <table class="real-table">
           <thead>
@@ -1169,7 +1064,7 @@
     <emu-clause id="sec-applyunsignedroundingmode" aoid="ApplyUnsignedRoundingMode">
       <h1>ApplyUnsignedRoundingMode ( _x_, _r1_, _r2_, _unsignedRoundingMode_ )</h1>
       <p>
-        The abstract operation ApplyUnsignedRoundingMode considers _x_ (a mathematical value), bracketed below by _r1_ (a mathematical value) and above by _r2_ (a mathematical value), and returns either _r1_ or _r2_ according to _unsignedRoundingMode_ (a specification type from <emu-xref href="#table-unsigned-rounding-mode"></emu-xref> or *undefined*). The following steps are taken:
+        The abstract operation ApplyUnsignedRoundingMode considers _x_ (a mathematical value), bracketed below by _r1_ (a mathematical value) and above by _r2_ (a mathematical value), and returns either _r1_ or _r2_ according to _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*). The following steps are taken:
       </p>
       <emu-alg>
         1. If _x_ is equal to _r1_, return _r1_.
@@ -1618,8 +1513,113 @@
       <li>[[Notation]] is one of the String values *"standard"*, *"scientific"*, *"engineering"*, or *"compact"*, specifying whether the number should be displayed without scaling, scaled to the units place with the power of ten in scientific notation, scaled to the nearest thousand with the power of ten in scientific notation, or scaled to the nearest locale-dependent compact decimal notation power of ten with the corresponding compact decimal notation affix.</li>
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
       <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, or *"exceptZero"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, or positive and negative numbers but not zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
-      <li><ins class="block">[[RoundingMode]] is one of the String values in the *"Identifier"* column of <emu-xref href="#table-rounding-modes"></emu-xref> , specifying the rounding strategy for the number.</ins></li>
+      <li><ins class="block">[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</ins></li>
     </ul>
+
+    <ins class="block">
+    <emu-table id="table-intl-rounding-modes">
+      <emu-caption>Rounding modes in Intl.NumberFormat</emu-caption>
+      <table class="real-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Identifier</th>
+            <th rowspan="2">Description</th>
+            <th colspan="5">Examples: Round to 0 fraction digits</th>
+          </tr>
+          <tr>
+            <th>-1.5</th>
+            <th>0.4</th>
+            <th>0.5</th>
+            <th>0.6</th>
+            <th>1.5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>*"ceil"*</td>
+            <td>Toward positive infinity</td>
+            <td>➕ [-1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [2]</td>
+          </tr>
+          <tr>
+            <td>*"floor"*</td>
+            <td>Toward negative infinity</td>
+            <td>➖ [-2]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➖ [1]</td>
+          </tr>
+          <tr>
+            <td>*"expand"*</td>
+            <td>Away from zero</td>
+            <td>➖ [-2]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [2]</td>
+          </tr>
+          <tr>
+            <td>*"trunc"*</td>
+            <td>Toward zero</td>
+            <td>➕ [-1]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➖ [1]</td>
+          </tr>
+          <tr>
+            <td>*"halfCeil"*</td>
+            <td>Ties toward positive infinity</td>
+            <td>➕ [-1]</td>
+            <td>➖ [0]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [2]</td>
+          </tr>
+          <tr>
+            <td>*"halfFloor"*</td>
+            <td>Ties toward negative infinity</td>
+            <td>➖ [-2]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➕ [1]</td>
+            <td>➖ [1]</td>
+          </tr>
+          <tr>
+            <td>*"halfExpand"*</td>
+            <td>Ties away from zero</td>
+            <td>➖ [-2]</td>
+            <td>➖ [0]</td>
+            <td>➕ [1]</td>
+            <td>➕ [1]</td>
+            <td>➕ [2]</td>
+          </tr>
+          <tr>
+            <td>*"halfTrunc"*</td>
+            <td>Ties toward zero</td>
+            <td>➕ [-1]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➕ [1]</td>
+            <td>➖ [1]</td>
+          </tr>
+          <tr>
+            <td>*"halfEven"*</td>
+            <td>Ties toward even cardinality</td>
+            <td>➖ [-2]</td>
+            <td>➖ [0]</td>
+            <td>➖ [0]</td>
+            <td>➕ [1]</td>
+            <td>➕ [2]</td>
+          </tr>
+      </table>
+      <emu-note>The examples are illustrative of the unique behavior of each option. ➕ means "resolves toward positive infinity"; ➖ means "resolves toward negative infinity".</emu-note>
+    </emu-table>
+    </ins>
 
     <p>
       Finally, Intl.NumberFormat instances have a [[BoundFormat]] internal slot that caches the function returned by the format accessor (<emu-xref href="#sec-intl.numberformat.prototype.format"></emu-xref>).
