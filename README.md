@@ -5,7 +5,7 @@
 - Spec: Intl.NumberFormat ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/proposed.html))
 - Spec: Intl.PluralRules ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/pluralrules/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/pluralrules/proposed.html))
 - Spec: Parameter Resolution ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/negotiation/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/negotiation/proposed.html))
-- Spec: Locale Sensitive Functions ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/locale-sensitive-functions/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/locale-sensitive-functions/proposed.html))
+- Spec: Annexes ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/annexes/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/annexes/proposed.html))
 
 Intl.NumberFormat was first added in the initial Intl specification.  More recently, the ECMA-402 Proposal [Unified Intl.NumberFormat](https://github.com/tc39/proposal-unified-intl-numberformat) added several new key features.  This proposal, which I'm calling "Intl.NumberFormat V3", is one more batch of features that have been shown to be important to clients of this API.
 
