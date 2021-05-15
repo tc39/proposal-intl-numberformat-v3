@@ -142,6 +142,9 @@
           Localized range separator symbol (<emu-xref href="#sec-partitionnumberrangepattern"></emu-xref>)
         </li>
         <li>
+          The FormatApproximately algorithm and the localized approximately sign (<emu-xref href="#sec-formatapproximately"></emu-xref>)
+        </li>
+        <li>
           The CollapseNumberRange algorithm (<emu-xref href="#sec-collapsenumberrange"></emu-xref>)
         </li>
         </ins>
