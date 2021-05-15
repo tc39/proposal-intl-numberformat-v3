@@ -3,10 +3,12 @@
   "name": "template-for-proposals",
   "description": "A repository template for ECMAScript proposals.",
   "scripts": {
+    "build:locale-sensitive-functions": "mkdirp out/locale-sensitive-functions && ecmarkup locale-sensitive-functions/diff.emu out/locale-sensitive-functions/diff.html && ecmarkup locale-sensitive-functions/proposed.emu out/locale-sensitive-functions/proposed.html",
     "build:numberformat": "mkdirp out/numberformat && ecmarkup numberformat/diff.emu out/numberformat/diff.html && ecmarkup numberformat/proposed.emu out/numberformat/proposed.html",
     "build:negotiation": "mkdirp out/negotiation && ecmarkup negotiation/diff.emu out/negotiation/diff.html && ecmarkup negotiation/proposed.emu out/negotiation/proposed.html",
+    "build:pluralrules": "mkdirp out/pluralrules && ecmarkup pluralrules/diff.emu out/pluralrules/diff.html && ecmarkup pluralrules/proposed.emu out/pluralrules/proposed.html",
     "build:readme": "marked -i README.md -o index.html",
-    "build": "mkdirp out && npm run build:readme && npm run build:numberformat && npm run build:negotiation"
+    "build": "mkdirp out && npm run build:readme && npm run build:locale-sensitive-functions && npm run build:numberformat && npm run build:negotiation && npm run build:pluralrules"
   },
   "homepage": "https://github.com/tc39/template-for-proposals#readme",
   "repository": {
