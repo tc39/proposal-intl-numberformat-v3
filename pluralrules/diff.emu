@@ -130,6 +130,35 @@
         1. Return ! PluralRuleSelect(_locale_, _type_, _n_, _operands_).
       </emu-alg>
     </emu-clause>
+
+    <ins class="block">
+    <emu-clause id="sec-pluralruleselectrange" aoid="PluralRuleSelectRange">
+      <h1>PluralRuleSelectRange ( _locale_, _type_, _xp_, _yp_ )</h1>
+
+      <p>
+        When the PluralRuleSelectRange abstract operation is called with four arguments, it performs an implementation-dependent algorithm to map the plural form String values _xp_ and _yp_, representing the plural forms of the start and end of a range, to a resolved String value for the plural form of the range as a whole denoted by _type_ for the corresponding _locale_, or the String value *"other"*.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-resolvepluralrange" aoid="ResolvePluralRange">
+      <h1>ResolvePluralRange ( _pluralRules_, _n_ )</h1>
+      <p>
+        When the ResolvePluralRange abstract operation is called with arguments _pluralRules_ (which must be an object initialized as a PluralRules), _x_ (which must be a Number value), and _y_ (which must be a Number value), it returns a String value representing the plural form of the range starting from _x_ and ending at _y_ according to the effective locale and the options of _pluralRules_. The following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Assert: Type(_pluralRules_) is Object.
+        1. Assert: _pluralRules_ has an [[InitializedPluralRules]] internal slot.
+        1. Assert: Type(_x_) is Number.
+        1. Assert: Type(_y_) is Number.
+        1. Let _xp_ be ! ResolvePlural(_pluralRules_, _x_).
+        1. Let _yp_ be ! ResolvePlural(_pluralRules_, _y_).
+        1. Let _locale_ be _pluralRules_.[[Locale]].
+        1. Let _type_ be _pluralRules_.[[Type]].
+        1. Return ! PluralRuleSelectRange(_locale_, _type_, _xp_, _yp_).
+      </emu-alg>
+    </emu-clause>
+    </ins>
   </emu-clause>
 
   <emu-clause id="sec-intl-pluralrules-constructor">
@@ -255,6 +284,24 @@
         1. Return ! ResolvePlural(_pr_, _n_).
       </emu-alg>
     </emu-clause>
+
+    <ins class="block">
+    <emu-clause id="sec-intl.pluralrules.prototype.selectrange">
+      <h1>Intl.PluralRules.prototype.selectRange ( _start_, _end_ )</h1>
+
+      <p>
+        When the `selectRange` method is called with arguments _start_ and _end_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let _pr_ be the *this* value.
+        1. Perform ? RequireInternalSlot(_pr_, [[InitializedPluralRules]]).
+        1. Let _x_ be ? ToNumber(_start_).
+        1. Let _y_ be ? ToNumber(_end_).
+        1. Return ! ResolvePluralRange(_pr_, _x_, _y_).
+      </emu-alg>
+    </emu-clause>
+    </ins>
 
     <emu-clause id="sec-intl.pluralrules.prototype.resolvedoptions">
       <h1>Intl.PluralRules.prototype.resolvedOptions ( )</h1>
