@@ -1092,18 +1092,33 @@
         The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be an Intl mathematical value), _y_ (which must be an Intl mathematical value), and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
       </p>
       <emu-alg>
+        1. If _x_ is a non-finite Number or _y_ is is a non-finite Number, throw a *RangeError* exception.
+        1. If _x_ is greater than _y_, throw a *RangeError* exception.
         1. Let _result_ be a new empty List.
-        1. Let _xResult_ be PartitionNumberPattern(_numberFormat_, _x_).
+        1. Let _xResult_ be ? PartitionNumberPattern(_numberFormat_, _x_).
+        1. Let _yResult_ be ? PartitionNumberPattern(_numberFormat_, _y_).
+        1. If _xResult_ is equal to _yResult_, return FormatApproximately(_numberFormat_, _xResult_).
         1. For each _r_ in _xResult_, do
           1. Set _r_.[[Source]] to *"startRange"*.
         1. Add all elements in _xResult_ to _result_ in order.
         1. Let _rangeSeparator_ be an ILND String value used to separate two numbers.
         1. Append a new Record { [[Type]]: *"literal"*, [[Value]]: _rangeSeparator_, [[Source]]: *"shared"* } element to _result_.
-        1. Let _yResult_ be PartitionNumberPattern(_numberFormat_, _x_).
         1. For each _r_ in _yResult_, do
           1. Set _r_.[[Source]] to *"endRange"*.
         1. Add all elements in _yResult_ to _result_ in order.
-        1. Let _result_ be CollapseNumberRange(_result_).
+        1. Return CollapseNumberRange(_result_).
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-formatapproximately" aoid="FormatApproximately">
+      <h1>FormatApproximately ( _numberFormat_, _result_ )</h1>
+      <p>
+        The FormatApproximately abstract operation modifies _result_, which must be a List of Record values as described in PartitionNumberPattern, by adding a new Record for the approximately sign, which may depend on _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
+      </p>
+      <emu-alg>
+        1. Let _i_ be an index into _result_, determined by an implementation-defined algorithm based on _numberFormat_ and _result_.
+        1. Let _approximatelySign_ be an ILND String value used to signify that a number is approximate.
+        1. Insert a new Record { [[Type]]: *"approximatelySign"*, [[Value]]: _approximatelySign_ } at index _i_ in _result_.
         1. Return _result_.
       </emu-alg>
     </emu-clause>
@@ -1357,10 +1372,7 @@
         1. If _start_ is *undefined* or _end_ is *undefined*, throw a *TypeError* exception.
         1. Let _x_ be ? ToIntlMathematicalValue(_start_).
         1. Let _y_ be ? ToIntlMathematicalValue(_end_).
-        1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
-        1. If _x_ is a non-finite Number or _y_ is is a non-finite Number, throw a *RangeError* exception.
-        1. If _x_ is greater than _y_, throw a *RangeError* exception.
-        1. Return ? FormatNumericRange(_nf_, _x_).
+        1. Return ? FormatNumericRange(_nf_, _x_, _y_).
       </emu-alg>
     </emu-clause>
 
@@ -1377,10 +1389,7 @@
         1. If _start_ is *undefined* or _end_ is *undefined*, throw a *TypeError* exception.
         1. Let _x_ be ? ToIntlMathematicalValue(_start_).
         1. Let _y_ be ? ToIntlMathematicalValue(_end_).
-        1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
-        1. If _x_ is a non-finite Number or _y_ is is a non-finite Number, throw a *RangeError* exception.
-        1. If _x_ is greater than _y_, throw a *RangeError* exception.
-        1. Return ? FormatNumericRangeToParts(_nf_, _x_).
+        1. Return ? FormatNumericRangeToParts(_nf_, _x_, _y_).
       </emu-alg>
     </emu-clause>
     </ins>
