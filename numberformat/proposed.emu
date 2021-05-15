@@ -93,7 +93,7 @@
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
         1. Let _useGrouping_ be ? GetStringOrBooleanOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *"auto"*).
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
-        1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, *"string"*, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"* &raquo;, *"auto"*).
+        1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, *"string"*, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*, *"negative"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
         1. Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, *"string"*, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).
         1. Set _numberFormat_.[[RoundingMode]] to _roundingMode_.
@@ -136,7 +136,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a mathematical value or *-0*), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final floating decimal value of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], and [[MaximumFractionDigits]] internal slots), and _x_ (which must be a mathematical value or *-0*), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final mathematical value (or *-0*) of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
@@ -164,7 +164,9 @@
         1. If _int_ < _minInteger_, then
           1. Let _forwardZeros_ be the String consisting of _minInteger_–_int_ occurrences of the character *"0"*.
           1. Set _string_ to the string-concatenation of _forwardZeros_ and _string_.
-        1. If _isNegative_, then
+        1. If _isNegative_ and _x_ is 0, then
+          1. Let _x_ be *-0*.
+        1. Else if _isNegative_, then
           1. Let _x_ be -_x_.
         1. Return the Record { [[RoundedNumber]]: _x_, [[FormattedString]]: _string_ }.
       </emu-alg>
@@ -841,12 +843,17 @@
             1. Let _pattern_ be _patterns_.[[positivePattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
-        1. Else,
-          1. Assert: _signDisplay_ is *"exceptZero"*.
-          1. If _x_ is 0 or _x_ is -0 or _x_ is *NaN*, then
+        1. Else if _signDisplay_ is *"exceptZero"*,
+          1. If _x_ is 0 or _x_ is *-0* or _x_ is *NaN*, then
             1. Let _pattern_ be _patterns_.[[zeroPattern]].
           1. Else if _x_ &gt; 0, then
             1. Let _pattern_ be _patterns_.[[positivePattern]].
+          1. Else,
+            1. Let _pattern_ be _patterns_.[[negativePattern]].
+        1. Else,
+          1. Assert: _signDisplay_ is *"negative"*.
+          1. If _x_ is 0 or _x_ is *-0* or _x_ &gt; 0 or _x_ is *NaN*, then
+            1. Let _pattern_ be _patterns_.[[zeroPattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Return _pattern_.
@@ -1516,7 +1523,7 @@
       <li>[[RoundingType]] is one of the values ~fractionDigits~, ~significantDigits~, or ~compactRounding~, indicating which rounding strategy to use. If ~fractionDigits~, the number is rounded according to [[MinimumFractionDigits]] and [[MaximumFractionDigits]], as described above. If ~significantDigits~, the number is rounded according to [[MinimumSignificantDigits]] and [[MaximumSignificantDigits]] as described above. If ~compactRounding~, the number is rounded to 1 maximum fraction digit if there is 1 digit before the decimal separator, and otherwise round to 0 fraction digits.</li>
       <li>[[Notation]] is one of the String values *"standard"*, *"scientific"*, *"engineering"*, or *"compact"*, specifying whether the number should be displayed without scaling, scaled to the units place with the power of ten in scientific notation, scaled to the nearest thousand with the power of ten in scientific notation, or scaled to the nearest locale-dependent compact decimal notation power of ten with the corresponding compact decimal notation affix.</li>
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
-      <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, or *"exceptZero"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, or positive and negative numbers but not zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
+      <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, *"exceptZero"*, or *"negative"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, positive and negative numbers but not zero, or negative numbers but not negative zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
       <li>[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</li>
     </ul>
 
