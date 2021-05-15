@@ -137,6 +137,12 @@
         <li>
           Localized narrow, short, and long unit symbols (<emu-xref href="#sec-formatnumber"></emu-xref>)
         </li>
+        <li>
+          Localized range separator symbol (<emu-xref href="#sec-partitionnumberrangepattern"></emu-xref>)
+        </li>
+        <li>
+          The CollapseNumberRange algorithm (<emu-xref href="#sec-collapsenumberrange"></emu-xref>)
+        </li>
         </ul>
     </li>
     <li>
@@ -144,6 +150,12 @@
       <ul>
         <li>
           List of Strings representing the possible results of plural selection and their corresponding order per locale. (<emu-xref href="#sec-initializepluralrules"></emu-xref>)
+        </li>
+        <li>
+          The PluralRuleSelect algorithm (<emu-xref href="#sec-pluralruleselect"></emu-xref>)
+        </li>
+        <li>
+          The PluralRuleSelectRange algorithm (<emu-xref href="#sec-pluralruleselectrange"></emu-xref>)
         </li>
       </ul>
     </li>
