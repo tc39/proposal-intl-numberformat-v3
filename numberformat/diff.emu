@@ -22,10 +22,11 @@
         1. Let _mnsd_ be ? Get(_options_, *"minimumSignificantDigits"*).
         1. Let _mxsd_ be ? Get(_options_, *"maximumSignificantDigits"*).
         1. Set _intlObj_.[[MinimumIntegerDigits]] to _mnid_.
+        1. <ins class="block">Let _roundingPriority_ be ? GetOption(_options_, *"roundingPriority"*, *"string"*, &laquo; *"auto"*, *"morePrecision"*, *"lessPrecision"* &raquo;, *"auto"*).</ins>
         1. Let _hasSd_ be _mnsd_ is not *undefined* or _mxsd_ is not *undefined*.
         1. Let _hasFd_ be _mnfd_ is not *undefined* or _mxfd_ is not *undefined*.
-        1. Let _needSd_ be _hasSd_.
-        1. Let _needFd_ be not _hasSd_ and _notation_ is not *"compact"*.
+        1. Let _needSd_ be _hasSd_ <ins>or _roundingPriority_ is not *"auto"*</ins>.
+        1. Let _needFd_ be <ins>(</ins> not _hasSd_ and _notation_ is not *"compact"* <ins>) or _roundingPriority_ is not *"auto"*</ins>.
         1. If _needSd_, then
           1. If _hasSd_, then
             1. Let _mnsd_ be ? DefaultNumberOption(_mnsd_, 1, 21, 1).
@@ -33,7 +34,9 @@
             1. Set _intlObj_.[[MinimumSignificantDigits]] to _mnsd_.
             1. Set _intlObj_.[[MaximumSignificantDigits]] to _mxsd_.
           1. Else,
-            1. Assert *false*.
+            1. <del class="block">Assert *false*.</del>
+            1. <ins class="block">Set _intlObj_.[[MinimumSignificantDigits]] to 1.</ins>
+            1. <ins class="block">Set _intlObj_.[[MaximumSignificantDigits]] to 21.</ins>
         1. If _needFd_, then
           1. If _hasFd_, then
             1. Let _mnfd_ be ? DefaultNumberOption(_mnfd_, 0, 20, *undefined*).
@@ -47,12 +50,21 @@
             1. Set _intlObj_.[[MinimumFractionDigits]] to _mnfdDefault_.
             1. Set _intlObj_.[[MaximumFractionDigits]] to _mxfdDefault_.
         1. If _needSd_ or _needFd_, then
-          1. If _hasSd_, then
+          1. <ins class="block">If _roundingPriority_ is *"morePrecision"*, then</ins>
+            1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~morePrecision~.</ins>
+          1. <ins class="block">Else if _roundingPriority_ is *"lessPrecision"*, then</ins>
+            1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~lessPrecision~.</ins>
+          1. <del>If</del><ins>Else if</ins> _hasSd_, then
             1. Set _intlObj_.[[RoundingType]] to ~significantDigits~.
           1. Else,
             1. Set _intlObj_.[[RoundingType]] to ~fractionDigits~.
         1. Else,
-          1. Set _intlObj_.[[RoundingType]] to ~compactRounding~.
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~compactRounding~.</del>
+          1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~morePrecision~.</ins>
+          1. <ins class="block">Set _intlObj_.[[MinimumFractionDigits]] to 0.</ins>
+          1. <ins class="block">Set _intlObj_.[[MaximumFractionDigits]] to 0.</ins>
+          1. <ins class="block">Set _intlObj_.[[MinimumSignificantDigits]] to 1.</ins>
+          1. <ins class="block">Set _intlObj_.[[MaximumSignificantDigits]] to 2.</ins>
       </emu-alg>
     </emu-clause>
 
