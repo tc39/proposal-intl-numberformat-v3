@@ -84,12 +84,13 @@ const nf = new Intl.NumberFormat("en-US", {
 nf.formatRange(2.999, 3.001);  // "~+€3.00"
 ```
 
-Ranges to infinity are supported, but if either value is NaN, an error is thrown. ([#12](https://github.com/tc39/proposal-intl-numberformat-v3/issues/12))
+If the second argument is less than the first argument, or if either is NaN, an error is thrown. ([#12](https://github.com/tc39/proposal-intl-numberformat-v3/issues/12))
 
 ```javascript
 const nf = new Intl.NumberFormat("en-US");
-nf.formatRange(500, 1/0);  // "3–∞"
+nf.formatRange(500, 1/0);  // "500–∞"
 nf.formatRange(500, 0/0);  // RangeError
+nf.formatRange(500, 0);  // RangeError
 ```
 
 ### Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
