@@ -1222,7 +1222,7 @@
 
       <emu-alg>
         1. If NewTarget is *undefined*, let _newTarget_ be the active function object, else let _newTarget_ be NewTarget.
-        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], [[RoundingMode]], [[BoundFormat]] &raquo;).
+        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], [[RoundingMode]], [[RoundingIncrement]], [[TrailingZeroDisplay]], [[BoundFormat]] &raquo;).
         1. Perform ? InitializeNumberFormat(_numberFormat_, _locales_, _options_).
       </emu-alg>
       <emu-normative-optional>
@@ -1522,6 +1522,14 @@
           <tr>
             <td>[[RoundingMode]]</td>
             <td>*"roundingMode"*</td>
+          </tr>
+          <tr>
+            <td>[[RoundingIncrement]]</td>
+            <td>*"roundingIncrement"*</td>
+          </tr>
+          <tr>
+            <td>[[TrailingZeroDisplay]]</td>
+            <td>*"trailingZeroDisplay"*</td>
           </tr>
         </table>
       </emu-table>
