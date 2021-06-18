@@ -176,10 +176,23 @@
         1. Else if _intlObject_.[[RoundingType]] is ~fractionDigits~, then
           1. Let _result_ be ToRawFixed(_x_, _intlObject_.[[MinimumFractionDigits]], _intlObject_.[[MaximumFractionDigits]]<ins>, _unsignedRoundingMode_</ins>).
         1. Else,
-          1. Assert: _intlObject_.[[RoundingType]] is ~compactRounding~.
-          1. Let _result_ be ToRawPrecision(_x_, 1, 2<ins>, _unsignedRoundingMode_</ins>).
-          1. If _result_.[[IntegerDigitsCount]] &gt; 1, then
-            1. Let _result_ be ToRawFixed(_x_, 0, 0<ins>, _unsignedRoundingMode_</ins>).
+          1. <del class="block">Assert: _intlObject_.[[RoundingType]] is ~compactRounding~.</del>
+          1. <del class="block">Let _result_ be ToRawPrecision(_x_, 1, 2<ins>, _unsignedRoundingMode_</ins>).</del>
+          1. <del class="block">If _result_.[[IntegerDigitsCount]] &gt; 1, then</del>
+            1. <del class="block">Let _result_ be ToRawFixed(_x_, 0, 0<ins>, _unsignedRoundingMode_</ins>).</del>
+          1. <ins class="block">Let _sResult_ be ToRawPrecision(_x_, _intlObject_.[[MinimumSignificantDigits]], _intlObject_.[[MaximumSignificantDigits]], _unsignedRoundingMode_).</ins>
+          1. <ins class="block">Let _fResult_ be ToRawFixed(_x_, _intlObject_.[[MinimumFractionDigits]], _intlObject_.[[MaximumFractionDigits]], _unsignedRoundingMode_).</ins>
+          1. <ins class="block">If _intlObj_.[[RoundingType]] is ~morePrecision~, then</ins>
+            1. <ins class="block">If _sResult_.[[RoundingMagnitude]] &le; _fResult_.[[RoundingMagnitude]], then</ins>
+              1. <ins class="block">Let _result_ be _sResult_.</ins>
+            1. <ins class="block">Else,</ins>
+              1. <ins class="block">Let _result_ be _fResult_.</ins>
+          1. <ins class="block">Else,</ins>
+            1. <ins class="block">Assert: _intlObj_.[[RoundingType]] is ~lessPrecision~.</ins>
+            1. <ins class="block">If _sResult_.[[RoundingMagnitude]] &le; _fResult_.[[RoundingMagnitude]], then</ins>
+              1. <ins class="block">Let _result_ be _fResult_.</ins>
+            1. <ins class="block">Else,</ins>
+              1. <ins class="block">Let _result_ be _sResult_.</ins>
         1. Let _x_ be _result_.[[RoundedNumber]].
         1. Let _string_ be _result_.[[FormattedString]].
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
@@ -715,7 +728,7 @@
             1. Decrease _cut_ by 1.
           1. If the last character of _m_ is *"."*, then
             1. Remove the last character from _m_.
-        1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_ }.
+        1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_<ins>, [[RoundingMagnitude]]: _e_–_p_+1</ins> }.
       </emu-alg>
     </emu-clause>
 
@@ -766,7 +779,7 @@
           1. Decrease _cut_ by 1.
         1. If the last character of _m_ is *"."*, then
           1. Remove the last character from _m_.
-        1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_ }.
+        1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_<ins>, [[RoundingMagnitude]]: –_f_</ins> }.
       </emu-alg>
     </emu-clause>
 
