@@ -111,6 +111,8 @@
         1. Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement,"*, 1, 5000000, 1).
         1. If _roundingIncrement_ is not in « 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 », throw a *RangeError* exception.
         1. Set _numberFormat.[[RoundingIncrement]] to _roundingIncrement_.
+        1. Let _trailingZeroDisplay_ be ? GetOption(_options_, *"TrailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"stripIfInteger"*).
+        1. Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, *"string"*, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. If _notation_ is *"compact"*, then
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
@@ -191,9 +193,12 @@
               1. Let _result_ be _sResult_.
         1. Let _x_ be _result_.[[RoundedNumber]].
         1. Let _string_ be _result_.[[FormattedString]].
+        1. If _intlObject_.[[TrailingZeroDisplay]] is *"stripIfInteger"* and <emu-eqn>_x_ modulo 1 = 0</emu-eqn>, then
+          1. If _string_ contains *"."*, then
+            1. Set _string_ to the substring of _string_ from index 0 to the index of *"."*.
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
         1. Let _minInteger_ be _intlObject_.[[MinimumIntegerDigits]].
-        1. If _int_ < _minInteger_, then
+        1. If _int_ &lt; _minInteger_, then
           1. Let _forwardZeros_ be the String consisting of _minInteger_–_int_ occurrences of the character *"0"*.
           1. Set _string_ to the string-concatenation of _forwardZeros_ and _string_.
         1. If _isNegative_ and _x_ is 0, then
@@ -1558,6 +1563,7 @@
       <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, *"exceptZero"*, or *"negative"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, positive and negative numbers but not zero, or negative numbers but not negative zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
       <li>[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</li>
       <li>[[RoundingIncrement]] is an integer with exactly one significant digit, either a 1 or a 5, followed by 0 to 6 zeros. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</li>
+      <li>[[TrailingZeroDisplay]] is one of the String values *"auto"* or *"stripIfInteger"*, indicating whether to strip trailing zeros if the formatted number is an integer (all fraction digits are zero).</li>
     </ul>
 
     <emu-table id="table-intl-rounding-modes">
