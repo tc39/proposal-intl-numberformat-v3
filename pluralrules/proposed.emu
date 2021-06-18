@@ -140,7 +140,7 @@
     </emu-clause>
 
     <emu-clause id="sec-resolvepluralrange" aoid="ResolvePluralRange">
-      <h1>ResolvePluralRange ( _pluralRules_, _n_ )</h1>
+      <h1>ResolvePluralRange ( _pluralRules_, _x_, _y_ )</h1>
       <p>
         When the ResolvePluralRange abstract operation is called with arguments _pluralRules_ (which must be an object initialized as a PluralRules), _x_ (which must be a Number value), and _y_ (which must be a Number value), it returns a String value representing the plural form of the range starting from _x_ and ending at _y_ according to the effective locale and the options of _pluralRules_. The following steps are taken:
       </p>
