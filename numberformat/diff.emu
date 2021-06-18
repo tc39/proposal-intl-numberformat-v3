@@ -111,6 +111,9 @@
         1. Let _notation_ be ? GetOption(_options_, *"notation"*, *"string"*, &laquo; *"standard"*, *"scientific"*, *"engineering"*, *"compact"* &raquo;, *"standard"*).
         1. Set _numberFormat_.[[Notation]] to _notation_.
         1. Perform ? SetNumberFormatDigitOptions(_numberFormat_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_).
+        1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement,"*, 1, 5000000, 1).</ins>
+        1. <ins class="block">If _roundingIncrement_ is not in « 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 », throw a *RangeError* exception.</ins>
+        1. <ins class="block">Set _numberFormat.[[RoundingIncrement]] to _roundingIncrement_.</ins>
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, *"string"*, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. If _notation_ is *"compact"*, then
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
@@ -672,7 +675,7 @@
     </emu-clause>
 
     <emu-clause id="sec-torawprecision" aoid="ToRawPrecision">
-      <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_<ins>, _unsignedRoundingMode_</ins> )</h1>
+      <h1>ToRawPrecision ( _x_, _minPrecision_, _maxPrecision_<ins>, _roundingIncrement_, _unsignedRoundingMode_</ins> )</h1>
 
       <ins class="block">
       <p>
@@ -686,7 +689,7 @@
       </ins>
 
       <p>
-        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minPrecision_, <del>and</del> _maxPrecision_ (both must be integers between 1 and 21)<ins>, and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
+        When the ToRawPrecision abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minPrecision_, <del>and</del> _maxPrecision_ (both must be integers between 1 and 21)<ins>, _roundingIncrement_ (an integer), and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -698,8 +701,8 @@
         1. Else,
           1. <del class="block">Let _e_ be the base 10 logarithm of _x_ rounded down to the nearest integer.</del>
           1. <del class="block">Let _n_ be an integer such that 10<sup>_p_–1</sup> ≤ _n_ < 10<sup>_p_</sup> and for which the exact mathematical value of _n_ × 10<sup>_e_–_p_+1</sup> – _x_ is as close to zero as possible. If there is more than one such _n_, pick the one for which _n_ × 10<sup>_e_–_p_+1</sup> is larger.</del>
-          1. <ins class="block">Let _n1_ and _e1_ each be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawPrecisionFn(_n1_, _e1_, _p_)</emu-eqn>, such that <emu-eqn>_r1_ ≤ _x_</emu-eqn> and _r1_ is maximized.</ins>
-          1. <ins class="block">Let _n2_ and _e2_ each be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawPrecisionFn(_n2_, _e2_, _p_)</emu-eqn>, such that <emu-eqn>_r2_ ≥ _x_</emu-eqn> and _r2_ is minimized.</ins>
+          1. <ins class="block">Let _n1_ and _e1_ each be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawPrecisionFn(_n1_, _e1_, _p_)</emu-eqn>, such that <emu-eqn>_n1_ modulo _roundingIncrement_ = 0</emu-eqn>, <emu-eqn>_r1_ ≤ _x_</emu-eqn>, and _r1_ is maximized.</ins>
+          1. <ins class="block">Let _n2_ and _e2_ each be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawPrecisionFn(_n2_, _e2_, _p_)</emu-eqn>, such that <emu-eqn>_n2_ modulo _roundingIncrement_ = 0</emu-eqn>, <emu-eqn>_r2_ ≥ _x_</emu-eqn>, and _r2_ is minimized.</ins>
           1. <ins class="block">Let _r_ be ApplyUnsignedRoundingMode(_x_, _r1_, _r2_, _unsignedRoundingMode_).</ins>
           1. <ins class="block">If _r_ is _r1_, then</ins>
             1. <ins class="block">Let _n_ be _n1_.</ins>
@@ -733,7 +736,7 @@
     </emu-clause>
 
     <emu-clause id="sec-torawfixed" aoid="ToRawFixed">
-      <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_<ins>, _unsignedRoundingMode_</ins> )</h1>
+      <h1>ToRawFixed ( _x_, _minInteger_, _minFraction_, _maxFraction_<ins>, _roundingIncrement_, _unsignedRoundingMode_</ins> )</h1>
 
       <ins class="block">
       <p>
@@ -746,15 +749,15 @@
       </ins>
 
       <p>
-        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, <del>and</del> _maxFraction_ (which must be integers between 0 and 20)<ins>, and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
+        When the ToRawFixed abstract operation is called with arguments _x_ (which must be a finite non-negative <del>Number or BigInt</del><ins>mathematical value</ins>), _minInteger_ (which must be an integer between 1 and 21), _minFraction_, <del>and</del> _maxFraction_ (which must be integers between 0 and 20)<ins>, _roundingIncrement_ (an integer), and _unsignedRoundingMode_ (a specification type from the *Unsigned Rounding Mode* column of <emu-xref href="#table-intl-unsigned-rounding-modes"></emu-xref> or *undefined*)</ins>, the following steps are taken:
       </p>
 
       <emu-alg>
         1. Let _f_ be _maxFraction_.
         1. <del class="block">Let _n_ be an integer for which the exact mathematical value of _n_ / 10<sup>_f_</sup> – _x_ is as close to zero as possible. If there are two such _n_, pick the larger _n_.</del>
         1. <del class="block">Let _xFinal_ be _n_ / 10<sup>_f_</sup>.</del>
-        1. <ins class="block">Let _n1_ be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawFixedFn(_n1_, _f_)</emu-eqn>, such that <emu-eqn>_r1_ ≤ _x_</emu-eqn> and _r1_ is maximized.</ins>
-        1. <ins class="block">Let _n2_ be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawFixedFn(_n2_, _f_)</emu-eqn>, such that <emu-eqn>_r2_ ≥ _x_</emu-eqn> and _r2_ is minimized.</ins>
+        1. <ins class="block">Let _n1_ be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawFixedFn(_n1_, _f_)</emu-eqn>, such that <emu-eqn>_n1_ modulo _roundingIncrement_ = 0</emu-eqn>, <emu-eqn>_r1_ ≤ _x_</emu-eqn>, and _r1_ is maximized.</ins>
+        1. <ins class="block">Let _n2_ be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawFixedFn(_n2_, _f_)</emu-eqn>, such that <emu-eqn>_n2_ modulo _roundingIncrement_ = 0</emu-eqn>, <emu-eqn>_r2_ ≥ _x_</emu-eqn>, and _r2_ is minimized.</ins>
         1. <ins class="block">Let _r_ be ApplyUnsignedRoundingMode(_x_, _r1_, _r2_, _unsignedRoundingMode_).</ins>
         1. <ins class="block">If _r_ is _r1_, then</ins>
           1. <ins class="block">Let _n_ be _n1_.</ins>
@@ -1579,6 +1582,7 @@
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
       <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, <del>or</del> *"exceptZero"*, <ins>or *"negative"*</ins>, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, <del>or</del> positive and negative numbers but not zero, <ins>or negative numbers but not negative zero</ins>. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
       <li><ins class="block">[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</ins></li>
+      <li><ins class="block">[[RoundingIncrement]] is an integer with exactly one significant digit, either a 1 or a 5, followed by 0 to 6 zeros. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</ins></li>
     </ul>
 
     <ins class="block">
