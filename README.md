@@ -116,7 +116,7 @@ Additional Context: [Unified NumberFormat #9](https://github.com/tc39/proposal-u
 
 The following additional options are proposed to the Intl.NumberFormat options bag to control rounding behavior:
 
-- `roundingPriority` = a string set to either `"significantDigits"`, `"morePrecision"`, or `"lessPrecision"` (details below)
+- `roundingPriority` = a string set to either `"auto"`, `"morePrecision"`, or `"lessPrecision"` (details below)
 - `roundingIncrement` = an integer, either 1 or 5 with any number of zeros.
   - Example values: 1 (default), 5, 10, 50, 100
   - Nickel rounding: `{ minimumFractionDigits: 2, maximumFractionDigits: 2, roundingIncrement: 5 }`
@@ -147,7 +147,7 @@ Now, consider the number "4.321". `maximumFractionDigits` wants to round at the 
 
 The new setting `roundingPriority` offers a hint on how to resolve this conflict. There are three options:
 
-1. `roundingPriority: "significantDigits"` means that significant digits always win a conflict.
+1. `roundingPriority: "auto"` means that significant digits always win a conflict.
 2. `roundingPriority: "morePrecision"` means that the result with more precision wins a conflict.
 3. `roundingPriority: "lessPrecision"` means that the result with less precision wins a conflict.
 
