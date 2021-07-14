@@ -150,6 +150,7 @@
         1. Assert: _pluralRules_ has an [[InitializedPluralRules]] internal slot.
         1. Assert: Type(_x_) is Number.
         1. Assert: Type(_y_) is Number.
+        1. If _x_ &gt; _y_, throw a *RangeError* exception.
         1. Let _xp_ be ! ResolvePlural(_pluralRules_, _x_).
         1. Let _yp_ be ! ResolvePlural(_pluralRules_, _y_).
         1. Let _locale_ be _pluralRules_.[[Locale]].
