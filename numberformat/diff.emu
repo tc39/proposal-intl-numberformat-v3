@@ -1560,20 +1560,18 @@
             <td>[[SignDisplay]]</td>
             <td>*"signDisplay"*</td>
           </tr>
-          <ins class="block">
           <tr>
-            <td>[[RoundingMode]]</td>
-            <td>*"roundingMode"*</td>
+            <td><ins>[[RoundingMode]]</ins></td>
+            <td><ins>*"roundingMode"*</ins></td>
           </tr>
           <tr>
-            <td>[[RoundingIncrement]]</td>
-            <td>*"roundingIncrement"*</td>
+            <td><ins>[[RoundingIncrement]]</ins></td>
+            <td><ins>*"roundingIncrement"*</ins></td>
           </tr>
           <tr>
-            <td>[[TrailingZeroDisplay]]</td>
-            <td>*"trailingZeroDisplay"*</td>
+            <td><ins>[[TrailingZeroDisplay]]</ins></td>
+            <td><ins>*"trailingZeroDisplay"*</ins></td>
           </tr>
-          </ins>
         </table>
       </emu-table>
     </emu-clause>
