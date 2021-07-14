@@ -114,7 +114,7 @@
         1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement,"*, 1, 5000000, 1).</ins>
         1. <ins class="block">If _roundingIncrement_ is not in « 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 », throw a *RangeError* exception.</ins>
         1. <ins class="block">Set _numberFormat.[[RoundingIncrement]] to _roundingIncrement_.</ins>
-        1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"TrailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"stripIfInteger"*).</ins>
+        1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).</ins>
         1. <ins class="block">Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.</ins>
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, *"string"*, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. If _notation_ is *"compact"*, then
