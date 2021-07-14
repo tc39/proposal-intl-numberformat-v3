@@ -185,7 +185,7 @@
           1. Let _result_ be ToRawFixed(_x_, _intlObject_.[[MinimumFractionDigits]], _intlObject_.[[MaximumFractionDigits]]<ins>, _intlObj_.[[RoundingIncrement]], _unsignedRoundingMode_</ins>).
         1. Else,
           1. <del class="block">Assert: _intlObject_.[[RoundingType]] is ~compactRounding~.</del>
-          1. <del class="block">Let _result_ be ToRawPrecision(_x_, 1, 2<ins>, _unsignedRoundingMode_</ins>).</del>
+          1. <del class="block">Let _result_ be ToRawPrecision(_x_, 1, 2).</del>
           1. <del class="block">If _result_.[[IntegerDigitsCount]] &gt; 1, then</del>
             1. <del class="block">Let _result_ be ToRawFixed(_x_, 0, 0).</del>
           1. <ins class="block">Let _sResult_ be ToRawPrecision(_x_, _intlObject_.[[MinimumSignificantDigits]], _intlObject_.[[MaximumSignificantDigits]], _unsignedRoundingMode_).</ins>
