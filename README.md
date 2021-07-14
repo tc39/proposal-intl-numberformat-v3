@@ -29,10 +29,10 @@ This piece is modeled off of the [Intl.DateTimeFormat.prototype.formatRange
 ```javascript
 const nf = new Intl.NumberFormat("en-US", {
   style: "currency",
-  currency: "EUR",
+  currency: "CHF",
   maximumFractionDigits: 0,
 });
-nf.formatRange(3, 5);  // "€3–5"
+nf.formatRange(3, 5);  // "€3–€5"
 ```
 
 Peer methods will also be added:
@@ -52,13 +52,14 @@ The formatToParts semantics from Intl.DateTimeFormat will be adopted here: parts
 ```javascript
 const nf = new Intl.NumberFormat("en-US", {
   style: "currency",
-  currency: "EUR",
+  currency: "GBP",
+  currencyDisplay: "code",
   maximumFractionDigits: 0,
 });
 nf.formatRangeToParts(3, 5);
 /*
 [
-  {type: "currency", value: "€", source: "startRange"}
+  {type: "currency", value: "GBP ", source: "shared"}
   {type: "integer", value: "3", source: "startRange"}
   {type: "literal", value: "–", source: "shared"}
   {type: "integer", value: "5", source: "endRange"}
