@@ -112,7 +112,7 @@
         1. Set _numberFormat_.[[Notation]] to _notation_.
         1. Perform ? SetNumberFormatDigitOptions(_numberFormat_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_).
         1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement,"*, 1, 5000000, 1).</ins>
-        1. <ins class="block">If _roundingIncrement_ is not in « 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 », throw a *RangeError* exception.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.</ins>
         1. <ins class="block">Set _numberFormat.[[RoundingIncrement]] to _roundingIncrement_.</ins>
         1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).</ins>
         1. <ins class="block">Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.</ins>
@@ -1611,7 +1611,7 @@
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
       <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, <del>or</del> *"exceptZero"*, <ins>or *"negative"*</ins>, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, <del>or</del> positive and negative numbers but not zero, <ins>or negative numbers but not negative zero</ins>. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
       <li><ins class="block">[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</ins></li>
-      <li><ins class="block">[[RoundingIncrement]] is an integer with exactly one significant digit, either a 1 or a 5, followed by 0 to 6 zeros. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</ins></li>
+      <li><ins class="block">[[RoundingIncrement]] is an integer-valued Number that evenly divides 1, 10, 100, 1000, or 10000 into halves, quarters, or fifths. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</ins></li>
       <li><ins class="block">[[TrailingZeroDisplay]] is one of the String values *"auto"* or *"stripIfInteger"*, indicating whether to strip trailing zeros if the formatted number is an integer (all fraction digits are zero).</ins></li>
     </ul>
 
