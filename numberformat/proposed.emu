@@ -114,9 +114,11 @@
         1. Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, *"string"*, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
+        1. Let _defaultUseGrouping_ be *"auto"*.
         1. If _notation_ is *"compact"*, then
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
-        1. Let _useGrouping_ be ? GetStringOrBooleanOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *false*, *"auto"*).
+          1. Set _defaultUseGrouping_ to *"min2"*.
+        1. Let _useGrouping_ be ? GetStringOrBooleanOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *false*, _defaultUseGrouping_).
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, *"string"*, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*, *"negative"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
