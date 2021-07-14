@@ -981,7 +981,10 @@
           1. Let _str_ be _primValue_.
         1. Else,
           1. Let _x_ be ? ToNumber(_primValue_).
-          1. Let _str_ be be ! Number::toString(_x_).
+          1. If _x_ is -0, then
+            1. Let _str_ be *"-0"*.
+          1. Else,
+            1. Let _str_ be ! Number::toString(_x_).
         1. If the grammar cannot interpret _str_ as an expansion of |StringNumericLiteral|, return *NaN*.
         1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
         1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
