@@ -330,7 +330,7 @@
       <h1>GetStringOrBooleanOption ( _options_, _property_, _values_, _trueValue_, _falsyValue_, _fallback_ )</h1>
 
       <p>
-        The abstract operation GetStringOrBooleanOption extracts the value of the property named _property_ from the provided _options_ object. If the value is *undefined*, the operation returns _fallback_. If the value is *true*, the operation returns _trueValue_. If the value is falsy, the operation returns _falsyValue_. Otherwise, the operation converts the value to a String, checks whether it is one of a List of allowed _values_ (which must not be *undefined*), and returns the stringified value.
+        The abstract operation GetStringOrBooleanOption extracts the value of the property named _property_ from the provided _options_ object. It returns either _trueValue_, _falsyValue_, _fallback_, or one of the elements of the List _values_. The following steps are taken:
       </p>
 
       <emu-alg>
