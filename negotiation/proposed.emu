@@ -325,7 +325,7 @@
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-getoption" aoid="GetStringOrBooleanOption">
+    <emu-clause id="sec-getstringorbooleanoption" aoid="GetStringOrBooleanOption">
       <h1>GetStringOrBooleanOption ( _options_, _property_, _values_, _trueValue_, _falsyValue_, _fallback_ )</h1>
 
       <p>
