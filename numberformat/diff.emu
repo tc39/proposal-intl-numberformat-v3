@@ -1193,7 +1193,7 @@
     <emu-clause id="sec-collapsenumberrange" aoid="CollapseNumberRange">
       <h1>CollapseNumberRange ( _result_ )</h1>
       <p>
-        The CollapseNumberRange abstract operation modifies _result_, which must be a List of Record values as described in PartitionNumberRangePattern, by removing redundant information, and returns the resulting List. The algorithm is implementation dependent, but it must not introduce ambiguity: the resulting string after modification should be unique for all pairs _x_ and _y_.
+        The CollapseNumberRange abstract operation modifies _result_, which must be a List of Record values as described in PartitionNumberRangePattern, by removing redundant information, and returns the resulting List. The algorithm is implementation dependent, but it must not introduce ambiguity: the resulting list after modification should be unique for all pairs _x_ and _y_.
       </p>
       <p>
         For example, an implementation may choose to remove the currency symbol following the range separator, to produce "$3–5" instead of "$3–$5".
