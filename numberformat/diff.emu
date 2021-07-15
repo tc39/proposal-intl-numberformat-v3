@@ -1173,7 +1173,7 @@
         1. For each _r_ in _yResult_, do
           1. Set _r_.[[Source]] to *"endRange"*.
         1. Add all elements in _yResult_ to _result_ in order.
-        1. Return CollapseNumberRange(_result_).
+        1. Return ! CollapseNumberRange(_result_).
       </emu-alg>
     </emu-clause>
 
