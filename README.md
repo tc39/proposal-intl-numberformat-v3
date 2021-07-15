@@ -118,13 +118,14 @@ Additional Context: [Unified NumberFormat #9](https://github.com/tc39/proposal-u
 The following additional options are proposed to the Intl.NumberFormat options bag to control rounding behavior:
 
 - `roundingPriority` = a string set to either `"auto"`, `"morePrecision"`, or `"lessPrecision"` (details below)
-- `roundingIncrement` = an integer, either 1 or 5 with any number of zeros.
-  - Example values: 1 (default), 5, 10, 50, 100
+- `roundingIncrement` = a Number in the following list: « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 »
   - Nickel rounding: `{ minimumFractionDigits: 2, maximumFractionDigits: 2, roundingIncrement: 5 }`
   - Dime rounding: `{ minimumFractionDigits: 2, maximumFractionDigits: 2, roundingIncrement: 10 }`
 - `trailingZeroDisplay` = a string expressing the strategy for displaying trailing zeros on whole numbers:
   - `"auto"` = current behavior. Keep trailing zeros according to minimumFractionDigits and minimumSignificantDigits.
   - `"stripIfInteger"` = same as `"auto"`, but remove the fraction digits if they are all zero.
+
+`roundingIncrement` cannot be mixed with significant digits rounding or any setting of `roundingPriority` other than `"auto"`.
 
 #### Rounding Priority
 
