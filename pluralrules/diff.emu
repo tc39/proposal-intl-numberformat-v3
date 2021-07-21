@@ -322,6 +322,12 @@
             1. Perform ! CreateDataPropertyOrThrow(_options_, _p_, _v_).
         1. Let _pluralCategories_ be a List of Strings representing the possible results of <emu-xref href="#sec-pluralruleselect">PluralRuleSelect</emu-xref> for the selected locale _pr_.[[Locale]]. This List consists of unique String values, from the the list *"zero"*, *"one"*, *"two"*, *"few"*, *"many"* and *"other"*, that are relevant for the locale whose localization is specified in LDML Language Plural Rules.
         1. Perform ! CreateDataProperty(_options_, *"pluralCategories"*, CreateArrayFromList(_pluralCategories_)).
+        1. <ins class="block">If _pr_.[[RoundingType]] is ~morePrecision~, then</ins>
+          1. <ins class="block">Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"morePrecision"*).</ins>
+        1. <ins class="block">Else if _pr_.[[RoundingType]] is ~lessPrecision~, then</ins>
+          1. <ins class="block">Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"lessPrecision"*).</ins>
+        1. <ins class="block">Else,</ins>
+          1. <ins class="block">Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"auto"*).</ins>
         1. Return _options_.
       </emu-alg>
 
