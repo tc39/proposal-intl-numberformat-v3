@@ -150,6 +150,7 @@
         1. Assert: _pluralRules_ has an [[InitializedPluralRules]] internal slot.
         1. Assert: Type(_x_) is Number.
         1. Assert: Type(_y_) is Number.
+        1. If _x_ &gt; _y_, throw a *RangeError* exception.
         1. Let _xp_ be ! ResolvePlural(_pluralRules_, _x_).
         1. Let _yp_ be ! ResolvePlural(_pluralRules_, _y_).
         1. Let _locale_ be _pluralRules_.[[Locale]].
@@ -317,6 +318,12 @@
             1. Perform ! CreateDataPropertyOrThrow(_options_, _p_, _v_).
         1. Let _pluralCategories_ be a List of Strings representing the possible results of <emu-xref href="#sec-pluralruleselect">PluralRuleSelect</emu-xref> for the selected locale _pr_.[[Locale]]. This List consists of unique String values, from the the list *"zero"*, *"one"*, *"two"*, *"few"*, *"many"* and *"other"*, that are relevant for the locale whose localization is specified in LDML Language Plural Rules.
         1. Perform ! CreateDataProperty(_options_, *"pluralCategories"*, CreateArrayFromList(_pluralCategories_)).
+        1. If _pr_.[[RoundingType]] is ~morePrecision~, then
+          1. Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"morePrecision"*).
+        1. Else if _pr_.[[RoundingType]] is ~lessPrecision~, then
+          1. Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"lessPrecision"*).
+        1. Else,
+          1. Perform ! CreateDataPropertyOrThrow(_options_, *"roundingPriority"*, *"auto"*).
         1. Return _options_.
       </emu-alg>
 
@@ -383,7 +390,7 @@
       <li>[[MinimumIntegerDigits]] is a non-negative integer Number value indicating the minimum integer digits to be used.</li>
       <li>[[MinimumFractionDigits]] and [[MaximumFractionDigits]] are non-negative integer Number values indicating the minimum and maximum fraction digits to be used. Numbers will be rounded or padded with trailing zeroes if necessary.</li>
       <li>[[MinimumSignificantDigits]] and [[MaximumSignificantDigits]] are positive integer Number values indicating the minimum and maximum fraction digits to be used. Either none or both of these properties are present; if they are, they override minimum and maximum integer and fraction digits.</li>
-      <li>[[RoundingType]] is one of the values ~fractionDigits~ or ~significantDigits~, indicating which rounding strategy to use, as discussed in <emu-xref href="#sec-properties-of-intl-numberformat-instances"></emu-xref>.</li>
+      <li>[[RoundingType]] is one of the values ~fractionDigits~, ~significantDigits~, ~morePrecision~, or ~lessPrecision~, indicating which rounding strategy to use, as discussed in <emu-xref href="#sec-properties-of-intl-numberformat-instances"></emu-xref>.</li>
     </ul>
   </emu-clause>
 </emu-clause>
