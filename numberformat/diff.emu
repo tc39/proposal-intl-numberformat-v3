@@ -712,14 +712,14 @@
       </p>
 
       <emu-alg>
+        1. <del class="block">Set x to ℝ(x).</del>
         1. Let _p_ be _maxPrecision_.
         1. If _x_ = 0, then
           1. Let _m_ be the String consisting of _p_ occurrences of the character *"0"*.
           1. Let _e_ be 0.
           1. Let _xFinal_ be 0.
         1. Else,
-          1. <del class="block">Let _e_ be the base 10 logarithm of _x_ rounded down to the nearest integer.</del>
-          1. <del class="block">Let _n_ be an integer such that 10<sup>_p_–1</sup> ≤ _n_ < 10<sup>_p_</sup> and for which the exact mathematical value of _n_ × 10<sup>_e_–_p_+1</sup> – _x_ is as close to zero as possible. If there is more than one such _n_, pick the one for which _n_ × 10<sup>_e_–_p_+1</sup> is larger.</del>
+          1. <del class="block">Let _e_ and _n_ be integers such that 10<sup>_p_ - 1</sup> &le; _n_ &lt; 10<sup>_p_</sup> and for which _n_ &times; 10<sup>_e_ - _p_ + 1</sup> - _x_ is as close to zero as possible. If there are two such sets of _e_ and _n_, pick the _e_ and _n_ for which _n_ &times; 10<sup>_e_ - _p_ + 1</sup> is larger.</del>
           1. <ins class="block">Let _n1_ and _e1_ each be an integer and _r1_ a mathematical value, with <emu-eqn>_r1_ = ToRawPrecisionFn(_n1_, _e1_, _p_)</emu-eqn>, such that <emu-eqn>_r1_ ≤ _x_</emu-eqn> and _r1_ is maximized.</ins>
           1. <ins class="block">Let _n2_ and _e2_ each be an integer and _r2_ a mathematical value, with <emu-eqn>_r2_ = ToRawPrecisionFn(_n2_, _e2_, _p_)</emu-eqn>, such that <emu-eqn>_r2_ ≥ _x_</emu-eqn> and _r2_ is minimized.</ins>
           1. <ins class="block">Let _r_ be ApplyUnsignedRoundingMode(_x_, _r1_, _r2_, _unsignedRoundingMode_).</ins>
@@ -772,6 +772,7 @@
       </p>
 
       <emu-alg>
+        1. <del class="block">Set x to ℝ(x).</del>
         1. Let _f_ be _maxFraction_.
         1. <del class="block">Let _n_ be an integer for which the exact mathematical value of _n_ / 10<sup>_f_</sup> – _x_ is as close to zero as possible. If there are two such _n_, pick the larger _n_.</del>
         1. <del class="block">Let _xFinal_ be _n_ / 10<sup>_f_</sup>.</del>
