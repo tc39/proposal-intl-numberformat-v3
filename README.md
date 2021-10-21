@@ -1,6 +1,6 @@
 # ECMA-402 Proposal: Intl.NumberFormat V3
 
-**Status: Stage 2 (June 2020)**
+**Status: Stage 3 (as of [July 2021](https://github.com/tc39/notes/blob/master/meetings/2021-07/july-15.md))**
 
 - Spec: Intl.NumberFormat ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/numberformat/proposed.html))
 - Spec: Intl.PluralRules ([diff](https://tc39.es/proposal-intl-numberformat-v3/out/pluralrules/diff.html), [proposed](https://tc39.es/proposal-intl-numberformat-v3/out/pluralrules/proposed.html))
