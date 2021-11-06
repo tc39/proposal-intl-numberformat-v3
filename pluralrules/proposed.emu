@@ -296,7 +296,7 @@
         1. Perform ? RequireInternalSlot(_pr_, [[InitializedPluralRules]]).
         1. Let _x_ be ? ToNumber(_start_).
         1. Let _y_ be ? ToNumber(_end_).
-        1. Return ! ResolvePluralRange(_pr_, _x_, _y_).
+        1. Return ? ResolvePluralRange(_pr_, _x_, _y_).
       </emu-alg>
     </emu-clause>
 
