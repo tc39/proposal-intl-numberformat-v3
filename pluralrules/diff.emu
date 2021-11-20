@@ -151,6 +151,7 @@
         1. Assert: _pluralRules_ has an [[InitializedPluralRules]] internal slot.
         1. Assert: Type(_x_) is Number.
         1. Assert: Type(_y_) is Number.
+        1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
         1. If _x_ &gt; _y_, throw a *RangeError* exception.
         1. Let _xp_ be ! ResolvePlural(_pluralRules_, _x_).
         1. Let _yp_ be ! ResolvePlural(_pluralRules_, _y_).
@@ -297,6 +298,7 @@
       <emu-alg>
         1. Let _pr_ be the *this* value.
         1. Perform ? RequireInternalSlot(_pr_, [[InitializedPluralRules]]).
+        1. If _start_ is *undefined* or _end_ is *undefined*, throw a *TypeError* exception.
         1. Let _x_ be ? ToNumber(_start_).
         1. Let _y_ be ? ToNumber(_end_).
         1. Return ? ResolvePluralRange(_pr_, _x_, _y_).

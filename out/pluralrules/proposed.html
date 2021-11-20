@@ -976,16 +976,43 @@ emu-const {
 emu-val {
   font-weight: bold;
 }
-emu-alg ol, emu-alg ol ol ol ol {
-    list-style-type: decimal;
+
+/* depth 1 */
+emu-alg ol,
+/* depth 4 */
+emu-alg ol ol ol ol,
+emu-alg ol.nested-thrice,
+emu-alg ol.nested-twice ol,
+emu-alg ol.nested-once ol ol {
+  list-style-type: decimal;
 }
 
-emu-alg ol ol, emu-alg ol ol ol ol ol {
-    list-style-type: lower-alpha;
+/* depth 2 */
+emu-alg ol ol,
+emu-alg ol.nested-once,
+/* depth 5 */
+emu-alg ol ol ol ol ol,
+emu-alg ol.nested-four-times,
+emu-alg ol.nested-thrice ol,
+emu-alg ol.nested-twice ol ol,
+emu-alg ol.nested-once ol ol ol {
+  list-style-type: lower-alpha;
 }
 
-emu-alg ol ol ol, ol ol ol ol ol ol {
-    list-style-type: lower-roman;
+/* depth 3 */
+emu-alg ol ol ol,
+emu-alg ol.nested-twice,
+emu-alg ol.nested-once ol,
+/* depth 6 */
+emu-alg ol ol ol ol ol ol,
+emu-alg ol.nested-lots,
+emu-alg ol.nested-four-times ol,
+emu-alg ol.nested-thrice ol ol,
+emu-alg ol.nested-twice ol ol ol,
+emu-alg ol.nested-once ol ol ol ol,
+/* depth 7+ */
+emu-alg ol.nested-lots ol {
+  list-style-type: lower-roman;
 }
 
 emu-eqn {
@@ -1913,7 +1940,7 @@ li.menu-search-result-term:before {
         When the ResolvePluralRange abstract operation is called with arguments <var>pluralRules</var> (which must be an object initialized as a PluralRules), <var>x</var> (which must be a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref>), and <var>y</var> (which must be a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref>), it returns a String value representing the plural form of the range starting from <var>x</var> and ending at <var>y</var> according to the effective locale and the options of <var>pluralRules</var>. The following steps are taken:
       </p>
 
-      <emu-alg><ol><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_14"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>pluralRules</var>) is Object.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>pluralRules</var> has an [[InitializedPluralRules]] internal slot.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_15"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>x</var>) is Number.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_16"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>y</var>) is Number.</li><li>If <var>x</var> &gt; <var>y</var>, throw a <emu-val>RangeError</emu-val> exception.</li><li>Let <var>xp</var> be !&nbsp;<emu-xref aoid="ResolvePlural" id="_ref_17"><a href="#sec-resolveplural">ResolvePlural</a></emu-xref>(<var>pluralRules</var>, <var>x</var>).</li><li>Let <var>yp</var> be !&nbsp;<emu-xref aoid="ResolvePlural" id="_ref_18"><a href="#sec-resolveplural">ResolvePlural</a></emu-xref>(<var>pluralRules</var>, <var>y</var>).</li><li>Let <var>locale</var> be <var>pluralRules</var>.[[Locale]].</li><li>Let <var>type</var> be <var>pluralRules</var>.[[Type]].</li><li>Return !&nbsp;<emu-xref aoid="PluralRuleSelectRange" id="_ref_19"><a href="#sec-pluralruleselectrange">PluralRuleSelectRange</a></emu-xref>(<var>locale</var>, <var>type</var>, <var>xp</var>, <var>yp</var>).</li></ol></emu-alg>
+      <emu-alg><ol><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_14"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>pluralRules</var>) is Object.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <var>pluralRules</var> has an [[InitializedPluralRules]] internal slot.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_15"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>x</var>) is Number.</li><li><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: <emu-xref aoid="Type" id="_ref_16"><a href="https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>y</var>) is Number.</li><li>If <var>x</var> is <emu-val>NaN</emu-val> or <var>y</var> is <emu-val>NaN</emu-val>, throw a <emu-val>RangeError</emu-val> exception.</li><li>If <var>x</var> &gt; <var>y</var>, throw a <emu-val>RangeError</emu-val> exception.</li><li>Let <var>xp</var> be !&nbsp;<emu-xref aoid="ResolvePlural" id="_ref_17"><a href="#sec-resolveplural">ResolvePlural</a></emu-xref>(<var>pluralRules</var>, <var>x</var>).</li><li>Let <var>yp</var> be !&nbsp;<emu-xref aoid="ResolvePlural" id="_ref_18"><a href="#sec-resolveplural">ResolvePlural</a></emu-xref>(<var>pluralRules</var>, <var>y</var>).</li><li>Let <var>locale</var> be <var>pluralRules</var>.[[Locale]].</li><li>Let <var>type</var> be <var>pluralRules</var>.[[Type]].</li><li>Return !&nbsp;<emu-xref aoid="PluralRuleSelectRange" id="_ref_19"><a href="#sec-pluralruleselectrange">PluralRuleSelectRange</a></emu-xref>(<var>locale</var>, <var>type</var>, <var>xp</var>, <var>yp</var>).</li></ol></emu-alg>
     </emu-clause>
   </emu-clause>
 
@@ -2035,7 +2062,7 @@ li.menu-search-result-term:before {
         When the <code>selectRange</code> method is called with arguments <var>start</var> and <var>end</var>, the following steps are taken:
       </p>
 
-      <emu-alg><ol><li>Let <var>pr</var> be the <emu-val>this</emu-val> value.</li><li>Perform ?&nbsp;<emu-xref aoid="RequireInternalSlot" id="_ref_28"><a href="https://tc39.es/ecma262/#sec-requireinternalslot">RequireInternalSlot</a></emu-xref>(<var>pr</var>, [[InitializedPluralRules]]).</li><li>Let <var>x</var> be ?&nbsp;<emu-xref aoid="ToNumber" id="_ref_29"><a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a></emu-xref>(<var>start</var>).</li><li>Let <var>y</var> be ?&nbsp;<emu-xref aoid="ToNumber" id="_ref_30"><a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a></emu-xref>(<var>end</var>).</li><li>Return !&nbsp;<emu-xref aoid="ResolvePluralRange" id="_ref_31"><a href="#sec-resolvepluralrange">ResolvePluralRange</a></emu-xref>(<var>pr</var>, <var>x</var>, <var>y</var>).</li></ol></emu-alg>
+      <emu-alg><ol><li>Let <var>pr</var> be the <emu-val>this</emu-val> value.</li><li>Perform ?&nbsp;<emu-xref aoid="RequireInternalSlot" id="_ref_28"><a href="https://tc39.es/ecma262/#sec-requireinternalslot">RequireInternalSlot</a></emu-xref>(<var>pr</var>, [[InitializedPluralRules]]).</li><li>If <var>start</var> is <emu-val>undefined</emu-val> or <var>end</var> is <emu-val>undefined</emu-val>, throw a <emu-val>TypeError</emu-val> exception.</li><li>Let <var>x</var> be ?&nbsp;<emu-xref aoid="ToNumber" id="_ref_29"><a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a></emu-xref>(<var>start</var>).</li><li>Let <var>y</var> be ?&nbsp;<emu-xref aoid="ToNumber" id="_ref_30"><a href="https://tc39.es/ecma262/#sec-tonumber">ToNumber</a></emu-xref>(<var>end</var>).</li><li>Return ?&nbsp;<emu-xref aoid="ResolvePluralRange" id="_ref_31"><a href="#sec-resolvepluralrange">ResolvePluralRange</a></emu-xref>(<var>pr</var>, <var>x</var>, <var>y</var>).</li></ol></emu-alg>
     </emu-clause>
 
     <emu-clause id="sec-intl.pluralrules.prototype.resolvedoptions">
