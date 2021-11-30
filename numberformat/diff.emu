@@ -42,7 +42,7 @@
           1. Let _needFd_ be *true*.
         1. If _needSd_ is *true*, then
           1. <del class="block">Assert: _hasSd_ is *true*.</del>
-          1. <ins class="block">If _hasSd_, then</ins>
+          1. <ins class="block">If _hasSd_ is *true*, then</ins>
             1. Set _mnsd_ to ? DefaultNumberOption(_mnsd_, 1, 21, 1).
             1. Set _mxsd_ to ? DefaultNumberOption(_mxsd_, _mnsd_, 21, 21).
             1. Set _intlObj_.[[MinimumSignificantDigits]] to _mnsd_.
