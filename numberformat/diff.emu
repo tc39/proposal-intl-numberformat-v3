@@ -66,8 +66,8 @@
           1. <del class="block">Set _intlObj_.[[RoundingType]] to ~compactRounding~.</del>
         1. <del class="block">Else if _hasSd_ is *true*, then</del>
           1. <del class="block">Set _intlObj_.[[RoundingType]] to ~significantDigits~.</del>
-        1. Else,
-          1. Set _intlObj_.[[RoundingType]] to ~fractionDigits~.
+        1. <del class="block">Else,</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~fractionDigits~.</del>
       </emu-alg>
     </emu-clause>
 
