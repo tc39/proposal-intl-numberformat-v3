@@ -28,6 +28,14 @@
         1. Else,
           1. Let _hasFd_ be *false*.
         1. <del class="block">Let _needSd_ be _hasSd_.</del>
+        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
+          1. <ins class="block">Let _needSd_ be *true*.</ins>
+        1. <ins class="block">Else If _hasSd_ is *true*, then</ins>
+          1. <ins class="block">Let _needSd_ be *true*.</ins>
+        1. <ins class="block">Else,</ins>
+          1. <ins class="block">Let _needSd_ be *false*.</ins>
+        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
+          1. <ins class="block">Let _needFd_ be *true*.</ins>
         1. <ins>Else</ins> If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
           1. Let _needFd_ be *false*.
         1. Else,
