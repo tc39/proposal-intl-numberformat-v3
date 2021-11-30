@@ -12,10 +12,6 @@
         options used for number formatting onto the intl object.
       </p>
       <emu-alg>
-        1. Assert: Type(_intlObj_) is Object.
-        1. Assert: Type(_options_) is Object.
-        1. Assert: Type(_mnfdDefault_) is Number.
-        1. Assert: Type(_mxfdDefault_) is Number.
         1. Let _mnid_ be ? GetNumberOption(_options_, *"minimumIntegerDigits,"*, 1, 21, 1).
         1. Let _mnfd_ be ? Get(_options_, *"minimumFractionDigits"*).
         1. Let _mxfd_ be ? Get(_options_, *"maximumFractionDigits"*).
@@ -37,7 +33,7 @@
         1. If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
           1. Let _needFd_ be *false*.
         1. Else,
-          1. Set _needFd_ to *true*.
+          1. Let _needFd_ be *true*.
         1. If _needSd_ is *true*, then
           1. If _hasSd_, then
             1. Set _mnsd_ to ? DefaultNumberOption(_mnsd_, 1, 21, 1).

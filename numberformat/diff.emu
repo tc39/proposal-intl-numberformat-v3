@@ -18,6 +18,7 @@
         1. Let _mnsd_ be ? Get(_options_, *"minimumSignificantDigits"*).
         1. Let _mxsd_ be ? Get(_options_, *"maximumSignificantDigits"*).
         1. Set _intlObj_.[[MinimumIntegerDigits]] to _mnid_.
+        1. <ins class="block">Let _roundingPriority_ be ? GetOption(_options_, *"roundingPriority"*, *"string"*, &laquo; *"auto"*, *"morePrecision"*, *"lessPrecision"* &raquo;, *"auto"*).</ins>
         1. If _mnsd_ is not *undefined* or _mxsd_ is not *undefined*, then
           1. Let _hasSd_ be *true*.
         1. Else,
@@ -26,7 +27,7 @@
           1. Let _hasFd_ be *true*.
         1. Else,
           1. Let _hasFd_ be *false*.
-        1. Let _needSd_ be _hasSd_.
+        1. <del class="block">Let _needSd_ be _hasSd_.</del>
         1. If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
           1. Let _needFd_ be *false*.
         1. Else,
