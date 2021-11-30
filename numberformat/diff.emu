@@ -28,7 +28,7 @@
         1. Else,
           1. Let _hasFd_ be *false*.
         1. <del class="block">Let _needSd_ be _hasSd_.</del>
-        1. If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
+        1. <ins>Else</ins> If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
           1. Let _needFd_ be *false*.
         1. Else,
           1. Let _needFd_ be *true*.
