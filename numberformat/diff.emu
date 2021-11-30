@@ -62,10 +62,10 @@
           1. Else,
             1. Set _intlObj_.[[MinimumFractionDigits]] to _mnfdDefault_.
             1. Set _intlObj_.[[MaximumFractionDigits]] to _mxfdDefault_.
-        1. If _needSd_ is *false* and _needFd_ is *false*, then
-          1. Set _intlObj_.[[RoundingType]] to ~compactRounding~.
-        1. Else if _hasSd_ is *true*, then
-          1. Set _intlObj_.[[RoundingType]] to ~significantDigits~.
+        1. <del class="block">If _needSd_ is *false* and _needFd_ is *false*, then</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~compactRounding~.</del>
+        1. <del class="block">Else if _hasSd_ is *true*, then</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~significantDigits~.</del>
         1. Else,
           1. Set _intlObj_.[[RoundingType]] to ~fractionDigits~.
       </emu-alg>
