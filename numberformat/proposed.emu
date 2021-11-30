@@ -27,10 +27,17 @@
           1. Let _hasFd_ be *true*.
         1. Else,
           1. Let _hasFd_ be *false*.
-        1. If _hasSd_ or _roundingPriority_ is not *"auto"*, set _needSd_ to *true*; else, set _needSd_ to *false*.
+        1. If _roundingPriority_ is not *"auto"*, then
+          1. Let _needSd_ be *true*.
+        1. Else If _hasSd_ is *true*, then
+          1. Let _needSd_ be *true*.
+        1. Else,
+          1. Let _needSd_ be *false*.
         1. If _roundingPriority_ is not *"auto"*, then
           1. Let _needFd_ be *true*.
-        1. If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
+        1. Else If _hasSd_ is *true*, then
+          1. Let _needFd_ be *false*.
+        1. Else If _hasFd_ is *false* and _notation_ is *"compact"*, then
           1. Let _needFd_ be *false*.
         1. Else,
           1. Let _needFd_ be *true*.
