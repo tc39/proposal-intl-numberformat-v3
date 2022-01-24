@@ -237,18 +237,25 @@
 
       <emu-alg>
         1. Let _exponent_ be 0.
-        1. If _x_ is *NaN*, then
+        1. If _x_ is <del>*NaN*</del><ins>~not-a-number~</ins>, then
           1. Let _n_ be an implementation- and locale-dependent (ILD) String value indicating the *NaN* value.
         1. <del class="block">Else if _x_ is a non-finite Number, then</del>
           1. <del class="block">Let _n_ be an ILD String value indicating infinity.</del>
-        1. <ins class="block">Else if _x_ is *+&infin;*, then</ins>
+        1. <ins class="block">Else if _x_ is ~positive-infinity~, then</ins>
           1. <ins class="block">Let _n_ be an ILD String value indicating positive infinity.</ins>
-        1. <ins class="block">Else if _x_ is *-&infin;*, then</ins>
+        1. <ins class="block">Else if _x_ is ~negative-infinity~, then</ins>
           1. <ins class="block">Let _n_ be an ILD String value indicating negative infinity.</ins>
         1. Else,
-          1. If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.
-          1. Let _exponent_ be ComputeExponent(_numberFormat_, _x_).
-          1. Let _x_ be _x_ × 10<sup>-_exponent_</sup>.
+          1. <del>If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.</del>
+          1. <del>Let _exponent_ be ComputeExponent(_numberFormat_, _x_).</del>
+          1. <del>Let _x_ be _x_ × 10<sup>-_exponent_</sup>.</del>
+          1. <ins>If _x_ is ~negative-zero~,</ins>
+            1. <ins>Let _x_ be *-0*.</ins>
+          2. <ins>Else,</ins>
+            1. <ins>Assert: _x_ is a mathematical value.</ins>
+            1. <ins>If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.</ins>
+            1. <ins>Let _exponent_ be ComputeExponent(_numberFormat_, _x_).</ins>
+            1. <ins>Let _x_ be _x_ × 10<sup>-_exponent_</sup>.</ins>
           1. Let _formatNumberResult_ be FormatNumericToString(_numberFormat_, _x_).
           1. Let _n_ be _formatNumberResult_.[[FormattedString]].
           1. Let _x_ be _formatNumberResult_.[[RoundedNumber]].
@@ -1004,7 +1011,7 @@
     <emu-clause id="sec-tointlmathematicalvalue" aoid="ToIntlMathematicalValue">
       <h1>ToIntlMathematicalValue ( _value_ )</h1>
       <p>
-        The abstract operation ToIntlMathematicalValue takes argument _value_. It returns _value_ converted to an <dfn id="intl-mathematical-value">Intl mathematical value</dfn>, which is a mathematical value together with *+&infin;*, *-&infin;*, *NaN*, and *-0*<sub>𝔽</sub>. This abstract operation is similar to <emu-xref href="#sec-tonumeric"></emu-xref>, but a mathematical value can be returned instead of a Number or BigInt, so that exact decimal values can be represented. The following steps are taken:
+        The abstract operation ToIntlMathematicalValue takes argument _value_. It returns _value_ converted to an <dfn id="intl-mathematical-value">Intl mathematical value</dfn>, which is a mathematical value together with ~positive-infinity~, ~negative-infinity~, ~not-a-number~, and ~negative-zero~. This abstract operation is similar to <emu-xref href="#sec-tonumeric"></emu-xref>, but a mathematical value can be returned instead of a Number or BigInt, so that exact decimal values can be represented. The following steps are taken:
       </p>
       <emu-alg>
         1. Let _primValue_ be ? ToPrimitive(_value_, ~number~).
@@ -1017,11 +1024,11 @@
             1. Let _str_ be *"-0"*.
           1. Else,
             1. Let _str_ be ! Number::toString(_x_).
-        1. If the grammar cannot interpret _str_ as an expansion of |StringNumericLiteral|, return *NaN*.
+        1. If the grammar cannot interpret _str_ as an expansion of |StringNumericLiteral|, return ~not-a-number~.
         1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
-        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*<sub>𝔽</sub>.
-        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return *+&infin;*.
-        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return *-&infin;*.
+        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return ~negative-zero~.
+        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return ~positive-infinity~.
+        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return ~negative-infinity~.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
@@ -1161,18 +1168,18 @@
         The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be an Intl mathematical value), _y_ (which must be an Intl mathematical value), and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
       </p>
       <emu-alg>
-        1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
+        1. If _x_ is ~not-a-number~ or _y_ is ~not-a-number~, throw a *RangeError* exception.
         1. If _x_ is a mathematical value, then
           1. If _y_ is a mathematical value and _y_ &lt; _x_, throw a *RangeError* exception.
-          1. Else if _y_ is *-&infin;*, throw a *RangeError* exception.
-          1. Else if _y_ is *-0*<sub>𝔽</sub> and _x_ &ge; 0, throw a *RangeError* exception.
-        1. Else if _x_ is *+&infin;*, then
+          1. Else if _y_ is ~negative-infinity~, throw a *RangeError* exception.
+          1. Else if _y_ is ~negative-zero~ and _x_ &ge; 0, throw a *RangeError* exception.
+        1. Else if _x_ is ~positive-infinity~, then
           1. If _y_ is a mathematical value, throw a *RangeError* exception.
-          1. Else if _y_ is *-&infin;*, throw a *RangeError* exception.
-          1. Else if _y_ is *-0*<sub>𝔽</sub>, throw a *RangeError* exception.
-        1. Else if _x_ is *-0*<sub>𝔽</sub>, then
+          1. Else if _y_ is ~negative-infinity~, throw a *RangeError* exception.
+          1. Else if _y_ is ~negative-zero~, throw a *RangeError* exception.
+        1. Else if _x_ is ~negative-zero~, then
           1. If _y_ is a mathematical value and _y_ &lt; 0, throw a *RangeError* exception.
-          1. Else if _y_ is *-&infin;*, throw a *RangeError* exception.
+          1. Else if _y_ is ~negative-infinity~, throw a *RangeError* exception.
         1. Let _result_ be a new empty List.
         1. Let _xResult_ be ? PartitionNumberPattern(_numberFormat_, _x_).
         1. Let _yResult_ be ? PartitionNumberPattern(_numberFormat_, _y_).
