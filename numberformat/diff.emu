@@ -176,11 +176,11 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], <del>and</del> [[MaximumFractionDigits]]<ins>, [[RoundingIncrement]], and [[TrailingZeroDisplay]]</ins> internal slots), and _x_ (which must be a <del>Number or BigInt value</del><ins>mathematical value or *-0*<sub>𝔽</sub></ins>), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final <del>floating decimal value</del> <ins>mathematical value (or *-0*<sub>𝔽</sub>)</ins> of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], <del>and</del> [[MaximumFractionDigits]]<ins>, [[RoundingIncrement]], and [[TrailingZeroDisplay]]</ins> internal slots), and _x_ (which must be a <del>Number or BigInt value</del><ins>mathematical value or ~negative-zero~</ins>), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final <del>floating decimal value</del> <ins>mathematical value (or *-0*<sub>𝔽</sub>)</ins> of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
-        1. <ins class="block">If _x_ is *-0*<sub>𝔽</sub>, then</ins>
+        1. <ins class="block">If _x_ is ~negative-zero~, then</ins>
           1. <ins class="block">Let _isNegative_ be *true*.</ins>
           1. <ins class="block">Let _x_ be the mathematical value 0.</ins>
         1. <ins class="block">Assert: _x_ is a mathematical value.</ins>
@@ -249,9 +249,7 @@
           1. <del>If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.</del>
           1. <del>Let _exponent_ be ComputeExponent(_numberFormat_, _x_).</del>
           1. <del>Let _x_ be _x_ × 10<sup>-_exponent_</sup>.</del>
-          1. <ins>If _x_ is ~negative-zero~,</ins>
-            1. <ins>Let _x_ be *-0*.</ins>
-          2. <ins>Else,</ins>
+          1. <ins>If _x_ is not ~negative-zero~,</ins>
             1. <ins>Assert: _x_ is a mathematical value.</ins>
             1. <ins>If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.</ins>
             1. <ins>Let _exponent_ be ComputeExponent(_numberFormat_, _x_).</ins>

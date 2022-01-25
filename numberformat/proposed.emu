@@ -173,11 +173,11 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or *-0*<sub>𝔽</sub>), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final mathematical value (or *-0*<sub>𝔽</sub>) of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or ~negative-zero~), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final mathematical value (or *-0*<sub>𝔽</sub>) of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
-        1. If _x_ is *-0*<sub>𝔽</sub>, then
+        1. If _x_ is ~negative-zero~, then
           1. Let _isNegative_ be *true*.
           1. Let _x_ be the mathematical value 0.
         1. Assert: _x_ is a mathematical value.
@@ -237,9 +237,7 @@
         1. Else if _x_ is ~negative-infinity~, then
           1. Let _n_ be an ILD String value indicating negative infinity.
         1. Else,
-          1. If _x_ is ~negative-zero~,
-            1. Let _x_ be *-0*.
-          2. Else,
+          1. If _x_ is not ~negative-zero~,
             1. Assert: _x_ is a mathematical value.
             1. If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.
             1. Let _exponent_ be ComputeExponent(_numberFormat_, _x_).
