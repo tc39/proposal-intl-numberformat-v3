@@ -3,6 +3,63 @@
 
   <emu-clause id="sec-numberformat-abstracts">
     <h1>Abstract Operations for NumberFormat Objects</h1>
+    <ins class="block">
+    <emu-clause id="sec-runtime-semantics-stringintlmv" type="sdo">
+      <h1>Runtime Semantics: StringIntlMV</h1>
+      <dl class="header">
+      </dl>
+      <emu-note>
+        <p>The conversion of a |StringNumericLiteral| to a Number value is similar overall to the determination of the NumericValue of a |NumericLiteral| (see <emu-xref href="#sec-literals-numeric-literals"></emu-xref>), but some of the details are different.</p>
+      </emu-note>
+      <emu-grammar>StringNumericLiteral ::: StrWhiteSpace?</emu-grammar>
+      <emu-alg>
+        1. Return *+0*.
+      </emu-alg>
+      <emu-grammar>StringNumericLiteral ::: StrWhiteSpace? StrNumericLiteral StrWhiteSpace?</emu-grammar>
+      <emu-alg>
+        1. Return StringIntlMV of |StrNumericLiteral|.
+      </emu-alg>
+      <emu-grammar>StrNumericLiteral ::: NonDecimalIntegerLiteral</emu-grammar>
+      <emu-alg>
+        1. Return 𝔽(MV of |NonDecimalIntegerLiteral|).
+      </emu-alg>
+      <emu-grammar>StrDecimalLiteral ::: `-` StrUnsignedDecimalLiteral</emu-grammar>
+      <emu-alg>
+        1. Let _a_ be StringIntlMV of |StrUnsignedDecimalLiteral|.
+        1. If _a_ is *+0*, return *-0*.
+        1. Return -_a_.
+      </emu-alg>
+      <emu-grammar>StrUnsignedDecimalLiteral ::: `Infinity`</emu-grammar>
+      <emu-alg>
+        1. Return *+&infin;*.
+      </emu-alg>
+      <emu-grammar>StrUnsignedDecimalLiteral ::: DecimalDigits `.` DecimalDigits? ExponentPart?</emu-grammar>
+      <emu-alg>
+        1. Let _a_ be MV of the first |DecimalDigits|.
+        1. If the second |DecimalDigits| is present, then
+          1. Let _b_ be MV of the second |DecimalDigits|.
+          1. Let _n_ be the number of code points in the second |DecimalDigits|.
+        1. Else,
+          1. Let _b_ be 0.
+          1. Let _n_ be 0.
+        1. If |ExponentPart| is present, let _e_ be MV of |ExponentPart|. Otherwise, let _e_ be 0.
+        1. Return (_a_ + (_b_ &times; 10<sup>-_n_</sup>)) &times; 10<sup>_e_</sup>.
+      </emu-alg>
+      <emu-grammar>StrUnsignedDecimalLiteral ::: `.` DecimalDigits ExponentPart?</emu-grammar>
+      <emu-alg>
+        1. Let _b_ be MV of |DecimalDigits|.
+        1. If |ExponentPart| is present, let _e_ be MV of |ExponentPart|. Otherwise, let _e_ be 0.
+        1. Let _n_ be the number of code points in |DecimalDigits|.
+        1. Return _b_ &times; 10<sup>_e_ - _n_</sup>.
+      </emu-alg>
+      <emu-grammar>StrUnsignedDecimalLiteral ::: DecimalDigits ExponentPart?</emu-grammar>
+      <emu-alg>
+        1. Let _a_ be MV of |DecimalDigits|.
+        1. If |ExponentPart| is present, let _e_ be MV of |ExponentPart|. Otherwise, let _e_ be 0.
+        1. Return _a_ &times; 10<sup>_e_</sup>.
+      </emu-alg>
+    </emu-clause>
+    </ins>
 
     <emu-clause id="sec-setnfdigitoptions" aoid="SetNumberFormatDigitOptions">
       <h1>SetNumberFormatDigitOptions ( _intlObj_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_ )</h1>
@@ -1029,11 +1086,13 @@
             1. Let _str_ be *"-0"*.
           1. Else,
             1. Let _str_ be ! Number::toString(_x_).
-        1. If the grammar cannot interpret _str_ as an expansion of |StringNumericLiteral|, return ~not-a-number~.
-        1. Let _mv_ be the MV, a mathematical value, of ? ToNumber(_str_), as described in <emu-xref href="#sec-runtime-semantics-mv-s"></emu-xref>.
-        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return ~negative-zero~.
-        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return ~positive-infinity~.
-        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return ~negative-infinity~.
+        1. Let _text_ be ! StringToCodePoints(_str_).
+        1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
+        1. If _literal_ is a List of errors, let _mv_ be *NaN*.
+        1. Else, let _mv_ be the StringIntlMV of _literal_.
+        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
+        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return *+&infin;*.
+        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return *-&infin;*.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
