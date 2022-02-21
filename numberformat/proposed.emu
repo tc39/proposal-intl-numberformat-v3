@@ -1055,8 +1055,6 @@
         1. If _literal_ is a List of errors, let _mv_ be *NaN*.
         1. Else, let _mv_ be the StringIntlMV of _literal_.
         1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
-        1. If _mv_ is 10<sup>10000</sup> and _str_ contains `Infinity`, return *+&infin;*.
-        1. If _mv_ is -10<sup>10000</sup> and _str_ contains `Infinity`, return *-&infin;*.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
