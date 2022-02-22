@@ -32,7 +32,7 @@ const nf = new Intl.NumberFormat("en-US", {
   currency: "CHF",
   maximumFractionDigits: 0,
 });
-nf.formatRange(3, 5);  // "€3–€5"
+nf.formatRange(3, 5);  // "CHF 3–5"
 ```
 
 Peer methods will also be added:
