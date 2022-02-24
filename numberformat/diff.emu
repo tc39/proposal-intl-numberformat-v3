@@ -12,10 +12,6 @@
         options used for number formatting onto the intl object.
       </p>
       <emu-alg>
-        1. Assert: Type(_intlObj_) is Object.
-        1. Assert: Type(_options_) is Object.
-        1. Assert: Type(_mnfdDefault_) is Number.
-        1. Assert: Type(_mxfdDefault_) is Number.
         1. Let _mnid_ be ? GetNumberOption(_options_, *"minimumIntegerDigits,"*, 1, 21, 1).
         1. Let _mnfd_ be ? Get(_options_, *"minimumFractionDigits"*).
         1. Let _mxfd_ be ? Get(_options_, *"maximumFractionDigits"*).
@@ -24,33 +20,37 @@
         1. Set _intlObj_.[[MinimumIntegerDigits]] to _mnid_.
         1. <ins class="block">Let _roundingPriority_ be ? GetOption(_options_, *"roundingPriority"*, *"string"*, &laquo; *"auto"*, *"morePrecision"*, *"lessPrecision"* &raquo;, *"auto"*).</ins>
         1. If _mnsd_ is not *undefined* or _mxsd_ is not *undefined*, then
-          1. Set _hasSd_ to *true*.
+          1. Let _hasSd_ be *true*.
         1. Else,
-          1. Set _hasSd_ to *false*.
+          1. Let _hasSd_ be *false*.
         1. If _mnfd_ is not *undefined* or _mxfd_ is not *undefined*, then
-          1. Set _hasFd_ to *true*.
+          1. Let _hasFd_ be *true*.
         1. Else,
-          1. Set _hasFd_ to *false*.
-        1. <del class="block">Let _needSd_ be _hasSd_.</del>
-        1. <ins class="block">If _hasSd_ or _roundingPriority_ is not *"auto"*, set _needSd_ to *true*; else, set _needSd_ to *false*.</ins>
-        1. If <ins>(</ins> not _hasSd_ and _notation_ is not *"compact"* <ins>) or _roundingPriority_ is not *"auto"*</ins>, then
-          1. Set _needFd_ to *true*.
+          1. Let _hasFd_ be *false*.
+        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
+          1. <ins class="block">Let _needSd_ be *true*.</ins>
+        1. <ins class="block">Else,</ins>
+          1. Let _needSd_ be _hasSd_.
+        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
+          1. <ins class="block">Let _needFd_ be *true*.</ins>
+        1. <ins>Else</ins> If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
+          1. Let _needFd_ be *false*.
         1. Else,
-          1. Set _needFd_ to *false*.
-        1. If _needSd_, then
+          1. Let _needFd_ be *true*.
+        1. If _needSd_ is *true*, then
           1. <del class="block">Assert: _hasSd_ is *true*.</del>
-          1. <ins class="block">If _hasSd_, then</ins>
-            1. Let _mnsd_ be ? DefaultNumberOption(_mnsd_, 1, 21, 1).
-            1. Let _mxsd_ be ? DefaultNumberOption(_mxsd_, _mnsd_, 21, 21).
+          1. <ins class="block">If _hasSd_ is *true*, then</ins>
+            1. Set _mnsd_ to ? DefaultNumberOption(_mnsd_, 1, 21, 1).
+            1. Set _mxsd_ to ? DefaultNumberOption(_mxsd_, _mnsd_, 21, 21).
             1. Set _intlObj_.[[MinimumSignificantDigits]] to _mnsd_.
             1. Set _intlObj_.[[MaximumSignificantDigits]] to _mxsd_.
           1. <ins class="block">Else,</ins>
             1. <ins class="block">Set _intlObj_.[[MinimumSignificantDigits]] to 1.</ins>
             1. <ins class="block">Set _intlObj_.[[MaximumSignificantDigits]] to 21.</ins>
-        1. If _needFd_, then
-          1. If _hasFd_, then
-            1. Let _mnfd_ be ? DefaultNumberOption(_mnfd_, 0, 20, *undefined*).
-            1. Let _mxfd_ be ? DefaultNumberOption(_mxfd_, 0, 20, *undefined*).
+        1. If _needFd_ is *true*, then
+          1. If _hasFd_ is *true*, then
+            1. Set _mnfd_ to ? DefaultNumberOption(_mnfd_, 0, 20, *undefined*).
+            1. Set _mxfd_ to ? DefaultNumberOption(_mxfd_, 0, 20, *undefined*).
             1. If _mnfd_ is *undefined*, set _mnfd_ to min(_mnfdDefault_, _mxfd_).
             1. Else if _mxfd_ is *undefined*, set _mxfd_ to max(_mxfdDefault_, _mnfd_).
             1. Else if _mnfd_ is greater than _mxfd_, throw a *RangeError* exception.
@@ -59,17 +59,22 @@
           1. Else,
             1. Set _intlObj_.[[MinimumFractionDigits]] to _mnfdDefault_.
             1. Set _intlObj_.[[MaximumFractionDigits]] to _mxfdDefault_.
-        1. If _needSd_ or _needFd_, then
+        1. <del class="block">If _needSd_ is *false* and _needFd_ is *false*, then</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~compactRounding~.</del>
+        1. <del class="block">Else if _hasSd_ is *true*, then</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~significantDigits~.</del>
+        1. <del class="block">Else,</del>
+          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~fractionDigits~.</del>
+        1. <ins class="block">If _needSd_ is *true* or _needFd_ is *true*, then</ins>
           1. <ins class="block">If _roundingPriority_ is *"morePrecision"*, then</ins>
             1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~morePrecision~.</ins>
           1. <ins class="block">Else if _roundingPriority_ is *"lessPrecision"*, then</ins>
             1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~lessPrecision~.</ins>
-          1. <del>If</del><ins>Else if</ins> _hasSd_, then
-            1. Set _intlObj_.[[RoundingType]] to ~significantDigits~.
-          1. Else,
-            1. Set _intlObj_.[[RoundingType]] to ~fractionDigits~.
-        1. Else,
-          1. <del class="block">Set _intlObj_.[[RoundingType]] to ~compactRounding~.</del>
+          1. <ins class="block">Else if _hasSd_ is *true*, then</ins>
+            1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~significantDigits~.</ins>
+          1. <ins class="block">Else,</ins>
+            1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~fractionDigits~.</ins>
+        1. <ins class="block">Else,</ins>
           1. <ins class="block">Set _intlObj_.[[RoundingType]] to ~morePrecision~.</ins>
           1. <ins class="block">Set _intlObj_.[[MinimumFractionDigits]] to 0.</ins>
           1. <ins class="block">Set _intlObj_.[[MaximumFractionDigits]] to 0.</ins>
