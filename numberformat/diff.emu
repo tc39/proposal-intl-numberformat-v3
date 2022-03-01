@@ -27,16 +27,17 @@
           1. Let _hasFd_ be *true*.
         1. Else,
           1. Let _hasFd_ be *false*.
-        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
-          1. <ins class="block">Let _needSd_ be *true*.</ins>
-        1. <ins class="block">Else,</ins>
-          1. Let _needSd_ be _hasSd_.
-        1. <ins class="block">If _roundingPriority_ is not *"auto"*, then</ins>
-          1. <ins class="block">Let _needFd_ be *true*.</ins>
-        1. <ins>Else</ins> If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then
-          1. Let _needFd_ be *false*.
-        1. Else,
-          1. Let _needFd_ be *true*.
+        1. <del class="block">Let _needSd_ be _hasSd_.</del>
+        1. <del class="block">If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then</del>
+          1. <del class="block">Let _needFd_ be *false*.</del>
+        1. <del class="block">Else,</del>
+          1. <del class="block">Let _needFd_ be *true*.</del>
+        1. <ins class="block">Let _needSd_ be *true*.</ins>
+        1. <ins class="block">Let _needFd_ be *true*.</ins>
+        1. <ins class="block">If _roundingPriority_ is *"auto"*, then</ins>
+          1. <ins class="block">Set _needSd_ to _hasSd_.</ins>
+          1. <ins class="block">If _hasSd_ is *true*, or _hasFd_ is *false* and _notation_ is *"compact"*, then</ins>
+            1. <ins class="block">Set _needFd_ to *false*.</ins>
         1. If _needSd_ is *true*, then
           1. <del class="block">Assert: _hasSd_ is *true*.</del>
           1. <ins class="block">If _hasSd_ is *true*, then</ins>
