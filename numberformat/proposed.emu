@@ -1197,7 +1197,7 @@
         The abstract operation PartitionNumberRangePattern creates the parts for a localized number range according to _x_ (which must be an Intl mathematical value), _y_ (which must be an Intl mathematical value), and the formatting options of _numberFormat_ (which must be an object initialized as NumberFormat). The following steps are taken:
       </p>
       <emu-alg>
-        1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
+        1. If _x_ is ~not-a-number~ or _y_ is ~not-a-number~, throw a *RangeError* exception.
         1. Let _result_ be a new empty List.
         1. Let _xResult_ be ? PartitionNumberPattern(_numberFormat_, _x_).
         1. Let _yResult_ be ? PartitionNumberPattern(_numberFormat_, _y_).
