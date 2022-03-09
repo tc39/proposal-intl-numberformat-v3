@@ -2325,24 +2325,24 @@ li.menu-search-result-term:before {
       <dl class="header">
       </dl>
       <emu-note><span class="note">Note</span><div class="note-contents">
-        <p>The conversion of a <emu-nt id="_ref_129"><a href="#prod-StringNumericLiteral">StringNumericLiteral</a></emu-nt> to a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref> is similar overall to the determination of the NumericValue of a <emu-nt><a href="https://tc39.es/ecma262/#prod-annexB-NumericLiteral">NumericLiteral</a></emu-nt> (see <emu-xref href="#sec-literals-numeric-literals"><a href="https://tc39.es/ecma262/#sec-literals-numeric-literals">11.8.3</a></emu-xref>), but some of the details are different.</p>
+        <p>The conversion of a <emu-nt id="_ref_126"><a href="#prod-StringNumericLiteral">StringNumericLiteral</a></emu-nt> to a <emu-xref href="#number-value"><a href="https://tc39.es/ecma262/#number-value">Number value</a></emu-xref> is similar overall to the determination of the NumericValue of a <emu-nt><a href="https://tc39.es/ecma262/#prod-annexB-NumericLiteral">NumericLiteral</a></emu-nt> (see <emu-xref href="#sec-literals-numeric-literals"><a href="https://tc39.es/ecma262/#sec-literals-numeric-literals">11.8.3</a></emu-xref>), but some of the details are different.</p>
       </div></emu-note>
       <emu-grammar><emu-production name="StringNumericLiteral" type="regexp" collapsed="" id="prod-StringNumericLiteral">
     <emu-nt><a href="#prod-StringNumericLiteral">StringNumericLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="9a4be900"><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-StrWhiteSpace">StrWhiteSpace</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
       <emu-alg><ol><li>Return <emu-val>+0</emu-val>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StringNumericLiteral" type="regexp" collapsed="">
-    <emu-nt><a href="#prod-StringNumericLiteral">StringNumericLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="fe58c396"><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-StrWhiteSpace">StrWhiteSpace</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-nt id="_ref_130"><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-StrWhiteSpace">StrWhiteSpace</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
+    <emu-nt><a href="#prod-StringNumericLiteral">StringNumericLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="fe58c396"><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-StrWhiteSpace">StrWhiteSpace</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-nt id="_ref_127"><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-StrWhiteSpace">StrWhiteSpace</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
-      <emu-alg><ol><li>Return StringIntlMV of <emu-nt id="_ref_131"><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt>.</li></ol></emu-alg>
+      <emu-alg><ol><li>Return StringIntlMV of <emu-nt id="_ref_128"><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrNumericLiteral" type="regexp" collapsed="" id="prod-StrNumericLiteral">
     <emu-nt><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="e867b70b"><emu-nt><a href="https://tc39.es/ecma262/#prod-NonDecimalIntegerLiteral">NonDecimalIntegerLiteral</a></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
       <emu-alg><ol><li>Return <emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(MV of <emu-nt><a href="https://tc39.es/ecma262/#prod-NonDecimalIntegerLiteral">NonDecimalIntegerLiteral</a></emu-nt>).</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrDecimalLiteral" type="regexp" collapsed="" id="prod-StrDecimalLiteral">
-    <emu-nt><a href="#prod-StrDecimalLiteral">StrDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="d60f01a5"><emu-t>-</emu-t><emu-nt id="_ref_132"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt></emu-rhs>
+    <emu-nt><a href="#prod-StrDecimalLiteral">StrDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="d60f01a5"><emu-t>-</emu-t><emu-nt id="_ref_129"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
-      <emu-alg><ol><li>Let <var>a</var> be StringIntlMV of <emu-nt id="_ref_133"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt>.</li><li>If <var>a</var> is <emu-val>+0</emu-val>, return <emu-val>-0</emu-val>.</li><li>Return -<var>a</var>.</li></ol></emu-alg>
+      <emu-alg><ol><li>Let <var>a</var> be StringIntlMV of <emu-nt id="_ref_130"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt>.</li><li>If <var>a</var> is <emu-val>+0</emu-val>, return <emu-val>-0</emu-val>.</li><li>Return -<var>a</var>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrUnsignedDecimalLiteral" type="regexp" collapsed="" id="prod-StrUnsignedDecimalLiteral">
     <emu-nt><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
 </emu-production></emu-grammar>
