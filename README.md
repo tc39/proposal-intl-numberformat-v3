@@ -176,6 +176,19 @@ nf.format(string);
 // Proposed: "987,654,321,987,654,321"
 ```
 
+A common use case is to store currency amounts as a BigInt of a small unit, like cents. This API can be used to retain full precision of the BigInt:
+
+```javascript
+const nf = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "EUR",
+});
+const bi = 1000000000000000110000n;
+nf.format(bi + "E-6");
+// Current:  "€1,000,000,000,000,000.10"
+// Proposed: "€1,000,000,000,000,000.11"
+```
+
 We will reference existing standards for interpreting decimal number strings where possible.
 
 ### Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
