@@ -189,7 +189,9 @@ nf.format(bi + "E-6");
 // Proposed: "€1,000,000,000,000,000.11"
 ```
 
-We will reference existing standards for interpreting decimal number strings where possible.
+The general syntax for decimal strings, essentially `#.#E#`, is a widely understood interchange format in computing. The specific version we use is the ECMA-262 `StringNumericLiteral` grammar, which also allows non-base-10 numbers like hexadecimal and binary.
+
+Arbitrary-precision decimal strings are intended to be used as pass-through for formatting. The champions do not intend for strings to become the de-facto standard for numeric computations in ECMAScript. For a general-purpose arbitrary-precision decimal type, see the [Decimal](https://github.com/tc39/proposal-decimal) proposal.
 
 ### Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
