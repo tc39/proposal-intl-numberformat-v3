@@ -1040,7 +1040,7 @@
       </emu-alg>
       <emu-grammar>StrUnsignedDecimalLiteral ::: `Infinity`</emu-grammar>
       <emu-alg>
-        1. Return *+&infin;*.
+        1. Return ~positive-infinity~.
       </emu-alg>
       <emu-grammar>StrUnsignedDecimalLiteral ::: DecimalDigits `.` DecimalDigits? ExponentPart?</emu-grammar>
       <emu-alg>
