@@ -1035,6 +1035,7 @@
       <emu-alg>
         1. Let _a_ be StringIntlMV of |StrUnsignedDecimalLiteral|.
         1. If _a_ is 0, return ~negative-zero~.
+        1. If _a_ is ~positive-infinity~, return ~negative-infinity~.
         1. Return -_a_.
       </emu-alg>
       <emu-grammar>StrUnsignedDecimalLiteral ::: `Infinity`</emu-grammar>
