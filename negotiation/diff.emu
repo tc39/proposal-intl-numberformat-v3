@@ -335,19 +335,13 @@
 
      <emu-alg>
         1. Let _value_ be ? Get(_options_, _property_).
-        1. If _value_ is not *undefined*, then
-          1. Assert: _type_ is *"boolean"* or *"string"*.
-          1. If _type_ is *"boolean"*, then
-            1. Let _value_ be ToBoolean(_value_)
-            1. If _value_ is *true*, return _trueValue_.
-            1. If _value_ is *false*, return _falsyValue_.
-          1. If _type_ is *"string"*, then
-            1. Let _value_ be ? ToString(_value_).
-            1. If _value_ contains *true*, return _trueValue_.
-            1. If _value_ contains *false*, return _falsyValue_.
-            1. If _values_ does not contain an element equal to _value_, throw a *RangeError* exception.
-            1. Return _value_.
-        1. Else, return _fallback_.
+        1. If _value_ is *undefined*, return _fallback_.
+        1. If _value_ is *true*, return _trueValue_.
+        1. Let _valueBoolean_ be ToBoolean(_value_).
+        1. If _valueBoolean_ is *false*, return _falsyValue_.
+        1. Let _value_ be ? ToString(_value_).
+        1. If _values_ does not contain an element equal to _value_, return _fallback_.
+        1. Return _value_.
       </emu-alg>
     </emu-clause>
     </ins>
