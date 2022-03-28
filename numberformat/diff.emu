@@ -1086,7 +1086,7 @@
             1. Let _str_ be ! Number::toString(_x_).
         1. Let _text_ be ! StringToCodePoints(_str_).
         1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
-        1. If _literal_ is a List of errors, let _mv_ be *NaN*.
+        1. If _literal_ is a List of errors, let _mv_ be ~not-a-number~.
         1. Else, let _mv_ be the StringIntlMV of _literal_.
         1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
         1. Return _mv_.
