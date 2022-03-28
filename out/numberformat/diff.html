@@ -2338,15 +2338,15 @@ li.menu-search-result-term:before {
       <emu-grammar><emu-production name="StrNumericLiteral" type="regexp" collapsed="" id="prod-StrNumericLiteral">
     <emu-nt><a href="#prod-StrNumericLiteral">StrNumericLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="e867b70b"><emu-nt><a href="https://tc39.es/ecma262/#prod-NonDecimalIntegerLiteral">NonDecimalIntegerLiteral</a></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
-      <emu-alg><ol><li>Return <emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(MV of <emu-nt><a href="https://tc39.es/ecma262/#prod-NonDecimalIntegerLiteral">NonDecimalIntegerLiteral</a></emu-nt>).</li></ol></emu-alg>
+      <emu-alg><ol><li>Return MV of <emu-nt><a href="https://tc39.es/ecma262/#prod-NonDecimalIntegerLiteral">NonDecimalIntegerLiteral</a></emu-nt>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrDecimalLiteral" type="regexp" collapsed="" id="prod-StrDecimalLiteral">
     <emu-nt><a href="#prod-StrDecimalLiteral">StrDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="d60f01a5"><emu-t>-</emu-t><emu-nt id="_ref_129"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt></emu-rhs>
 </emu-production></emu-grammar>
-      <emu-alg><ol><li>Let <var>a</var> be StringIntlMV of <emu-nt id="_ref_130"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt>.</li><li>If <var>a</var> is <emu-val>+0</emu-val>, return <emu-val>-0</emu-val>.</li><li>Return -<var>a</var>.</li></ol></emu-alg>
+      <emu-alg><ol><li>Let <var>a</var> be StringIntlMV of <emu-nt id="_ref_130"><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt>.</li><li>If <var>a</var> is 0, return <emu-const>negative-zero</emu-const>.</li><li>If <var>a</var> is <emu-const>positive-infinity</emu-const>, return <emu-const>negative-infinity</emu-const>.</li><li>Return -<var>a</var>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrUnsignedDecimalLiteral" type="regexp" collapsed="" id="prod-StrUnsignedDecimalLiteral">
     <emu-nt><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="4afe8df8"><emu-t>Infinity</emu-t></emu-rhs>
 </emu-production></emu-grammar>
-      <emu-alg><ol><li>Return <emu-val>+∞</emu-val>.</li></ol></emu-alg>
+      <emu-alg><ol><li>Return <emu-const>positive-infinity</emu-const>.</li></ol></emu-alg>
       <emu-grammar><emu-production name="StrUnsignedDecimalLiteral" type="regexp" collapsed="">
     <emu-nt><a href="#prod-StrUnsignedDecimalLiteral">StrUnsignedDecimalLiteral</a></emu-nt><emu-geq>:::</emu-geq><emu-rhs a="8a89062c"><emu-nt><a href="https://tc39.es/ecma262/#prod-grammar-notation-DecimalDigits">DecimalDigits</a></emu-nt><emu-t>.</emu-t><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-grammar-notation-DecimalDigits">DecimalDigits</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt><emu-nt optional=""><a href="https://tc39.es/ecma262/#prod-ExponentPart">ExponentPart</a><emu-mods><emu-opt>opt</emu-opt></emu-mods></emu-nt></emu-rhs>
 </emu-production></emu-grammar>

@@ -996,17 +996,18 @@
       </emu-alg>
       <emu-grammar>StrNumericLiteral ::: NonDecimalIntegerLiteral</emu-grammar>
       <emu-alg>
-        1. Return 𝔽(MV of |NonDecimalIntegerLiteral|).
+        1. Return MV of |NonDecimalIntegerLiteral|.
       </emu-alg>
       <emu-grammar>StrDecimalLiteral ::: `-` StrUnsignedDecimalLiteral</emu-grammar>
       <emu-alg>
         1. Let _a_ be StringIntlMV of |StrUnsignedDecimalLiteral|.
-        1. If _a_ is *+0*, return *-0*.
+        1. If _a_ is 0, return ~negative-zero~.
+        1. If _a_ is ~positive-infinity~, return ~negative-infinity~.
         1. Return -_a_.
       </emu-alg>
       <emu-grammar>StrUnsignedDecimalLiteral ::: `Infinity`</emu-grammar>
       <emu-alg>
-        1. Return *+&infin;*.
+        1. Return ~positive-infinity~.
       </emu-alg>
       <emu-grammar>StrUnsignedDecimalLiteral ::: DecimalDigits `.` DecimalDigits? ExponentPart?</emu-grammar>
       <emu-alg>
@@ -1055,7 +1056,6 @@
         1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
         1. If _literal_ is a List of errors, let _mv_ be *NaN*.
         1. Else, let _mv_ be the StringIntlMV of _literal_.
-        1. If _mv_ is 0 and the first non white space code point in _str_ is `-`, return *-0*.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
