@@ -1029,7 +1029,7 @@
       </emu-alg>
       <emu-grammar>StrNumericLiteral ::: NonDecimalIntegerLiteral</emu-grammar>
       <emu-alg>
-        1. Return 𝔽(MV of |NonDecimalIntegerLiteral|).
+        1. Return MV of |NonDecimalIntegerLiteral|.
       </emu-alg>
       <emu-grammar>StrDecimalLiteral ::: `-` StrUnsignedDecimalLiteral</emu-grammar>
       <emu-alg>
