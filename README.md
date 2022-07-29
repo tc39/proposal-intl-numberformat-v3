@@ -98,7 +98,7 @@ nf.formatRange(500, 0);  // RangeError
 
 Main Issue: [#3](https://github.com/tc39/proposal-intl-numberformat-v3/issues/3)
 
-Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
+Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when specifying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
 
 - `false`: do not display grouping separators
 - `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group). (Bikeshed: [#23](https://github.com/tc39/proposal-intl-numberformat-v3/issues/23))
