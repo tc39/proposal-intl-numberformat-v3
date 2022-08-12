@@ -98,7 +98,7 @@ nf.formatRange(500, 0);  // RangeError
 
 Main Issue: [#3](https://github.com/tc39/proposal-intl-numberformat-v3/issues/3)
 
-Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when speficying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
+Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a boolean value.  However, as reported in the bug thread, there are several options users may want when specifying grouping.  This proposal is to make the following be valid inputs to `{ useGrouping }`:
 
 - `false`: do not display grouping separators
 - `"min2"`: display grouping separators when there are at least 2 digits in a group; for example, "1000" (first group too small) and "10,000" (now there are at least 2 digits in that group). (Bikeshed: [#23](https://github.com/tc39/proposal-intl-numberformat-v3/issues/23))
@@ -176,7 +176,22 @@ nf.format(string);
 // Proposed: "987,654,321,987,654,321"
 ```
 
-We will reference existing standards for interpreting decimal number strings where possible.
+A common use case is to store currency amounts as a BigInt of a small unit, like cents. This API can be used to retain full precision of the BigInt:
+
+```javascript
+const nf = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "EUR",
+});
+const bi = 1000000000000000110000n;
+nf.format(bi + "E-6");
+// Current:  "€1,000,000,000,000,000.10"
+// Proposed: "€1,000,000,000,000,000.11"
+```
+
+The general syntax for decimal strings, essentially `#.#E#`, is a widely understood format in computing. The specific version we use is the ECMA-262 `StringNumericLiteral` grammar, which also allows non-base-10 numbers like hexadecimal and binary.
+
+Arbitrary-precision decimal strings are intended to be used as pass-through for formatting. The champions do not intend for strings to become the de-facto standard for numeric computations in ECMAScript. For a general-purpose arbitrary-precision decimal type, see the [Decimal](https://github.com/tc39/proposal-decimal) proposal.
 
 ### Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
