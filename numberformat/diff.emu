@@ -122,13 +122,15 @@
             1. Let _mxfdDefault_ be 0.
           1. Else,
             1. Let _mxfdDefault_ be 3.
+        1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).</ins>
+        1. <ins class="block">If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not 1, set _mxfdDefault_ to _mnfdDefault_.</ins>
         1. Let _notation_ be ? GetOption(_options_, *"notation"*, *"string"*, &laquo; *"standard"*, *"scientific"*, *"engineering"*, *"compact"* &raquo;, *"standard"*).
         1. Set _numberFormat_.[[Notation]] to _notation_.
         1. Perform ? SetNumberFormatDigitOptions(_numberFormat_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_).
-        1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).</ins>
-        1. <ins class="block">If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.</ins>
-        1. <ins class="block">If _roundingIncrement_ is not 1 and _numberFormat_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.</ins>
-        1. <ins class="block">If _roundingIncrement_ is not 1 and _numberFormat_.[[MaximumFractionDigits]] is not equal to _numberFormat_.[[MinimumFractionDigits]], throw a *RangeError* exception.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not 1, then</ins>
+          1. <ins class="block">If _numberFormat_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.</ins>
+          1. <ins class="block">If _numberFormat_.[[MaximumFractionDigits]] is not equal to _numberFormat_.[[MinimumFractionDigits]], throw a *RangeError* exception.</ins>
         1. <ins class="block">Set _numberFormat_.[[RoundingIncrement]] to _roundingIncrement_.</ins>
         1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, *"string"*, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).</ins>
         1. <ins class="block">Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.</ins>
