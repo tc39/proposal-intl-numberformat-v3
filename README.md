@@ -153,16 +153,18 @@ The new setting `roundingPriority` offers a hint on how to resolve this conflict
 2. `roundingPriority: "morePrecision"` means that the result with more precision wins a conflict.
 3. `roundingPriority: "lessPrecision"` means that the result with less precision wins a conflict.
 
-This resolution algorithm applies separately between the maximum digits settings and the minimum digits settings.  So, for example, suppose you had
+The whole result is taken atomically, including the trailing zeros. For example:
 
 ```
 {
     minimumFractionDigits: 2,
-    minimumSignificantDigits: 2
+    maximumFractionDigits: 2,
+    minimumSignificantDigits: 2,
+    maximumSignificantDigits: 6
 }
 ```
 
-Consider the input number "1".  `minimumFractionDigits` wants to retain trailing zeros up to the hundredths place, producing "1.00", whereas `minimumSignificantDigits` wants to retain only as many as are required to render two significant digits, producing "1.0".  We again have a conflict, and the conflict is resolved in the same way.
+Consider the input number "1".  `minimumFractionDigits` wants to retain trailing zeros up to the hundredths place, producing "1.00", whereas `minimumSignificantDigits` wants to retain only as many as are required to render two significant digits, producing "1.0". However, since `maximumSignificantDigits` has more precision (rounding to 10^-5, rather than 10^-2 for fraction precision), the resolved answer is "1.0".
 
 ### Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
 
