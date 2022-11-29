@@ -177,11 +177,10 @@
       </p>
 
       <emu-alg>
-        1. If _x_ is ~negative-zero~, then
-          1. Let _isNegative_ be *true*.
-          1. Let _x_ be the mathematical value 0.
+        1. Let _isNegative_ be *true*.
+        1. If _x_ is ~negative-zero~, set _x_ to the mathematical value 0.
         1. Assert: _x_ is a mathematical value.
-        1. If _x_ &lt; 0, let _isNegative_ be *true*; else let _isNegative_ be *false*.
+        1. If _x_ > 0, set _isNegative_ to *false*.
         1. If _isNegative_, then
           1. Let _x_ be -_x_.
         1. Let _unsignedRoundingMode_ be GetUnsignedRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).
