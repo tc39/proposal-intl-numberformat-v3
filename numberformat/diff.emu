@@ -101,10 +101,7 @@
         1. Return _numberFormat_.
       </emu-alg>
     </emu-clause>
-  </emu-clause>
 
-  <emu-clause id="sec-numberformat-abstracts">
-    <h1>Abstract Operations for NumberFormat Objects</h1>
     <emu-clause id="sec-setnfdigitoptions" aoid="SetNumberFormatDigitOptions">
       <h1>SetNumberFormatDigitOptions ( _intlObj_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_ )</h1>
 
@@ -218,6 +215,10 @@
           1. Set _intlObj_.[[UnitDisplay]] to _unitDisplay_.
       </emu-alg>
     </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-numberformat-abstracts">
+    <h1>Abstract Operations for NumberFormat Objects</h1>
 
     <emu-clause id="sec-currencydigits" aoid="CurrencyDigits">
       <h1>CurrencyDigits ( _currency_ )</h1>
