@@ -19,22 +19,24 @@
         1. If NewTarget is *undefined*, let _newTarget_ be the active function object, else let _newTarget_ be NewTarget.
         1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], [[RoundingMode]], [[RoundingIncrement]], [[TrailingZeroDisplay]], [[BoundFormat]] &raquo;).
         1. Perform ? InitializeNumberFormat(_numberFormat_, _locales_, _options_).
+        1. If the implementation supports the normative optional constructor mode of <emu-xref href="#legacy-constructor"></emu-xref>, then
+          1. Let _this_ be the *this* value.
+          1. Return ? ChainNumberFormat(_numberFormat_, NewTarget, _this_).
+        1. Return _numberFormat_.
       </emu-alg>
+
       <emu-normative-optional>
-      <!-- Note: 4. is intentional -->
-      <emu-alg>
-        4. Let _this_ be the *this* value.
-        1. If NewTarget is *undefined* and ? OrdinaryHasInstance(%NumberFormat%, _this_) is *true*, then
-          1. Perform ? DefinePropertyOrThrow(_this_, %Intl%.[[FallbackSymbol]], PropertyDescriptor{ [[Value]]: _numberFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
-          1. Return _this_.
-      </emu-alg>
+      <emu-clause id="sec-chainnumberformat" aoid="ChainNumberFormat">
+        <h1>ChainNumberFormat ( _numberFormat_, _newTarget_, _this_ )</h1>
+        <emu-alg>
+          1. If _newTarget_ is *undefined* and ? OrdinaryHasInstance(%NumberFormat%, _this_) is *true*, then
+            1. Perform ? DefinePropertyOrThrow(_this_, %Intl%.[[FallbackSymbol]], PropertyDescriptor{ [[Value]]: _numberFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
+            1. Return _this_.
+          1. Return _numberFormat_.
+        </emu-alg>
+      </emu-clause>
       </emu-normative-optional>
-      <!-- Note: 6. is intentional -->
-      <emu-alg>
-        6. Return _numberFormat_.
-      </emu-alg>
     </emu-clause>
-    <emu-note>See <emu-xref href="#legacy-constructor"></emu-xref> for the motivation of the normative optional text.</emu-note>
 
     <emu-clause id="sec-initializenumberformat" aoid="InitializeNumberFormat">
       <h1>InitializeNumberFormat ( _numberFormat_, _locales_, _options_ )</h1>
