@@ -1234,7 +1234,11 @@
         1. Let _result_ be a new empty List.
         1. Let _xResult_ be ? PartitionNumberPattern(_numberFormat_, _x_).
         1. Let _yResult_ be ? PartitionNumberPattern(_numberFormat_, _y_).
-        1. If _xResult_ is equal to _yResult_, return FormatApproximately(_numberFormat_, _xResult_).
+        1. If _xResult_ is equal to _yResult_, then
+          1. Let _appxResult_ be ? FormatApproximately(_numberFormat_, _xResult_).
+          1. For each _r_ in _appxResult_, do
+            1. Set _r_.[[Source]] to *"shared"*.
+          1. Return _appxResult_.
         1. For each _r_ in _xResult_, do
           1. Set _r_.[[Source]] to *"startRange"*.
         1. Add all elements in _xResult_ to _result_ in order.
