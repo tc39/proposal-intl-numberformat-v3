@@ -1,6 +1,42 @@
 <emu-clause id="numberformat-objects">
   <h1>NumberFormat Objects</h1>
 
+  <emu-clause id="sec-intl-numberformat-constructor">
+    <h1>The Intl.NumberFormat Constructor</h1>
+
+    <p>
+      The NumberFormat constructor is the <dfn>%NumberFormat%</dfn> intrinsic object and a standard built-in property of the Intl object. Behaviour common to all service constructor properties of the Intl object is specified in <emu-xref href="#sec-internal-slots"></emu-xref>.
+    </p>
+
+    <emu-clause id="sec-intl.numberformat">
+      <h1>Intl.NumberFormat ( [ _locales_ [ , _options_ ] ] )</h1>
+
+      <p>
+        When the `Intl.NumberFormat` function is called with optional arguments _locales_ and _options_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. If NewTarget is *undefined*, let _newTarget_ be the active function object, else let _newTarget_ be NewTarget.
+        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], <ins>[[RoundingMode]], [[RoundingIncrement]], [[TrailingZeroDisplay]],</ins> [[BoundFormat]] &raquo;).
+        1. Perform ? InitializeNumberFormat(_numberFormat_, _locales_, _options_).
+      </emu-alg>
+      <emu-normative-optional>
+      <!-- Note: 4. is intentional -->
+      <emu-alg>
+        4. Let _this_ be the *this* value.
+        1. If NewTarget is *undefined* and ? OrdinaryHasInstance(%NumberFormat%, _this_) is *true*, then
+          1. Perform ? DefinePropertyOrThrow(_this_, %Intl%.[[FallbackSymbol]], PropertyDescriptor{ [[Value]]: _numberFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
+          1. Return _this_.
+      </emu-alg>
+      </emu-normative-optional>
+      <!-- Note: 6. is intentional -->
+      <emu-alg>
+        6. Return _numberFormat_.
+      </emu-alg>
+    </emu-clause>
+    <emu-note>See <emu-xref href="#legacy-constructor"></emu-xref> for the motivation of the normative optional text.</emu-note>
+  </emu-clause>
+
   <emu-clause id="sec-numberformat-abstracts">
     <h1>Abstract Operations for NumberFormat Objects</h1>
     <emu-clause id="sec-setnfdigitoptions" aoid="SetNumberFormatDigitOptions">
@@ -1315,42 +1351,6 @@
       </emu-alg>
     </emu-clause>
     </ins>
-  </emu-clause>
-
-  <emu-clause id="sec-intl-numberformat-constructor">
-    <h1>The Intl.NumberFormat Constructor</h1>
-
-    <p>
-      The NumberFormat constructor is the <dfn>%NumberFormat%</dfn> intrinsic object and a standard built-in property of the Intl object. Behaviour common to all service constructor properties of the Intl object is specified in <emu-xref href="#sec-internal-slots"></emu-xref>.
-    </p>
-
-    <emu-clause id="sec-intl.numberformat">
-      <h1>Intl.NumberFormat ( [ _locales_ [ , _options_ ] ] )</h1>
-
-      <p>
-        When the `Intl.NumberFormat` function is called with optional arguments _locales_ and _options_, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. If NewTarget is *undefined*, let _newTarget_ be the active function object, else let _newTarget_ be NewTarget.
-        1. Let _numberFormat_ be ? OrdinaryCreateFromConstructor(_newTarget_, *"%NumberFormat.prototype%"*, &laquo; [[InitializedNumberFormat]], [[Locale]], [[DataLocale]], [[NumberingSystem]], [[Style]], [[Unit]], [[UnitDisplay]], [[Currency]], [[CurrencyDisplay]], [[CurrencySign]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[RoundingType]], [[Notation]], [[CompactDisplay]], [[UseGrouping]], [[SignDisplay]], <ins>[[RoundingMode]], [[RoundingIncrement]], [[TrailingZeroDisplay]],</ins> [[BoundFormat]] &raquo;).
-        1. Perform ? InitializeNumberFormat(_numberFormat_, _locales_, _options_).
-      </emu-alg>
-      <emu-normative-optional>
-      <!-- Note: 4. is intentional -->
-      <emu-alg>
-        4. Let _this_ be the *this* value.
-        1. If NewTarget is *undefined* and ? OrdinaryHasInstance(%NumberFormat%, _this_) is *true*, then
-          1. Perform ? DefinePropertyOrThrow(_this_, %Intl%.[[FallbackSymbol]], PropertyDescriptor{ [[Value]]: _numberFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
-          1. Return _this_.
-      </emu-alg>
-      </emu-normative-optional>
-      <!-- Note: 6. is intentional -->
-      <emu-alg>
-        6. Return _numberFormat_.
-      </emu-alg>
-    </emu-clause>
-    <emu-note>See <emu-xref href="#legacy-constructor"></emu-xref> for the motivation of the normative optional text.</emu-note>
   </emu-clause>
 
   <emu-clause id="sec-properties-of-intl-numberformat-constructor">
