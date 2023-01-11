@@ -294,7 +294,7 @@
       <h1>Intl.NumberFormat.prototype.constructor</h1>
 
       <p>
-        The initial value of `Intl.NumberFormat.prototype.constructor` is the intrinsic object %NumberFormat%.
+        The initial value of `Intl.NumberFormat.prototype.constructor` is %NumberFormat%.
       </p>
     </emu-clause>
 
@@ -318,8 +318,9 @@
 
       <emu-alg>
         1. Let _nf_ be the *this* value.
-        1. If Type(_nf_) is not Object, throw a *TypeError* exception.
-        1. Let _nf_ be ? UnwrapNumberFormat(_nf_).
+        1. If the implementation supports the normative optional constructor mode of <emu-xref href="#legacy-constructor"></emu-xref>, then
+          1. Set _nf_ to ? UnwrapNumberFormat(_nf_).
+        1. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
         1. If _nf_.[[BoundFormat]] is *undefined*, then
           1. Let _F_ be a new built-in function object as defined in Number Format Functions (<emu-xref href="#sec-number-format-functions"></emu-xref>).
           1. Set _F_.[[NumberFormat]] to _nf_.
@@ -386,14 +387,15 @@
       <h1>Intl.NumberFormat.prototype.resolvedOptions ( )</h1>
 
       <p>
-        This function provides access to the locale and formatting options computed during initialization of the object.
+        This function provides access to the locale and options computed during initialization of the object.
       </p>
 
       <emu-alg>
         1. Let _nf_ be the *this* value.
-        1. If Type(_nf_) is not Object, throw a *TypeError* exception.
-        1. Let _nf_ be ? UnwrapNumberFormat(_nf_).
-        1. Let _options_ be ! OrdinaryObjectCreate(%Object.prototype%).
+        1. If the implementation supports the normative optional constructor mode of <emu-xref href="#legacy-constructor"></emu-xref>, then
+          1. Set _nf_ to ? UnwrapNumberFormat(_nf_).
+        1. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
+        1. Let _options_ be OrdinaryObjectCreate(%Object.prototype%).
         1. For each row of <emu-xref href="#table-numberformat-resolvedoptions-properties"></emu-xref>, except the header row, in table order, do
           1. Let _p_ be the Property value of the current row.
           1. Let _v_ be the value of _nf_'s internal slot whose name is the Internal Slot value of the current row.
