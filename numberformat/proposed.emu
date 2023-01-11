@@ -1305,23 +1305,23 @@
         1. Else,
           1. Let _n_ be _n2_.
           1. Let _xFinal_ be _r2_.
-        1. If _n_ = 0, let _m_ be the String *"0"*. Otherwise, let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
-        1. If _f_ ≠ 0, then
-          1. Let _k_ be the number of characters in _m_.
-          1. If _k_ ≤ _f_, then
-            1. Let _z_ be the String value consisting of _f_+1–_k_ occurrences of the character *"0"*.
-            1. Let _m_ be the string-concatenation of _z_ and _m_.
-            1. Let _k_ be _f_+1.
-          1. Let _a_ be the first _k_–_f_ characters of _m_, and let _b_ be the remaining _f_ characters of _m_.
-          1. Let _m_ be the string-concatenation of _a_, *"."*, and _b_.
-          1. Let _int_ be the number of characters in _a_.
-        1. Else, let _int_ be the number of characters in _m_.
-        1. Let _cut_ be _maxFraction_ – _minFraction_.
-        1. Repeat, while _cut_ > 0 and the last character of _m_ is *"0"*,
-          1. Remove the last character from _m_.
+        1. If _n_ = 0, let _m_ be *"0"*. Otherwise, let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
+        1. If _f_ &ne; 0, then
+          1. Let _k_ be the length of _m_.
+          1. If _k_ &le; _f_, then
+            1. Let _z_ be the String value consisting of _f_ + 1 - _k_ occurrences of the code unit 0x0030 (DIGIT ZERO).
+            1. Set _m_ to the string-concatenation of _z_ and _m_.
+            1. Set _k_ to _f_ + 1.
+          1. Let _a_ be the first _k_ - _f_ code units of _m_, and let _b_ be the remaining _f_ code units of _m_.
+          1. Set _m_ to the string-concatenation of _a_, *"."*, and _b_.
+          1. Let _int_ be the length of _a_.
+        1. Else, let _int_ be the length of _m_.
+        1. Let _cut_ be _maxFraction_ - _minFraction_.
+        1. Repeat, while _cut_ &gt; 0 and the last code unit of _m_ is 0x0030 (DIGIT ZERO),
+          1. Remove the last code unit from _m_.
           1. Decrease _cut_ by 1.
-        1. If the last character of _m_ is *"."*, then
-          1. Remove the last character from _m_.
+        1. If the last code unit of _m_ is 0x002E (FULL STOP), then
+          1. Remove the last code unit from _m_.
         1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_, [[RoundingMagnitude]]: –_f_ }.
       </emu-alg>
     </emu-clause>
