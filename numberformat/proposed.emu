@@ -94,7 +94,7 @@
         1. If _notation_ is *"compact"*, then
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
           1. Set _defaultUseGrouping_ to *"min2"*.
-        1. Let _useGrouping_ be ? GetStringOrBooleanOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"* &raquo;, *"always"*, *false*, _defaultUseGrouping_).
+        1. Let _useGrouping_ be ? GetNumberFormatUseGroupingOption(_options_, _defaultUseGrouping_).
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, ~string~, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*, *"negative"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
