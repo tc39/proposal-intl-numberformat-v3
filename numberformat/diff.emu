@@ -1581,20 +1581,17 @@
       </p>
       <emu-alg>
         1. Let _primValue_ be ? ToPrimitive(_value_, ~number~).
-        1. If Type(_primValue_) is BigInt, return the mathematical value of _primValue_.
+        1. If Type(_primValue_) is BigInt, return ℝ(_primValue_).
         1. If Type(_primValue_) is String,
           1. Let _str_ be _primValue_.
         1. Else,
           1. Let _x_ be ? ToNumber(_primValue_).
-          1. If _x_ is *-0*<sub>𝔽</sub>, then
-            1. Let _str_ be *"-0"*.
-          1. Else,
-            1. Let _str_ be ! Number::toString(_x_).
+          1. If _x_ is *-0*<sub>𝔽</sub>, return ~negative-zero~.
+          1. Let _str_ be ! Number::toString(_x_).
         1. Let _text_ be ! StringToCodePoints(_str_).
         1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
-        1. If _literal_ is a List of errors, let _mv_ be ~not-a-number~.
-        1. Else, let _mv_ be the StringIntlMV of _literal_.
-        1. Return _mv_.
+        1. If _literal_ is a List of errors, return ~not-a-number~.
+        1. Return the StringIntlMV of _literal_.
       </emu-alg>
     </emu-clause>
 
