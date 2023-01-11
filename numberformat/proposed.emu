@@ -1159,6 +1159,10 @@
             <td>U+114D0 to U+114D9</td>
           </tr>
           <tr>
+            <td>tnsa</td>
+            <td>U+16AC0 to U+16AC9</td>
+          </tr>
+          <tr>
             <td>vaii</td>
             <td>U+A620 to U+A629</td>
           </tr>
@@ -1174,11 +1178,11 @@
       </emu-table>
 
       <emu-note>
-        The computations rely on String values and locations within numeric strings that are dependent upon the implementation and the effective locale of _numberFormat_ ("ILD") or upon the implementation, the effective locale, and the numbering system of _numberFormat_ ("ILND"). The ILD and ILND Strings mentioned, other than those for currency names, must not contain any characters in the General Category "Number, decimal digit" as specified by the Unicode Standard.
+        The computations rely on String values and locations within numeric strings that are dependent upon the implementation and the effective locale of _numberFormat_ ("ILD") or upon the implementation, the effective locale, and the numbering system of _numberFormat_ ("ILND"). The ILD and ILND Strings mentioned, other than those for currency names, must not contain any code points in the General Category "Number, decimal digit" as specified by the Unicode Standard.
       </emu-note>
 
       <emu-note>
-        It is recommended that implementations use the locale provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org">http://cldr.unicode.org</a>).
+        It is recommended that implementations use the locale provided by the Common Locale Data Repository (available at <a href="https://cldr.unicode.org/">https://cldr.unicode.org/</a>).
       </emu-note>
     </emu-clause>
 
@@ -1207,7 +1211,7 @@
 
       <emu-alg>
         1. Let _parts_ be ? PartitionNumberPattern(_numberFormat_, _x_).
-        1. Let _result_ be ArrayCreate(0).
+        1. Let _result_ be ! ArrayCreate(0).
         1. Let _n_ be 0.
         1. For each Record { [[Type]], [[Value]] } _part_ in _parts_, do
           1. Let _O_ be OrdinaryObjectCreate(%Object.prototype%).
@@ -1238,7 +1242,7 @@
       <emu-alg>
         1. Let _p_ be _maxPrecision_.
         1. If _x_ = 0, then
-          1. Let _m_ be the String consisting of _p_ occurrences of the character *"0"*.
+          1. Let _m_ be the String consisting of _p_ occurrences of the code unit 0x0030 (DIGIT ZERO).
           1. Let _e_ be 0.
           1. Let _xFinal_ be 0.
         1. Else,
@@ -1254,23 +1258,23 @@
             1. Let _e_ be _e2_.
             1. Let _xFinal_ be _r2_.
           1. Let _m_ be the String consisting of the digits of the decimal representation of _n_ (in order, with no leading zeroes).
-        1. If _e_ ≥ _p_–1, then
-          1. Let _m_ be the string-concatenation of _m_ and _e_–_p_+1 occurrences of the character *"0"*.
-          1. Let _int_ be _e_+1.
-        1. Else if _e_ ≥ 0, then
-          1. Let _m_ be the string-concatenation of the first _e_+1 characters of _m_, the character *"."*, and the remaining _p_–(_e_+1) characters of _m_.
-          1. Let _int_ be _e_+1.
+        1. If _e_ &ge; (_p_ - 1), then
+          1. Set _m_ to the string-concatenation of _m_ and _e_ - _p_ + 1 occurrences of the code unit 0x0030 (DIGIT ZERO).
+          1. Let _int_ be _e_ + 1.
+        1. Else if _e_ &ge; 0, then
+          1. Set _m_ to the string-concatenation of the first _e_ + 1 code units of _m_, the code unit 0x002E (FULL STOP), and the remaining _p_ - (_e_ + 1) code units of _m_.
+          1. Let _int_ be _e_ + 1.
         1. Else,
-          1. Assert: _e_ < 0.
-          1. Let _m_ be the string-concatenation of the String value *"0."*, –(_e_+1) occurrences of the character *"0"*, and _m_.
+          1. Assert: _e_ &lt; 0.
+          1. Set _m_ to the string-concatenation of *"0."*, -(_e_ + 1) occurrences of the code unit 0x0030 (DIGIT ZERO), and _m_.
           1. Let _int_ be 1.
-        1. If _m_ contains the character *"."*, and _maxPrecision_ > _minPrecision_, then
-          1. Let _cut_ be _maxPrecision_ – _minPrecision_.
-          1. Repeat, while _cut_ > 0 and the last character of _m_ is *"0"*,
-            1. Remove the last character from _m_.
+        1. If _m_ contains the code unit 0x002E (FULL STOP) and _maxPrecision_ &gt; _minPrecision_, then
+          1. Let _cut_ be _maxPrecision_ - _minPrecision_.
+          1. Repeat, while _cut_ &gt; 0 and the last code unit of _m_ is 0x0030 (DIGIT ZERO),
+            1. Remove the last code unit from _m_.
             1. Decrease _cut_ by 1.
-          1. If the last character of _m_ is *"."*, then
-            1. Remove the last character from _m_.
+          1. If the last code unit of _m_ is 0x002E (FULL STOP), then
+            1. Remove the last code unit from _m_.
         1. Return the Record { [[FormattedString]]: _m_, [[RoundedNumber]]: _xFinal_, [[IntegerDigitsCount]]: _int_, [[RoundingMagnitude]]: _e_–_p_+1 }.
       </emu-alg>
     </emu-clause>
