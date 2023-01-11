@@ -1548,7 +1548,7 @@
           1. Let _str_ be _primValue_.
         1. Else,
           1. Let _x_ be ? ToNumber(_primValue_).
-          1. If _x_ is -0, then
+          1. If _x_ is *-0*<sub>𝔽</sub>, then
             1. Let _str_ be *"-0"*.
           1. Else,
             1. Let _str_ be ! Number::toString(_x_).
