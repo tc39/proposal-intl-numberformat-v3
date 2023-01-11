@@ -450,12 +450,12 @@
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[DataLocale]] is a String value with the language tag of the nearest locale for which the implementation has data to perform the formatting operation. It will be a parent locale of [[Locale]].</li>
-      <li>[[NumberingSystem]] is a String value with the "type" given in Unicode Technical Standard 35 for the numbering system used for formatting.</li>
+      <li>[[NumberingSystem]] is a String value with the "type" given in Unicode Technical Standard #35 for the numbering system used for formatting.</li>
       <li>[[Style]] is one of the String values *"decimal"*, *"currency"*, *"percent"*, or *"unit"*, identifying the type of quantity being measured.</li>
       <li>[[Currency]] is a String value with the currency code identifying the currency to be used if formatting with the *"currency"* unit type. It is only used when [[Style]] has the value *"currency"*.</li>
       <li>[[CurrencyDisplay]] is one of the String values *"code"*, *"symbol"*, *"narrowSymbol"*, or *"name"*, specifying whether to display the currency as an ISO 4217 alphabetic currency code, a localized currency symbol, or a localized currency name if formatting with the *"currency"* style. It is only used when [[Style]] has the value *"currency"*.</li>
       <li>[[CurrencySign]] is one of the String values *"standard"* or *"accounting"*, specifying whether to render negative numbers in accounting format, often signified by parenthesis. It is only used when [[Style]] has the value *"currency"* and when [[SignDisplay]] is not *"never"*.</li>
-      <li>[[Unit]] is a core unit identifier, as defined by Unicode Technical Standard #35, Part 2, Section 6. It is only used when [[Style]] has the value *"unit"*.</li>
+      <li>[[Unit]] is a core unit identifier. It is only used when [[Style]] has the value *"unit"*.</li>
       <li>[[UnitDisplay]] is one of the String values *"short"*, *"narrow"*, or *"long"*, specifying whether to display the unit as a symbol, narrow symbol, or localized long name if formatting with the *"unit"* style. It is only used when [[Style]] has the value *"unit"*.</li>
       <li>[[MinimumIntegerDigits]] is a non-negative integer Number value indicating the minimum integer digits to be used. Numbers will be padded with leading zeroes if necessary.</li>
       <li>[[MinimumFractionDigits]] and [[MaximumFractionDigits]] are non-negative integer Number values indicating the minimum and maximum fraction digits to be used. Numbers will be rounded or padded with trailing zeroes if necessary. These properties are only used when [[RoundingType]] is ~fractionDigits~.</li>
@@ -464,7 +464,10 @@
       <li>[[RoundingType]] is one of the values ~fractionDigits~, ~significantDigits~, or ~compactRounding~, indicating which rounding strategy to use. If ~fractionDigits~, the number is rounded according to [[MinimumFractionDigits]] and [[MaximumFractionDigits]], as described above. If ~significantDigits~, the number is rounded according to [[MinimumSignificantDigits]] and [[MaximumSignificantDigits]] as described above. If ~compactRounding~, the number is rounded to 1 maximum fraction digit if there is 1 digit before the decimal separator, and otherwise round to 0 fraction digits.</li>
       <li>[[Notation]] is one of the String values *"standard"*, *"scientific"*, *"engineering"*, or *"compact"*, specifying whether the number should be displayed without scaling, scaled to the units place with the power of ten in scientific notation, scaled to the nearest thousand with the power of ten in scientific notation, or scaled to the nearest locale-dependent compact decimal notation power of ten with the corresponding compact decimal notation affix.</li>
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
-      <li>[[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, or *"exceptZero"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, or positive and negative numbers but not zero. In scientific notation, this slot affects the sign display of the mantissa but not the exponent.</li>
+      <li>
+        [[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, or *"exceptZero"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, or positive and negative numbers but not zero.
+        In scientific notation, this slot affects the sign display of the mantissa but not the exponent.
+      </li>
     </ul>
 
     <p>
