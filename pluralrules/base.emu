@@ -33,14 +33,14 @@
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. Set _options_ to ? CoerceOptionsToObject(_options_).
         1. Let _opt_ be a new Record.
-        1. Let _matcher_ be ? GetOption(_options_, *"localeMatcher"*, *"string"*, &laquo; *"lookup"*, *"best fit"* &raquo;, *"best fit"*).
+        1. Let _matcher_ be ? GetOption(_options_, *"localeMatcher"*, ~string~, &laquo; *"lookup"*, *"best fit"* &raquo;, *"best fit"*).
         1. Set _opt_.[[localeMatcher]] to _matcher_.
-        1. Let _t_ be ? GetOption(_options_, *"type"*, *"string"*, &laquo; *"cardinal"*, *"ordinal"* &raquo;, *"cardinal"*).
+        1. Let _t_ be ? GetOption(_options_, *"type"*, ~string~, &laquo; *"cardinal"*, *"ordinal"* &raquo;, *"cardinal"*).
         1. Set _pluralRules_.[[Type]] to _t_.
         1. Perform ? SetNumberFormatDigitOptions(_pluralRules_, _options_, *+0*<sub>𝔽</sub>, *3*<sub>𝔽</sub>, *"standard"*).
         1. Let _localeData_ be %PluralRules%.[[LocaleData]].
         1. Let _r_ be ResolveLocale(%PluralRules%.[[AvailableLocales]], _requestedLocales_, _opt_, %PluralRules%.[[RelevantExtensionKeys]], _localeData_).
-        1. Set _pluralRules_.[[Locale]] to the value of _r_.[[locale]].
+        1. Set _pluralRules_.[[Locale]] to _r_.[[locale]].
         1. Return _pluralRules_.
       </emu-alg>
     </emu-clause>
@@ -76,10 +76,6 @@
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. Return ? SupportedLocales(_availableLocales_, _requestedLocales_, _options_).
       </emu-alg>
-
-      <p>
-        The value of the *"length"* property of the `supportedLocalesOf` method is 1.
-      </p>
     </emu-clause>
 
     <emu-clause id="sec-intl.pluralrules-internal-slots">
@@ -94,7 +90,7 @@
       </p>
 
       <emu-note>
-        Unicode Technical Standard 35 describes no locale extension keys that are relevant to the pluralization process.
+        Unicode Technical Standard #35 describes no locale extension keys that are relevant to the pluralization process.
       </emu-note>
 
       <p>
@@ -102,7 +98,7 @@
       </p>
 
       <emu-note>
-        It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org">http://cldr.unicode.org</a>).
+        It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="https://cldr.unicode.org/">https://cldr.unicode.org/</a>).
       </emu-note>
     </emu-clause>
   </emu-clause>
@@ -118,7 +114,7 @@
       <h1>Intl.PluralRules.prototype.constructor</h1>
 
       <p>
-        The initial value of `Intl.PluralRules.prototype.constructor` is the intrinsic object %PluralRules%.
+        The initial value of `Intl.PluralRules.prototype.constructor` is %PluralRules%.
       </p>
     </emu-clause>
 
