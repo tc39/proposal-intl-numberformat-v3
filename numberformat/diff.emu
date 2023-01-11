@@ -776,14 +776,10 @@
         1. Let _exponent_ be 0.
         1. If _x_ is <del>*NaN*</del><ins>~not-a-number~</ins>, then
           1. Let _n_ be an implementation- and locale-dependent (ILD) String value indicating the *NaN* value.
-        1. <del class="block">Else if _x_ is *+&infin;*<sub>𝔽</sub>, then</del>
-          1. <del class="block">Let _n_ be an ILD String value indicating positive infinity.</del>
-        1. <del class="block">Else if _x_ is *-&infin;*<sub>𝔽</sub>, then</del>
-          1. <del class="block">Let _n_ be an ILD String value indicating negative infinity.</del>
-        1. <ins class="block">Else if _x_ is ~positive-infinity~, then</ins>
-          1. <ins class="block">Let _n_ be an ILD String value indicating positive infinity.</ins>
-        1. <ins class="block">Else if _x_ is ~negative-infinity~, then</ins>
-          1. <ins class="block">Let _n_ be an ILD String value indicating negative infinity.</ins>
+        1. Else if _x_ is <del>*+&infin;*<sub>𝔽</sub></del><ins>~positive-infinity~</ins>, then
+          1. Let _n_ be an ILD String value indicating positive infinity.
+        1. Else if _x_ is <del>*-&infin;*<sub>𝔽</sub></del><ins>~negative-infinity~</ins>, then
+          1. Let _n_ be an ILD String value indicating negative infinity.
         1. Else,
           1. <del>Set _x_ to ℝ(_x_).</del>
           1. <del>If _numberFormat_.[[Style]] is *"percent"*, set _x_ to 100 &times; _x_.</del>
