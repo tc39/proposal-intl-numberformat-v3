@@ -1097,30 +1097,23 @@
       </emu-alg>
     </emu-clause>
 
+    <emu-normative-optional>
     <emu-clause id="sec-unwrapnumberformat" aoid="UnwrapNumberFormat">
       <h1>UnwrapNumberFormat ( _nf_ )</h1>
       <p>
-        The UnwrapNumberFormat abstract operation gets the underlying NumberFormat operation
-        for various methods which implement ECMA-402 v1 semantics for supporting initializing
-        existing Intl objects.
+        The UnwrapNumberFormat abstract operation returns the NumberFormat instance
+        of its input object, which is either the value itself or a value associated
+        with it by %NumberFormat% according to the normative optional
+        constructor mode of <emu-xref href="#legacy-constructor"></emu-xref>.
       </p>
       <emu-alg>
-        1. Assert: Type(_nf_) is Object.
-      </emu-alg>
-      <emu-normative-optional>
-      <!-- Note: 2. is intentional -->
-      <emu-alg>
-        2. If _nf_ does not have an [[InitializedNumberFormat]] internal slot and ? OrdinaryHasInstance(%NumberFormat%, _nf_) is *true*, then
-          1. Let _nf_ be ? Get(_nf_, %Intl%.[[FallbackSymbol]]).
-      </emu-alg>
-      </emu-normative-optional>
-      <!-- Note: 3. is intentional -->
-      <emu-alg>
-        3. Perform ? RequireInternalSlot(_nf_, [[InitializedNumberFormat]]).
+        1. If Type(_nf_) is not Object, throw a *TypeError* exception.
+        1. If _nf_ does not have an [[InitializedNumberFormat]] internal slot and ? OrdinaryHasInstance(%NumberFormat%, _nf_) is *true*, then
+          1. Return ? Get(_nf_, %Intl%.[[FallbackSymbol]]).
         1. Return _nf_.
       </emu-alg>
-      <emu-note>See <emu-xref href="#legacy-constructor"></emu-xref> for the motivation of the normative optional text.</emu-note>
     </emu-clause>
+    </emu-normative-optional>
 
     <emu-clause id="sec-getnumberformatpattern" aoid="GetNumberFormatPattern">
       <h1>GetNumberFormatPattern ( _numberFormat_, _x_ )</h1>
