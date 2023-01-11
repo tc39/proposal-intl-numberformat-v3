@@ -482,7 +482,7 @@
       <h1>CurrencyDigits ( _currency_ )</h1>
 
       <p>
-        When the CurrencyDigits abstract operation is called with an argument _currency_ (which must be an upper case String value), the following steps are taken:
+        When the CurrencyDigits abstract operation is called with an argument _currency_ (which must be an uppercase String value), the following steps are taken:
       </p>
 
       <emu-alg>
@@ -517,7 +517,7 @@
       </p>
 
       <emu-alg>
-        1. If _x_ &lt; 0 or _x_ is *-0*<sub>𝔽</sub>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
+        1. If ℝ(_x_) &lt; 0 or _x_ is *-0*<sub>𝔽</sub>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
         1. If _isNegative_, then
           1. Let _x_ be -_x_.
         1. If _intlObject_.[[RoundingType]] is ~significantDigits~, then
@@ -533,8 +533,8 @@
         1. Let _string_ be _result_.[[FormattedString]].
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
         1. Let _minInteger_ be _intlObject_.[[MinimumIntegerDigits]].
-        1. If _int_ < _minInteger_, then
-          1. Let _forwardZeros_ be the String consisting of _minInteger_–_int_ occurrences of the character *"0"*.
+        1. If _int_ &lt; _minInteger_, then
+          1. Let _forwardZeros_ be the String consisting of _minInteger_ - _int_ occurrences of the code unit 0x0030 (DIGIT ZERO).
           1. Set _string_ to the string-concatenation of _forwardZeros_ and _string_.
         1. If _isNegative_, then
           1. Let _x_ be -_x_.
