@@ -2,7 +2,7 @@
   <h1>Implementation Dependent Behaviour</h1>
 
   <p>
-    The following aspects of the ECMAScript 2022 Internationalization API Specification are implementation dependent:
+    The following aspects of the ECMAScript 2023 Internationalization API Specification are implementation dependent:
   </p>
 
   <ul>
@@ -16,7 +16,7 @@
           The default locale (<emu-xref href="#sec-defaultlocale"></emu-xref>)
         </li>
         <li>
-          The default time zone (<emu-xref href="#sec-defaulttimezone"></emu-xref>)
+          The default time zone (<emu-xref href="#sup-defaulttimezone"></emu-xref>)
         </li>
         <li>
           The set of available locales for each constructor (<emu-xref href="#sec-internal-slots"></emu-xref>)
@@ -74,6 +74,9 @@
         </li>
         <li>
           The calendric calculations used for calendars other than *"gregory"*, and adjustments for local time zones and daylight saving time (<emu-xref href="#sec-formatdatetime"></emu-xref>)
+        </li>
+        <li>
+          The set of all known registered Zone and Link names of the IANA Time Zone Database and the information about their offsets from UTC and their daylight saving time rules (<emu-xref href="#sec-time-zone-names"></emu-xref>)
         </li>
       </ul>
     </li>
@@ -170,6 +173,17 @@
         </li>
         <li>
           The patterns used for formatting values (<emu-xref href="#sec-Intl.RelativeTimeFormat-internal-slots"></emu-xref>)
+        </li>
+      </ul>
+    </li>
+    <li>
+      In Segmenter:
+      <ul>
+        <li>
+          Boundary determination algorithms (<emu-xref href="#sec-findboundary"></emu-xref>)
+        </li>
+        <li>
+          Classification of segments as "word-like" (<emu-xref href="#sec-createsegmentdataobject"></emu-xref>)
         </li>
       </ul>
     </li>
