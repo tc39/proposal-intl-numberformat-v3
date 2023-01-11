@@ -1484,12 +1484,12 @@
           1. Let _x_ = -_x_.
         1. Let _magnitude_ be the base 10 logarithm of _x_ rounded down to the nearest integer.
         1. Let _exponent_ be ComputeExponentForMagnitude(_numberFormat_, _magnitude_).
-        1. Let _x_ be _x_ × 10<sup>-_exponent_</sup>.
+        1. Let _x_ be _x_ &times; 10<sup>-_exponent_</sup>.
         1. Let _formatNumberResult_ be FormatNumericToString(_numberFormat_, _x_).
         1. If _formatNumberResult_.[[RoundedNumber]] = 0, then
           1. Return _exponent_.
         1. Let _newMagnitude_ be the base 10 logarithm of _formatNumberResult_.[[RoundedNumber]] rounded down to the nearest integer.
-        1. If _newMagnitude_ is _magnitude_ – _exponent_, then
+        1. If _newMagnitude_ is _magnitude_ - _exponent_, then
           1. Return _exponent_.
         1. Return ComputeExponentForMagnitude(_numberFormat_, _magnitude_ + 1).
       </emu-alg>
@@ -1508,7 +1508,7 @@
           1. Return _magnitude_.
         1. Else if _notation_ is *"engineering"*, then
           1. Let _thousands_ be the greatest integer that is not greater than _magnitude_ / 3.
-          1. Return _thousands_ × 3.
+          1. Return _thousands_ &times; 3.
         1. Else,
           1. Assert: _notation_ is *"compact"*.
           1. Let _exponent_ be an implementation- and locale-dependent (ILD) integer by which to scale a number of the given magnitude in compact notation for the current locale.
