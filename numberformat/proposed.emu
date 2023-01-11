@@ -740,11 +740,16 @@
     </emu-clause>
 
     <emu-clause id="sec-partitionnumberpattern" aoid="PartitionNumberPattern">
-      <h1>PartitionNumberPattern ( _numberFormat_, _x_ )</h1>
-
-      <p>
-        The PartitionNumberPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat) and _x_ (which must be an Intl mathematical value), interprets _x_ as a numeric value, and creates the corresponding parts according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
-      </p>
+      <h1>
+        PartitionNumberPattern (
+          _numberFormat_: an object initialized as a NumberFormat,
+          _x_: an Intl mathematical value,
+        )
+      </h1>
+      <dl class="header">
+        <dt>description</dt>
+        <dd>It creates the parts representing the mathematical value of _x_ according to the effective locale and the formatting options of _numberFormat_.</dd>
+      </dl>
 
       <emu-alg>
         1. Let _exponent_ be 0.
@@ -757,12 +762,12 @@
         1. Else,
           1. If _x_ is not ~negative-zero~,
             1. Assert: _x_ is a mathematical value.
-            1. If _numberFormat_.[[Style]] is *"percent"*, let _x_ be 100 × _x_.
+            1. If _numberFormat_.[[Style]] is *"percent"*, set _x_ be 100 &times; _x_.
             1. Let _exponent_ be ComputeExponent(_numberFormat_, _x_).
-            1. Let _x_ be _x_ × 10<sup>-_exponent_</sup>.
+            1. Set _x_ to _x_ &times; 10<sup>-_exponent_</sup>.
           1. Let _formatNumberResult_ be FormatNumericToString(_numberFormat_, _x_).
           1. Let _n_ be _formatNumberResult_.[[FormattedString]].
-          1. Let _x_ be _formatNumberResult_.[[RoundedNumber]].
+          1. Set _x_ to _formatNumberResult_.[[RoundedNumber]].
         1. Let _pattern_ be GetNumberFormatPattern(_numberFormat_, _x_).
         1. Let _result_ be a new empty List.
         1. Let _patternParts_ be PartitionPattern(_pattern_).
