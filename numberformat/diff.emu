@@ -713,10 +713,10 @@
       <emu-alg>
         1. <ins class="block">If _x_ is ~negative-zero~, then</ins>
           1. <ins class="block">Let _isNegative_ be *true*.</ins>
-          1. <ins class="block">Let _x_ be the mathematical value 0.</ins>
+          1. <ins class="block">Set _x_ to 0.</ins>
         1. <ins class="block">Else,</ins>
           1. <ins class="block">Assert: _x_ is a mathematical value.</ins>
-          1. If ℝ(_x_) &lt; 0 <del>or _x_ is *-0*<sub>𝔽</sub></del>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
+          1. If <del>ℝ(_x_) &lt; 0 or _x_ is *-0*<sub>𝔽</sub></del><ins>_x_ &lt; 0</ins>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
         1. If _isNegative_, then
           1. Let _x_ be -_x_.
         1. <ins class="block">Let _unsignedRoundingMode_ be GetUnsignedRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).</ins>
