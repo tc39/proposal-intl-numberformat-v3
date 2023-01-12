@@ -1555,11 +1555,11 @@
         1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
         1. If _literal_ is a List of errors, let _mv_ be ~not-a-number~.
         1. Else, let _mv_ be the StringIntlMV of _literal_.
-        1. If _mv_ ≥ 1<sup>1000</sup>, then let _mv_ be ~positive-infinity~.
-        1. If _mv_ ≤ -1<sup>1000</sup>, then let _mv_  be ~negative-infinity~.
-        1. If _mv_ > -1<sup>-1000</sup> < 0, then let _mv_ be ~negative-zero~.
-        1. If _mv_ < 1<sup>-1000</sup> > 0, then let _mv_ be 0.
-        1. If _mv_ contains more than 100 significant digits, every significant digit after the 100th may be set to 0, at the option of the implementation.
+        1. If _mv_ ≥ 1<sup>300</sup>, let _mv_ be ~positive-infinity~.
+        1. If _mv_ ≤ -1<sup>300</sup>, let _mv_  be ~negative-infinity~.
+        1. If _mv_ > -1<sup>-300</sup> and _mv_ < 0, let _mv_ be ~negative-zero~.
+        1. If _mv_ < 1<sup>-300</sup> and _mv_ > 0, let _mv_ be 0.
+        1. If _mv_ contains more than 300 significant digits, every significant digit after the 300th may be set to 0, at the option of the implementation.
         1. Return _mv_.
       </emu-alg>
     </emu-clause>
