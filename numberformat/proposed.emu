@@ -537,12 +537,12 @@
       <li>[[Notation]] is one of the String values *"standard"*, *"scientific"*, *"engineering"*, or *"compact"*, specifying whether the number should be displayed without scaling, scaled to the units place with the power of ten in scientific notation, scaled to the nearest thousand with the power of ten in scientific notation, or scaled to the nearest locale-dependent compact decimal notation power of ten with the corresponding compact decimal notation affix.</li>
       <li>[[CompactDisplay]] is one of the String values *"short"* or *"long"*, specifying whether to display compact notation affixes in short form ("5K") or long form ("5 thousand") if formatting with the *"compact"* notation. It is only used when [[Notation]] has the value *"compact"*.</li>
       <li>
-        [[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, *"exceptZero"*, or *"negative"*, specifying whether to show the sign on negative numbers only, positive and negative numbers including zero, neither positive nor negative numbers, positive and negative numbers but not zero, or negative numbers but not negative zero.
+        [[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, *"exceptZero"*, or *"negative"*, specifying when to include a sign (with non-*"auto"* options respectively corresponding with inclusion always, never, only for nonzero numbers, or only for nonzero negative numbers).
         In scientific notation, this slot affects the sign display of the mantissa but not the exponent.
       </li>
       <li>[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</li>
-      <li>[[RoundingIncrement]] is an integer-valued Number that evenly divides 1, 10, 100, 1000, or 10000 into halves, quarters, or fifths. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</li>
-      <li>[[TrailingZeroDisplay]] is one of the String values *"auto"* or *"stripIfInteger"*, indicating whether to strip trailing zeros if the formatted number is an integer (all fraction digits are zero).</li>
+      <li>[[RoundingIncrement]] is an integer-valued Number that evenly divides 10, 100, 1000, or 10000 into tenths, fifths, quarters, or halves. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</li>
+      <li>[[TrailingZeroDisplay]] is one of the String values *"auto"* or *"stripIfInteger"*, indicating whether to strip trailing zeros if the formatted number is an integer (i.e., has no nonzero fraction digit).</li>
     </ul>
 
     <emu-table id="table-intl-rounding-modes">
@@ -1544,20 +1544,17 @@
       </p>
       <emu-alg>
         1. Let _primValue_ be ? ToPrimitive(_value_, ~number~).
-        1. If Type(_primValue_) is BigInt, return the mathematical value of _primValue_.
+        1. If Type(_primValue_) is BigInt, return ℝ(_primValue_).
         1. If Type(_primValue_) is String,
           1. Let _str_ be _primValue_.
         1. Else,
           1. Let _x_ be ? ToNumber(_primValue_).
-          1. If _x_ is -0, then
-            1. Let _str_ be *"-0"*.
-          1. Else,
-            1. Let _str_ be ! Number::toString(_x_).
+          1. If _x_ is *-0*<sub>𝔽</sub>, return ~negative-zero~.
+          1. Let _str_ be ! Number::toString(_x_).
         1. Let _text_ be ! StringToCodePoints(_str_).
         1. Let _literal_ be ParseText(_text_, |StringNumericLiteral|).
-        1. If _literal_ is a List of errors, let _mv_ be ~not-a-number~.
-        1. Else, let _mv_ be the StringIntlMV of _literal_.
-        1. Return _mv_.
+        1. If _literal_ is a List of errors, return ~not-a-number~.
+        1. Return the StringIntlMV of _literal_.
       </emu-alg>
     </emu-clause>
 
