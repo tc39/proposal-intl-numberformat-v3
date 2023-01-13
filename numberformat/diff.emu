@@ -718,7 +718,7 @@
           1. <ins class="block">Assert: _x_ is a mathematical value.</ins>
           1. If <del>ℝ(_x_) &lt; 0 or _x_ is *-0*<sub>𝔽</sub></del><ins>_x_ &lt; 0</ins>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
           1. If _isNegative_, then
-            1. Let _x_ be -_x_.
+            1. <del>Let _x_ be</del><ins>Set _x_ to</ins> -_x_.
         1. <ins class="block">Let _unsignedRoundingMode_ be GetUnsignedRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).</ins>
         1. If _intlObject_.[[RoundingType]] is ~significantDigits~, then
           1. Let _result_ be ToRawPrecision(_x_, _intlObject_.[[MinimumSignificantDigits]], _intlObject_.[[MaximumSignificantDigits]]<ins>, _unsignedRoundingMode_</ins>).
