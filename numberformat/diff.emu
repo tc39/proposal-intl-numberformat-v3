@@ -77,18 +77,9 @@
             1. Let _mxfdDefault_ be 0.
           1. Else,
             1. Let _mxfdDefault_ be 3.
-        1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).</ins>
-        1. <ins class="block">If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.</ins>
-        1. <ins class="block">If _roundingIncrement_ is not 1, set _mxfdDefault_ to _mnfdDefault_.</ins>
         1. Let _notation_ be ? GetOption(_options_, *"notation"*, ~string~, &laquo; *"standard"*, *"scientific"*, *"engineering"*, *"compact"* &raquo;, *"standard"*).
         1. Set _numberFormat_.[[Notation]] to _notation_.
         1. Perform ? SetNumberFormatDigitOptions(_numberFormat_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_).
-        1. <ins class="block">If _roundingIncrement_ is not 1, then</ins>
-          1. <ins class="block">If _numberFormat_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.</ins>
-          1. <ins class="block">If _numberFormat_.[[MaximumFractionDigits]] is not equal to _numberFormat_.[[MinimumFractionDigits]], throw a *RangeError* exception.</ins>
-        1. <ins class="block">Set _numberFormat_.[[RoundingIncrement]] to _roundingIncrement_.</ins>
-        1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, ~string~, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).</ins>
-        1. <ins class="block">Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.</ins>
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, ~string~, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. <ins class="block">Let _defaultUseGrouping_ be *"auto"*.</ins>
         1. If _notation_ is *"compact"*, then
@@ -98,8 +89,6 @@
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, ~string~, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*<ins>, *"negative"*</ins> &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
-        1. <ins class="block">Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, ~string~, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).</ins>
-        1. <ins class="block">Set _numberFormat_.[[RoundingMode]] to _roundingMode_.</ins>
         1. Return _numberFormat_.
       </emu-alg>
     </emu-clause>
@@ -110,6 +99,7 @@
       <p>
         The abstract operation SetNumberFormatDigitOptions applies digit
         options used for number formatting onto the intl object.
+        <ins>It is used by both Intl.NumberFormat and Intl.PluralRules.</ins>
       </p>
       <emu-alg>
         1. Let _mnid_ be ? GetNumberOption(_options_, *"minimumIntegerDigits,"*, 1, 21, 1).
@@ -119,6 +109,15 @@
         1. Let _mxsd_ be ? Get(_options_, *"maximumSignificantDigits"*).
         1. Set _intlObj_.[[MinimumIntegerDigits]] to _mnid_.
         1. <ins class="block">Let _roundingPriority_ be ? GetOption(_options_, *"roundingPriority"*, ~string~, &laquo; *"auto"*, *"morePrecision"*, *"lessPrecision"* &raquo;, *"auto"*).</ins>
+        1. <ins class="block">Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).</ins>
+        1. <ins class="block">Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, ~string~, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).</ins>
+        1. <ins class="block">Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, ~string~, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).</ins>
+        1. <ins class="block">NOTE: All fields required by SetNumberFormatDigitOptions have now been read from _options_. The remainder of this AO interprets the options and may throw exceptions.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not 1, set _mxfdDefault_ to _mnfdDefault_.</ins>
+        1. <ins class="block">Set _intlObj_.[[RoundingIncrement]] to _roundingIncrement_.</ins>
+        1. <ins class="block">Set _intlObj_.[[RoundingMode]] to _roundingMode_.</ins>
+        1. <ins class="block">Set _intlObj_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.</ins>
         1. If _mnsd_ is not *undefined* or _mxsd_ is not *undefined*, then
           1. Let _hasSd_ be *true*.
         1. Else,
@@ -181,6 +180,9 @@
           1. <ins class="block">Set _intlObj_.[[MaximumFractionDigits]] to 0.</ins>
           1. <ins class="block">Set _intlObj_.[[MinimumSignificantDigits]] to 1.</ins>
           1. <ins class="block">Set _intlObj_.[[MaximumSignificantDigits]] to 2.</ins>
+        1. <ins class="block">If _roundingIncrement_ is not 1, then</ins>
+          1. <ins class="block">If _intlObj_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.</ins>
+          1. <ins class="block">If _intlObj_.[[MaximumFractionDigits]] is not equal to _intlObj_.[[MinimumFractionDigits]], throw a *RangeError* exception.</ins>
       </emu-alg>
     </emu-clause>
 
