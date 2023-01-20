@@ -95,9 +95,10 @@
           1. Set _numberFormat_.[[CompactDisplay]] to _compactDisplay_.
           1. <ins class="block">Set _defaultUseGrouping_ to *"min2"*.</ins>
         1. <del class="block">Let _useGrouping_ be ? GetOption(_options_, *"useGrouping"*, ~boolean~, ~empty~, *true*).</del>
-        1. <ins class="block">Let _useGrouping_ be ? GetStringOrBooleanNumberFormatOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"*, *"true"*, *"false"* &raquo;, *"always"*, *false*, _defaultUseGrouping_).</ins>
+        1. <ins class="block">Let _useGrouping_ be ? GetStringOrBooleanNumberFormatOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"*, *"true"*, *"false"* &raquo;, _defaultUseGrouping_).</ins>
+        1. <ins class="block">If _useGrouping_ is *true*, then set _useGrouping_ to *"always"*.</ins>
         1. <ins class="block">NOTE: For historical reasons, the strings *"true"* and *"false"* are treated the same as the _fallback_ value.</ins>
-        1. <ins class="block">If _useGrouping_ is *"true"* or _useGrouping_ is *"false"*, then set _useGrouping_ to *"always"*.</ins>
+        1. <ins class="block">If _useGrouping_ is *"true"* or _useGrouping_ is *"false"*, then set _useGrouping_ to _defaultUseGrouping_.</ins>
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, ~string~, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*<ins>, *"negative"*</ins> &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
