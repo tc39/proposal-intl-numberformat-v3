@@ -96,7 +96,7 @@
           1. <ins class="block">Set _defaultUseGrouping_ to *"min2"*.</ins>
         1. <del class="block">Let _useGrouping_ be ? GetOption(_options_, *"useGrouping"*, ~boolean~, ~empty~, *true*).</del>
         1. <ins class="block">NOTE: For historical reasons, the strings *"true"* and *"false"* are accepted and replaced with the default value.</ins>
-        1. <ins class="block">Let _useGrouping_ be ? GetStringOrBooleanNumberFormatOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"*, *"true"*, *"false"* &raquo;, _defaultUseGrouping_).</ins>
+        1. <ins class="block">Let _useGrouping_ be ? GetBooleanOrStringNumberFormatOption(_options_, *"useGrouping"*, &laquo; *"min2"*, *"auto"*, *"always"*, *"true"*, *"false"* &raquo;, _defaultUseGrouping_).</ins>
         1. <ins class="block">If _useGrouping_ is *"true"* or _useGrouping_ is *"false"*, set _useGrouping_ to _defaultUseGrouping_.</ins>
         1. <ins class="block">If _useGrouping_ is *true*, set _useGrouping_ to *"always"*.</ins>
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
