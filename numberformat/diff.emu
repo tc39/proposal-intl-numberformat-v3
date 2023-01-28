@@ -1385,7 +1385,7 @@
     <emu-clause id="sec-getnumberformatpattern" aoid="GetNumberFormatPattern">
       <h1>GetNumberFormatPattern ( _numberFormat_, _x_ )</h1>
       <p>
-        The abstract operation GetNumberFormatPattern considers the resolved unit-related options in the number format object along with the final scaled and rounded number being formatted and returns a pattern, a String value as described in <emu-xref href="#sec-intl.numberformat-internal-slots"></emu-xref>.
+        The abstract operation GetNumberFormatPattern considers the resolved unit-related options in the number format object along with the final scaled and rounded number being formatted <ins>(an Intl mathematical value)</ins> and returns a pattern, a String value as described in <emu-xref href="#sec-intl.numberformat-internal-slots"></emu-xref>.
       </p>
       <emu-alg>
         1. Let _localeData_ be %NumberFormat%.[[LocaleData]].
@@ -1417,30 +1417,46 @@
         1. Else,
           1. Assert: _style_ is *"decimal"*.
           1. Let _patterns_ be _patterns_.[[decimal]].
+        1. <ins class="block">If _x_ is ~negative-infinity~, then</ins>
+          1. <ins class="block">Let _category_ be ~negative-nonzero~.</ins>
+        1. <ins class="block">Else if _x_ is ~negative-zero~, then</ins>
+          1. <ins class="block">Let _category_ be ~negative-zero~.</ins>
+        1. <ins class="block">Else if _x_ is ~not-a-number~, then</ins>
+          1. <ins class="block">Let _category_ be ~positive-zero~.</ins>
+        1. <ins class="block">Else if _x_ is ~positive-infinity~, then</ins>
+          1. <ins class="block">Let _category_ be ~positive-nonzero~.</ins>
+        1. <ins class="block">Else,</ins>
+          1. <ins class="block">Assert: _x_ is a mathematical value.</ins>
+          1. <ins class="block">If _x_ &lt; 0, then</ins>
+            1. <ins class="block">Let _category_ be ~negative-nonzero~.</ins>
+          1. <ins class="block">Else if _x_ &gt; 0, then</ins>
+            1. <ins class="block">Let _category_ be ~positive-nonzero~.</ins>
+          1. <ins class="block">Else,</ins>
+            1. <ins class="block">Let _category_ be ~positive-zero~.</ins>
         1. Let _signDisplay_ be _numberFormat_.[[SignDisplay]].
         1. If _signDisplay_ is *"never"*, then
           1. Let _pattern_ be _patterns_.[[zeroPattern]].
         1. Else if _signDisplay_ is *"auto"*, then
-          1. If _x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*, then
+          1. If <del>_x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*</del><ins>_category_ is ~positive-nonzero~ or ~positive-zero~</ins>, then
             1. Let _pattern_ be _patterns_.[[zeroPattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else if _signDisplay_ is *"always"*, then
-          1. If _x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*, then
+          1. If <del>_x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*</del><ins>_category_ is ~positive-nonzero~ or ~positive-zero~</ins>, then
             1. Let _pattern_ be _patterns_.[[positivePattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else <ins>if _signDisplay_ is *"exceptZero"*</ins>, then
           1. <del class="block">Assert: _signDisplay_ is *"exceptZero"*.</del>
-          1. If _x_ is *NaN*, or if _x_ is finite and ℝ(_x_) is 0, then
+          1. If <del>_x_ is *NaN*, or if _x_ is finite and ℝ(_x_) is 0</del><ins>_category_ is ~positive-zero~ or ~negative-zero~</ins>, then
             1. Let _pattern_ be _patterns_.[[zeroPattern]].
-          1. Else if ℝ(_x_) &gt; 0, then
+          1. Else if <del>ℝ(_x_) &gt; 0</del><ins>_category_ is ~positive-nonzero~</ins>, then
             1. Let _pattern_ be _patterns_.[[positivePattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. <ins class="block">Else,</ins>
           1. <ins class="block">Assert: _signDisplay_ is *"negative"*.</ins>
-          1. <ins class="block">If _x_ is *NaN*, or if _x_ is finite and ℝ(_x_) &ge; 0, then</ins>
+          1. <ins class="block">If_category_ is ~positive-nonzero~ or ~positive-zero~ or ~negative-zero~, then</ins>
             1. <ins class="block">Let _pattern_ be _patterns_.[[zeroPattern]].</ins>
           1. <ins class="block">Else,</ins>
             1. <ins class="block">Let _pattern_ be _patterns_.[[negativePattern]].</ins>
