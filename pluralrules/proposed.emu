@@ -140,7 +140,7 @@
         1. Let _pr_ be the *this* value.
         1. Perform ? RequireInternalSlot(_pr_, [[InitializedPluralRules]]).
         1. Let _n_ be ? ToNumber(_value_).
-        1. Return ! ResolvePlural(_pr_, _n_).
+        1. Return ! ResolvePlural(_pr_, _n_).[[PluralCategory]].
       </emu-alg>
     </emu-clause>
 
@@ -356,7 +356,7 @@
     <emu-clause id="sec-resolveplural" aoid="ResolvePlural">
       <h1>ResolvePlural ( _pluralRules_, _n_ )</h1>
       <p>
-        When the ResolvePlural abstract operation is called with arguments _pluralRules_ (which must be an object initialized as a PluralRules) and _n_ (which must be a Number value), it returns a String value representing the plural form of _n_ according to the effective locale and the options of _pluralRules_. The following steps are taken:
+        When the ResolvePlural abstract operation is called with arguments _pluralRules_ (which must be an object initialized as a PluralRules) and _n_ (which must be a Number value), it returns a Record containing two values: a String value representing the plural form of _n_ according to the effective locale and the options of _pluralRules_ in the field [[PluralCategory]], and _n_ as a formatted string in the field [[FormattedString]]. The following steps are taken:
       </p>
 
       <emu-alg>
@@ -370,7 +370,8 @@
         1. Let _res_ be ! FormatNumericToString(_pluralRules_, _n_).
         1. Let _s_ be _res_.[[FormattedString]].
         1. Let _operands_ be ! GetOperands(_s_).
-        1. Return ! PluralRuleSelect(_locale_, _type_, _n_, _operands_).
+        1. Let _p_ be ! PluralRuleSelect(_locale_, _type_, _n_, _operands_).
+        1. Return the Record { [[PluralCategory]]: _p_, [[FormattedString]]: _s_ }.
       </emu-alg>
     </emu-clause>
 
@@ -396,9 +397,11 @@
         1. If _x_ is *NaN* or _y_ is *NaN*, throw a *RangeError* exception.
         1. Let _xp_ be ! ResolvePlural(_pluralRules_, _x_).
         1. Let _yp_ be ! ResolvePlural(_pluralRules_, _y_).
+        1. If _xp_.[[FormattedString]] is _yp_.[[FormattedString]], then
+          1. Return _xp_.[[PluralCategory]].
         1. Let _locale_ be _pluralRules_.[[Locale]].
         1. Let _type_ be _pluralRules_.[[Type]].
-        1. Return ! PluralRuleSelectRange(_locale_, _type_, _xp_, _yp_).
+        1. Return ! PluralRuleSelectRange(_locale_, _type_, _xp_.[[PluralCategory]], _yp_.[[PluralCategory]]).
       </emu-alg>
     </emu-clause>
   </emu-clause>
