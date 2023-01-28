@@ -1729,7 +1729,7 @@
       <emu-alg>
         1. Let _i_ be an index into _result_, determined by an implementation-defined algorithm based on _numberFormat_ and _result_.
         1. Let _approximatelySign_ be an ILND String value used to signify that a number is approximate.
-        1. Insert a new Record { [[Type]]: *"approximatelySign"*, [[Value]]: _approximatelySign_ } at index _i_ in _result_.
+        1. If _approximatelySign_ is not empty, insert a new Record { [[Type]]: *"approximatelySign"*, [[Value]]: _approximatelySign_ } at index _i_ in _result_.
         1. Return _result_.
       </emu-alg>
     </emu-clause>
