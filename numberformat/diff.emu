@@ -707,7 +707,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], <del>and</del> [[MaximumFractionDigits]]<ins>, [[RoundingIncrement]], and [[TrailingZeroDisplay]]</ins> internal slots), and _x_ (which must be a <del>Number or BigInt value</del><ins>mathematical value or ~negative-zero~</ins>), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final <del>floating decimal value</del> <ins>mathematical value (or *-0*<sub>𝔽</sub>)</ins> of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], <del>and</del> [[MaximumFractionDigits]]<ins>, [[RoundingIncrement]], and [[TrailingZeroDisplay]]</ins> internal slots), and _x_ (which must be a <del>Number or BigInt value</del><ins>mathematical value or ~negative-zero~</ins>), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final <del>floating decimal value</del> <ins>Intl mathematical value</ins> of _x_ after rounding has been performed in the field [[RoundedNumber]].
       </p>
 
       <emu-alg>
@@ -753,9 +753,9 @@
           1. Let _forwardZeros_ be the String consisting of _minInteger_ - _int_ occurrences of the code unit 0x0030 (DIGIT ZERO).
           1. Set _string_ to the string-concatenation of _forwardZeros_ and _string_.
         1. If _isNegative_ and _x_ is 0, then
-          1. Let _x_ be *-0*.
+          1. <del>Let _x_ be *-0*.</del><ins>Set _x_ to ~negative-zero~.</ins>
         1. Else if _isNegative_, then
-          1. Let _x_ be -_x_.
+          1. <del>Let _x_ be -_x_.</del><ins>Set _x_ to -_x_.</ins>
         1. Return the Record { [[RoundedNumber]]: _x_, [[FormattedString]]: _string_ }.
       </emu-alg>
     </emu-clause>
