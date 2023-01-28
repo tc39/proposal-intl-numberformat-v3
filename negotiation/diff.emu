@@ -374,7 +374,7 @@
         1. Let _valueBoolean_ be ToBoolean(_value_).
         1. If _valueBoolean_ is *false*, return *false*.
         1. Let _value_ be ? ToString(_value_).
-        1. If _values_ does not contain an element equal to _value_, throw a *RangeError* exception.
+        1. If _stringValues_ does not contain an element equal to _value_, throw a *RangeError* exception.
         1. Return _value_.
       </emu-alg>
     </emu-clause>
