@@ -1781,6 +1781,9 @@
         For example, an implementation may choose to remove the currency symbol following the range separator, to produce "$3–5" instead of "$3–$5".
       </p>
       <p>
+        The implementation may choose to modify symbols for grammatical correctness; for example, "0.5 miles–1 mile" may become "0.5–1 miles".
+      </p>
+      <p>
         Returning _result_ unmodified is guaranteed to be a correct implementation of CollapseNumberRange.
       </p>
     </emu-clause>
