@@ -691,7 +691,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or ~negative-zero~), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final Intl mathematical value of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingMode]], [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or ~negative-zero~). It rounds _x_ to an Intl mathematical value according to the internal slots of _intlObject_ and returns a Record with a [[RoundedNumber]] field containing containing that result and a [[FormattedString]] field containing a String value representation of that result formatted according to the internal slots of _intlObject_.
       </p>
 
       <emu-alg>
