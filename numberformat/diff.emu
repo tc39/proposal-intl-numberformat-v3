@@ -1457,10 +1457,10 @@
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. <ins class="block">Else,</ins>
           1. <ins class="block">Assert: _signDisplay_ is *"negative"*.</ins>
-          1. <ins class="block">If_category_ is ~positive-nonzero~ or ~positive-zero~ or ~negative-zero~, then</ins>
-            1. <ins class="block">Let _pattern_ be _patterns_.[[zeroPattern]].</ins>
-          1. <ins class="block">Else,</ins>
+          1. <ins class="block">If _category_ is ~negative-nonzero~, then</ins>
             1. <ins class="block">Let _pattern_ be _patterns_.[[negativePattern]].</ins>
+          1. <ins class="block">Else,</ins>
+            1. <ins class="block">Let _pattern_ be _patterns_.[[zeroPattern]].</ins>
         1. Return _pattern_.
       </emu-alg>
     </emu-clause>
