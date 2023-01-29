@@ -364,7 +364,7 @@
       <h1>GetBooleanOrStringNumberFormatOption ( _options_, _property_, _stringValues_, _fallback_ )</h1>
 
       <p>
-        The abstract operation GetBooleanOrStringNumberFormatOption extracts the value of the property named _property_ from the provided _options_ object. It returns either *true*, *false*, _fallback_, or one of the elements of the List _values_. The following steps are taken:
+        The abstract operation GetBooleanOrStringNumberFormatOption extracts the value of the property named _property_ from the provided _options_ object. It returns either *true*, *false*, _fallback_, or one of the elements of the List _stringValues_. The following steps are taken:
       </p>
 
       <emu-alg>
