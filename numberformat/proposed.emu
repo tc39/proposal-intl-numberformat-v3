@@ -1418,10 +1418,10 @@
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else,
           1. Assert: _signDisplay_ is *"negative"*.
-          1. If _category_ is ~positive-nonzero~ or ~positive-zero~ or ~negative-zero~, then
-            1. Let _pattern_ be _patterns_.[[zeroPattern]].
-          1. Else,
+          1. If _category_ is ~negative-nonzero~, then
             1. Let _pattern_ be _patterns_.[[negativePattern]].
+          1. Else,
+            1. Let _pattern_ be _patterns_.[[zeroPattern]].
         1. Return _pattern_.
       </emu-alg>
     </emu-clause>
