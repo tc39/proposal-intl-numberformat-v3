@@ -362,16 +362,16 @@
     <ins class="block">
     <emu-clause id="sec-getbooleanorstringnumberformatoption" type="abstract operation">
       <h1>
-        GetOption (
+        GetBooleanOrStringNumberFormatOption (
           _options_: an Object,
           _property_: a property key,
-          _stringValues_: ~empty~ or a List of ECMAScript String values,
+          _stringValues_: a List of Strings,
           _fallback_: an ECMAScript language value,
-        )
+        ): either a normal completion containing either a Boolean, String, or *undefined*, or a throw completion
       </h1>
       <dl class="header">
         <dt>description</dt>
-        <dd>It extracts the value of the property named _property_ from the provided _options_ object. It returns either *true*, *false*, _fallback_, or one of the elements of the List _stringValues_.</dd>
+        <dd>It extracts the value of the property named _property_ from the provided _options_ object. It returns _fallback_ if that value is *undefined*, *true* if that value is *true*, *false* if that value coerces to *false*, and otherwise coerces it to a String and returns the result if it is allowed by _stringValues_.</dd>
       </dl>
       <emu-alg>
         1. Let _value_ be ? Get(_options_, _property_).
