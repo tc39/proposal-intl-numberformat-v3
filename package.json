@@ -17,7 +17,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "ecmarkup": "^3.11.5",
-    "marked": "^1.1.0"
+    "ecmarkup": "^16.0.0",
+    "marked": "^1.1.0",
+    "mkdirp": "^2.1.3"
   }
 }
