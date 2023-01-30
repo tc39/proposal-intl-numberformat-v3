@@ -718,7 +718,7 @@
         1. <ins class="block">Else,</ins>
           1. <ins class="block">Assert: _x_ is a mathematical value.</ins>
           1. If <del>ℝ(_x_) &lt; 0 or _x_ is *-0*<sub>𝔽</sub></del><ins>_x_ &lt; 0</ins>, let _isNegative_ be *true*; else let _isNegative_ be *false*.
-          1. If _isNegative_, then
+          1. If _isNegative_ <ins>is *true*</ins>, then
             1. <del>Let _x_ be</del><ins>Set _x_ to</ins> -_x_.
         1. <ins class="block">Let _unsignedRoundingMode_ be GetUnsignedRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).</ins>
         1. If _intlObject_.[[RoundingType]] is ~significantDigits~, then
@@ -743,11 +743,11 @@
               1. <ins class="block">Let _result_ be _fResult_.</ins>
             1. <ins class="block">Else,</ins>
               1. <ins class="block">Let _result_ be _sResult_.</ins>
-        1. Let _x_ be _result_.[[RoundedNumber]].
+        1. <del>Let _x_ be</del> <ins>Set _x_ to</ins> _result_.[[RoundedNumber]].
         1. Let _string_ be _result_.[[FormattedString]].
         1. <ins class="block">If _intlObject_.[[TrailingZeroDisplay]] is *"stripIfInteger"* and <emu-eqn>_x_ modulo 1 = 0</emu-eqn>, then</ins>
-          1. <ins class="block">If _string_ contains *"."*, then</ins>
-            1. <ins class="block">Set _string_ to the substring of _string_ from index 0 to the index of *"."*.</ins>
+          1. <ins class="block">Let _i_ be StringIndexOf(_string_, *"."*, 0).</ins>
+          1. <ins class="block">If _i_ &ne; -1, set _string_ to the substring of _string_ from 0 to _i_.</ins>
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
         1. Let _minInteger_ be _intlObject_.[[MinimumIntegerDigits]].
         1. If _int_ &lt; _minInteger_, then
