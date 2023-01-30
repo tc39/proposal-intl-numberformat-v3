@@ -696,7 +696,7 @@
       <h1>FormatNumericToString ( _intlObject_, _x_ )</h1>
 
       <p>
-        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or ~negative-zero~), and returns a Record containing two values: _x_ as a String value with digits formatted according to the five formatting parameters in the field [[FormattedString]], and the final mathematical value (or *-0*<sub>𝔽</sub>) of _x_ after rounding has been performed in the field [[RoundedNumber]].
+        The FormatNumericToString abstract operation is called with arguments _intlObject_ (which must be an object with [[RoundingMode]], [[RoundingType]], [[MinimumSignificantDigits]], [[MaximumSignificantDigits]], [[MinimumIntegerDigits]], [[MinimumFractionDigits]], [[MaximumFractionDigits]], [[RoundingIncrement]], and [[TrailingZeroDisplay]] internal slots), and _x_ (which must be a mathematical value or ~negative-zero~). It rounds _x_ to an Intl mathematical value according to the internal slots of _intlObject_ and returns a Record with a [[RoundedNumber]] field containing containing that result and a [[FormattedString]] field containing a String value representation of that result formatted according to the internal slots of _intlObject_.
       </p>
 
       <emu-alg>
@@ -706,7 +706,7 @@
         1. Else,
           1. Assert: _x_ is a mathematical value.
           1. If _x_ &lt; 0, let _isNegative_ be *true*; else let _isNegative_ be *false*.
-          1. If _isNegative_, then
+          1. If _isNegative_ is *true*, then
             1. Set _x_ to -_x_.
         1. Let _unsignedRoundingMode_ be GetUnsignedRoundingMode(_intlObject_.[[RoundingMode]], _isNegative_).
         1. If _intlObject_.[[RoundingType]] is ~significantDigits~, then
@@ -727,20 +727,18 @@
               1. Let _result_ be _fResult_.
             1. Else,
               1. Let _result_ be _sResult_.
-        1. Let _x_ be _result_.[[RoundedNumber]].
+        1. Set _x_ to _result_.[[RoundedNumber]].
         1. Let _string_ be _result_.[[FormattedString]].
         1. If _intlObject_.[[TrailingZeroDisplay]] is *"stripIfInteger"* and <emu-eqn>_x_ modulo 1 = 0</emu-eqn>, then
-          1. If _string_ contains *"."*, then
-            1. Set _string_ to the substring of _string_ from index 0 to the index of *"."*.
+          1. Let _i_ be StringIndexOf(_string_, *"."*, 0).
+          1. If _i_ &ne; -1, set _string_ to the substring of _string_ from 0 to _i_.
         1. Let _int_ be _result_.[[IntegerDigitsCount]].
         1. Let _minInteger_ be _intlObject_.[[MinimumIntegerDigits]].
         1. If _int_ &lt; _minInteger_, then
           1. Let _forwardZeros_ be the String consisting of _minInteger_ - _int_ occurrences of the code unit 0x0030 (DIGIT ZERO).
           1. Set _string_ to the string-concatenation of _forwardZeros_ and _string_.
-        1. If _isNegative_ and _x_ is 0, then
-          1. Let _x_ be *-0*.
-        1. Else if _isNegative_, then
-          1. Let _x_ be -_x_.
+        1. If _isNegative_ is *true*, then
+          1. If _x_ is 0, set _x_ to ~negative-zero~. Otherwise, set _x_ to -_x_.
         1. Return the Record { [[RoundedNumber]]: _x_, [[FormattedString]]: _string_ }.
       </emu-alg>
     </emu-clause>
@@ -827,13 +825,13 @@
     <emu-clause id="sec-partitionnotationsubpattern" aoid="PartitionNotationSubPattern">
       <h1>PartitionNotationSubPattern ( _numberFormat_, _x_, _n_, _exponent_ )</h1>
       <p>
-        The PartitionNotationSubPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which is a numeric value after rounding is applied), _n_ (which is an intermediate formatted string), and _exponent_ (an integer), and creates the corresponding parts for the number and notation according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
+        The PartitionNotationSubPattern abstract operation is called with arguments _numberFormat_ (which must be an object initialized as a NumberFormat), _x_ (which is an Intl mathematical value after rounding is applied), _n_ (which is an intermediate formatted string), and _exponent_ (an integer), and creates the corresponding parts for the number and notation according to the effective locale and the formatting options of _numberFormat_. The following steps are taken:
       </p>
       <emu-alg>
         1. Let _result_ be a new empty List.
-        1. If _x_ is *NaN*, then
+        1. If _x_ is ~not-a-number~, then
           1. Append a new Record { [[Type]]: *"nan"*, [[Value]]: _n_ } as the last element of _result_.
-        1. Else if _x_ is a non-finite Number, then
+        1. Else if _x_ is ~positive-infinity~ or ~negative-infinity~, then
           1. Append a new Record { [[Type]]: *"infinity"*, [[Value]]: _n_ } as the last element of _result_.
         1. Else,
           1. Let _notationSubPattern_ be GetNotationSubPattern(_numberFormat_, _exponent_).
@@ -1353,7 +1351,7 @@
     <emu-clause id="sec-getnumberformatpattern" aoid="GetNumberFormatPattern">
       <h1>GetNumberFormatPattern ( _numberFormat_, _x_ )</h1>
       <p>
-        The abstract operation GetNumberFormatPattern considers the resolved unit-related options in the number format object along with the final scaled and rounded number being formatted and returns a pattern, a String value as described in <emu-xref href="#sec-intl.numberformat-internal-slots"></emu-xref>.
+        The abstract operation GetNumberFormatPattern considers the resolved unit-related options in the number format object along with the final scaled and rounded number being formatted (an Intl mathematical value) and returns a pattern, a String value as described in <emu-xref href="#sec-intl.numberformat-internal-slots"></emu-xref>.
       </p>
       <emu-alg>
         1. Let _localeData_ be %NumberFormat%.[[LocaleData]].
@@ -1385,32 +1383,48 @@
         1. Else,
           1. Assert: _style_ is *"decimal"*.
           1. Let _patterns_ be _patterns_.[[decimal]].
+        1. If _x_ is ~negative-infinity~, then
+          1. Let _category_ be ~negative-nonzero~.
+        1. Else if _x_ is ~negative-zero~, then
+          1. Let _category_ be ~negative-zero~.
+        1. Else if _x_ is ~not-a-number~, then
+          1. Let _category_ be ~positive-zero~.
+        1. Else if _x_ is ~positive-infinity~, then
+          1. Let _category_ be ~positive-nonzero~.
+        1. Else,
+          1. Assert: _x_ is a mathematical value.
+          1. If _x_ &lt; 0, then
+            1. Let _category_ be ~negative-nonzero~.
+          1. Else if _x_ &gt; 0, then
+            1. Let _category_ be ~positive-nonzero~.
+          1. Else,
+            1. Let _category_ be ~positive-zero~.
         1. Let _signDisplay_ be _numberFormat_.[[SignDisplay]].
         1. If _signDisplay_ is *"never"*, then
           1. Let _pattern_ be _patterns_.[[zeroPattern]].
         1. Else if _signDisplay_ is *"auto"*, then
-          1. If _x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*, then
+          1. If _category_ is ~positive-nonzero~ or ~positive-zero~, then
             1. Let _pattern_ be _patterns_.[[zeroPattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else if _signDisplay_ is *"always"*, then
-          1. If _x_ is 0 or _x_ &gt; 0 or _x_ is *NaN*, then
+          1. If _category_ is ~positive-nonzero~ or ~positive-zero~, then
             1. Let _pattern_ be _patterns_.[[positivePattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else if _signDisplay_ is *"exceptZero"*, then
-          1. If _x_ is *NaN*, or if _x_ is finite and ℝ(_x_) is 0, then
+          1. If _category_ is ~positive-zero~ or ~negative-zero~, then
             1. Let _pattern_ be _patterns_.[[zeroPattern]].
-          1. Else if ℝ(_x_) &gt; 0, then
+          1. Else if _category_ is ~positive-nonzero~, then
             1. Let _pattern_ be _patterns_.[[positivePattern]].
           1. Else,
             1. Let _pattern_ be _patterns_.[[negativePattern]].
         1. Else,
           1. Assert: _signDisplay_ is *"negative"*.
-          1. If _x_ is *NaN*, or if _x_ is finite and ℝ(_x_) &ge; 0, then
-            1. Let _pattern_ be _patterns_.[[zeroPattern]].
-          1. Else,
+          1. If _category_ is ~negative-nonzero~, then
             1. Let _pattern_ be _patterns_.[[negativePattern]].
+          1. Else,
+            1. Let _pattern_ be _patterns_.[[zeroPattern]].
         1. Return _pattern_.
       </emu-alg>
     </emu-clause>
