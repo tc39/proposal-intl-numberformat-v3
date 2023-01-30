@@ -77,18 +77,9 @@
             1. Let _mxfdDefault_ be 0.
           1. Else,
             1. Let _mxfdDefault_ be 3.
-        1. Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).
-        1. If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception. 
-        1. If _roundingIncrement_ is not 1, set _mxfdDefault_ to _mnfdDefault_.
         1. Let _notation_ be ? GetOption(_options_, *"notation"*, ~string~, &laquo; *"standard"*, *"scientific"*, *"engineering"*, *"compact"* &raquo;, *"standard"*).
         1. Set _numberFormat_.[[Notation]] to _notation_.
         1. Perform ? SetNumberFormatDigitOptions(_numberFormat_, _options_, _mnfdDefault_, _mxfdDefault_, _notation_).
-        1. If _roundingIncrement_ is not 1, then
-          1. If _numberFormat_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.
-          1. If _numberFormat_.[[MaximumFractionDigits]] is not equal to _numberFormat_.[[MinimumFractionDigits]], throw a *RangeError* exception.
-        1. Set _numberFormat_.[[RoundingIncrement]] to _roundingIncrement_.
-        1. Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, ~string~, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).
-        1. Set _numberFormat_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.
         1. Let _compactDisplay_ be ? GetOption(_options_, *"compactDisplay"*, ~string~, &laquo; *"short"*, *"long"* &raquo;, *"short"*).
         1. Let _defaultUseGrouping_ be *"auto"*.
         1. If _notation_ is *"compact"*, then
@@ -98,8 +89,6 @@
         1. Set _numberFormat_.[[UseGrouping]] to _useGrouping_.
         1. Let _signDisplay_ be ? GetOption(_options_, *"signDisplay"*, ~string~, &laquo; *"auto"*, *"never"*, *"always"*, *"exceptZero"*, *"negative"* &raquo;, *"auto"*).
         1. Set _numberFormat_.[[SignDisplay]] to _signDisplay_.
-        1. Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, ~string~, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).
-        1. Set _numberFormat_.[[RoundingMode]] to _roundingMode_.
         1. Return _numberFormat_.
       </emu-alg>
     </emu-clause>
@@ -110,6 +99,7 @@
       <p>
         The abstract operation SetNumberFormatDigitOptions applies digit
         options used for number formatting onto the intl object.
+        It is used by both Intl.NumberFormat and Intl.PluralRules.
       </p>
       <emu-alg>
         1. Let _mnid_ be ? GetNumberOption(_options_, *"minimumIntegerDigits,"*, 1, 21, 1).
@@ -119,6 +109,15 @@
         1. Let _mxsd_ be ? Get(_options_, *"maximumSignificantDigits"*).
         1. Set _intlObj_.[[MinimumIntegerDigits]] to _mnid_.
         1. Let _roundingPriority_ be ? GetOption(_options_, *"roundingPriority"*, ~string~, &laquo; *"auto"*, *"morePrecision"*, *"lessPrecision"* &raquo;, *"auto"*).
+        1. Let _roundingIncrement_ be ? GetNumberOption(_options_, *"roundingIncrement"*, 1, 5000, 1).
+        1. If _roundingIncrement_ is not in « 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000 », throw a *RangeError* exception.
+        1. Let _roundingMode_ be ? GetOption(_options_, *"roundingMode"*, ~string~, &laquo; *"ceil"*, *"floor"*, *"expand"*, *"trunc"*, *"halfCeil"*, *"halfFloor"*, *"halfExpand"*, *"halfTrunc"*, *"halfEven"* &raquo;, *"halfExpand"*).
+        1. Let _trailingZeroDisplay_ be ? GetOption(_options_, *"trailingZeroDisplay"*, ~string~, &laquo; *"auto"*, *"stripIfInteger"* &raquo;, *"auto"*).
+        1. NOTE: All fields required by SetNumberFormatDigitOptions have now been read from _options_. The remainder of this AO interprets the options and may throw exceptions.
+        1. If _roundingIncrement_ is not 1, set _mxfdDefault_ to _mnfdDefault_.
+        1. Set _intlObj_.[[RoundingIncrement]] to _roundingIncrement_.
+        1. Set _intlObj_.[[RoundingMode]] to _roundingMode_.
+        1. Set _intlObj_.[[TrailingZeroDisplay]] to _trailingZeroDisplay_.
         1. If _mnsd_ is not *undefined* or _mxsd_ is not *undefined*, then
           1. Let _hasSd_ be *true*.
         1. Else,
@@ -169,6 +168,9 @@
           1. Set _intlObj_.[[MaximumFractionDigits]] to 0.
           1. Set _intlObj_.[[MinimumSignificantDigits]] to 1.
           1. Set _intlObj_.[[MaximumSignificantDigits]] to 2.
+        1. If _roundingIncrement_ is not 1, then
+          1. If _intlObj_.[[RoundingType]] is not ~fractionDigits~, throw a *TypeError* exception.
+          1. If _intlObj_.[[MaximumFractionDigits]] is not equal to _intlObj_.[[MinimumFractionDigits]], throw a *RangeError* exception.
       </emu-alg>
     </emu-clause>
 
@@ -540,7 +542,7 @@
         [[SignDisplay]] is one of the String values *"auto"*, *"always"*, *"never"*, *"exceptZero"*, or *"negative"*, specifying when to include a sign (with non-*"auto"* options respectively corresponding with inclusion always, never, only for nonzero numbers, or only for nonzero negative numbers).
         In scientific notation, this slot affects the sign display of the mantissa but not the exponent.
       </li>
-      <li>[[RoundingMode]] is one of the String values in the *Identifier* column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying the rounding strategy for the number.</li>
+      <li>[[RoundingMode]] is one of the String values in the Identifier column of <emu-xref href="#table-intl-rounding-modes"></emu-xref>, specifying which rounding mode to use.</li>
       <li>[[RoundingIncrement]] is an integer-valued Number that evenly divides 10, 100, 1000, or 10000 into tenths, fifths, quarters, or halves. It indicates the increment at which rounding should take place relative to the calculated rounding magnitude. For example, if [[MaximumFractionDigits]] is 2 and [[RoundingIncrement]] is 5, then the number is rounded to the nearest 0.05 ("nickel rounding").</li>
       <li>[[TrailingZeroDisplay]] is one of the String values *"auto"* or *"stripIfInteger"*, indicating whether to strip trailing zeros if the formatted number is an integer (i.e., has no nonzero fraction digit).</li>
     </ul>
