@@ -367,7 +367,7 @@
           _property_: a property key,
           _stringValues_: a List of Strings,
           _fallback_: an ECMAScript language value,
-        ): either a normal completion containing either a Boolean, String, or *undefined*, or a throw completion
+        ): either a normal completion containing either a Boolean, String, or _fallback_, or a throw completion
       </h1>
       <dl class="header">
         <dt>description</dt>
