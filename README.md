@@ -94,6 +94,14 @@ nf.formatRange(500, 0/0);  // RangeError
 nf.formatRange(500, 0);  // RangeError
 ```
 
+#### Feature Detection
+
+```javascript
+if (Intl.NumberFormat.prototype.formatRange) {
+  // feature is available
+}
+```
+
 ### Grouping Enum ([ECMA-402 #367](https://github.com/tc39/ecma402/issues/367))
 
 Main Issue: [#3](https://github.com/tc39/proposal-intl-numberformat-v3/issues/3)
@@ -108,6 +116,14 @@ Currently, Intl.NumberFormat accepts a `{ useGrouping }` option, which accepts a
 - `undefined` (default): alias for `"auto"`
 
 In `resolvedOptions`, either `false` or one of the three strings will be returned.  This is an observable behavior change, because currently only the booleans `true` and `false` are returned.
+
+#### Feature Detection
+
+```javascript
+if (new Intl.NumberFormat("und").resolvedOptions().useGrouping === "auto") {
+  // feature is available
+}
+```
 
 ### New Rounding/Precision Options ([ECMA-402 #286](https://github.com/tc39/ecma402/issues/286))
 
@@ -166,6 +182,14 @@ The whole result is taken atomically, including the trailing zeros. For example:
 
 Consider the input number "1".  `minimumFractionDigits` wants to retain trailing zeros up to the hundredths place, producing "1.00", whereas `minimumSignificantDigits` wants to retain only as many as are required to render two significant digits, producing "1.0". However, since `maximumSignificantDigits` has more precision (rounding to 10^-5, rather than 10^-2 for fraction precision), the resolved answer is "1.0".
 
+#### Feature Detection
+
+```javascript
+if (new Intl.NumberFormat("und").resolvedOptions().roundingPriority) {
+  // feature is available
+}
+```
+
 ### Interpret Strings as Decimals ([ECMA-402 #334](https://github.com/tc39/ecma402/issues/334))
 
 The `format()` method currently accepts a Number or a BigInt, and strings are interpreted as Numbers.  This part proposes redefining strings to be represented as decimals instead of Numbers.
@@ -195,6 +219,14 @@ The general syntax for decimal strings, essentially `#.#E#`, is a widely underst
 
 Arbitrary-precision decimal strings are intended to be used as pass-through for formatting. The champions do not intend for strings to become the de-facto standard for numeric computations in ECMAScript. For a general-purpose arbitrary-precision decimal type, see the [Decimal](https://github.com/tc39/proposal-decimal) proposal.
 
+#### Feature Detection
+
+```javascript
+if (new Intl.NumberFormat("und").format("11111111111111111112").indexOf("2") !== -1) {
+  // feature is available
+}
+```
+
 ### Rounding Modes ([ECMA-402 #419](https://github.com/tc39/ecma402/issues/419))
 
 Main Issue: [#7](https://github.com/tc39/proposal-intl-numberformat-v3/issues/7)
@@ -217,6 +249,14 @@ The behavior of these modes will reflect the [ICU user guide](https://unicode-or
 
 Rounding does not look at or change the sign bit of the number. Therefore, -0 and 0 are equivalent for the purposes of rounding. ([#21](https://github.com/tc39/proposal-intl-numberformat-v3/issues/21))
 
+#### Feature Detection
+
+```javascript
+if (new Intl.NumberFormat("und").resolvedOptions().roundingMode) {
+  // feature is available
+}
+```
+
 ### Sign Display Negative
 
 Main Issue: [#17](https://github.com/tc39/proposal-intl-numberformat-v3/issues/17)
@@ -233,8 +273,25 @@ nf.format(0.0);   // 0
 nf.format(1.0);   // 1  (note: "exceptZero" produces "+1" here)
 ```
 
+#### Feature Detection
+
+```javascript
+try {
+  new Intl.NumberFormat("und", { signDisplay: "negative" });
+  // feature is available
+} catch(e) {
+  // feature is NOT available
+}
+```
+
 ## Implementation Status
 
-### v8 Prototype
+Shipped in:
 
-A prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146 w/ the flag --harmony_intl_number_format_v3
+- Safari 15.4
+- Chrome 106
+- Firefox 93
+
+<details>
+A V8 prototype of the latest spec text can be found in https://chromium-review.googlesource.com/c/v8/v8/+/2336146 w/ the flag --harmony_intl_number_format_v3
+</details>
